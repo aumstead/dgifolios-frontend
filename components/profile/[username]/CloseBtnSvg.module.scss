@@ -1,0 +1,10 @@
+.closeBtn {
+  z-index: 150;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+.closeBtn:hover {
+  cursor: pointer;
+  fill: gainsboro;
+}

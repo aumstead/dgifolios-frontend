@@ -1,0 +1,62 @@
+.menu {
+  width: 20rem;
+  height: calc(100vh - 5rem);
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 5rem;
+  z-index: 10;
+
+  &:first-child {
+    padding-top: 3rem;
+  }
+
+  &__section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sectionHeading {
+  font-size: 1.2rem;
+  padding-bottom: .5rem;
+  color: #8c8c8c;
+  font-weight: 100;
+  font-size: 1.3rem;
+  margin-left: 3rem;
+}
+
+.menuItem {
+  font-size: 1.4rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  display: block;
+  padding-left: 3rem;
+  width: 100%;
+
+  &:hover {
+    background-color: #ececec;
+    // color: #fff;
+    cursor: pointer;
+  }
+}
+
+.active {
+  background-color: var(--deep-green);
+  color: #fff;
+
+  &:hover {
+    background-color: var(--deep-green);
+    color: #fff;
+  }
+}
+
+.content {
+  position: absolute;
+  left: 20rem;
+  top: 5rem;
+  width: calc(100vw - 20rem);
+}

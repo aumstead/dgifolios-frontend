@@ -1,0 +1,75 @@
+.contentContainer {
+  width: 100rem;
+  min-height: calc(100vh - 11.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.loadingSpinnerContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.secondaryMenu {
+  display: flex;
+  margin-left: 3rem;
+  margin-top: 2.5rem;
+}
+
+.btnSecondaryMenu {
+  display: flex;
+  font-size: 1.6rem;
+  margin-right: 3rem;
+  border: 1px solid var(--deep-green);
+  border-radius: 4px;
+  padding: .8rem 1rem;
+  background-color: var(--deep-green);
+  color: #fff;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: #0f9a7a, $amount: 5);
+    border: 1px solid darken($color: #0f9a7a, $amount: 5);
+  }
+}
+
+.buttonModalDelete {
+  border: none;
+  border-radius: 4px;
+  width: 8rem;
+  height: 4rem;
+  font-size: 1.4rem;
+  background-color: var(--red);
+  color: #fff;
+  margin-right: 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: #ff4517, $amount: 10);
+  }
+}
+
+.buttonModalCancel {
+  border: none;
+  border-radius: 4px;
+  width: 8rem;
+  height: 4rem;
+  font-size: 1.4rem;
+  background-color: gainsboro;
+  color: gray;
+  margin-right: 2.5rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: gainsboro, $amount: 10);
+  }
+}
+

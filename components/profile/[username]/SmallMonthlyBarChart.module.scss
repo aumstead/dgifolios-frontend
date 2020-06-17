@@ -1,0 +1,28 @@
+.componentContainer {
+  height: 40rem;
+  width: 80rem;
+}
+
+.dropdownContainer {
+  float: right;
+  margin-right: 10rem;
+}
+
+.dropdownBtn {
+  font-size: 1.3rem;
+  outline: none;
+  background-color: none;
+  border: none;
+  width: fit-content;
+  z-index: 5;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+.arrow {
+  font-size: 1.5rem;
+  font-family: none;
+}

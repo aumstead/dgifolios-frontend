@@ -1,0 +1,32 @@
+.componentContainer {
+  margin-left: 6rem;
+  margin-top: 1rem;
+  display: flex;
+  font-size: 1.4rem;
+  width: 60rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.label {
+  margin-right: 1rem;
+}
+
+.value {
+  color: var(--deep-green);
+}
+
+.capitalize::first-letter {
+  text-transform: uppercase;
+}
+
+.p {
+  margin-top: .3rem;
+}

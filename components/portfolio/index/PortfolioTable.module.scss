@@ -1,0 +1,20 @@
+.portfolioTableContainer {
+  margin-top: 3rem;
+}
+
+.tableHeadings {
+  display: grid;
+  grid-template-columns: 12rem 12rem 12rem 12rem 12rem;
+  color: var(--color-dark-grey);
+  width: 3rem;
+  justify-items: center;
+  margin-bottom: 1.5rem;
+  margin-left: 6rem;
+}
+
+.tableHeading {
+  font-weight: normal;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 2rem;
+}

@@ -1,0 +1,46 @@
+.componentContainer {
+  margin-left: 6rem;
+  display: flex;
+}
+
+.table {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  margin-right: 8rem;
+}
+
+.td {
+  width: 20rem;
+  padding-bottom: .5rem;
+}
+
+.value {
+  font-weight: 700;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+}
+
+.topThreeTd {
+  vertical-align: baseline;
+  width: 17rem;
+}
+
+.tickerDiv {
+  margin-bottom: .4rem;
+}
+
+.tickerAnchor {
+  color: var(--dark-purple);
+}
+
+.topThreeAmount {
+  font-weight: 400;
+  color: var(--dark-gray);
+  font-size: 1.4rem;
+  margin-left: .5rem;
+  font-style: italic;
+}
+
+.divider {
+  border-bottom: 1px solid gainsboro;
+}

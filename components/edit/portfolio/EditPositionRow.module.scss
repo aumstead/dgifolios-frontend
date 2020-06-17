@@ -1,0 +1,228 @@
+.row {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem 9rem 9rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  font-size: 1.6rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  align-items: center;
+  justify-items: center;
+  border-bottom: 1px solid gainsboro;
+  position: relative;
+
+  &:hover {
+    background-color: var(--off-white);
+  }
+}
+
+.ticker {
+  font-weight: 700;
+  color: var(--dark-purple);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button {
+  font-size: 1.4rem;
+  width: 6rem;
+  border-radius: 3px;
+  background-color: #fff;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttonEdit {
+  border: 1px solid var(--deep-green);
+  color: var(--deep-green);
+
+  &:hover {
+    background-color: var(--deep-green);
+    color: #fff;
+  }
+}
+
+.buttonDelete {
+  border: 1px solid var(--deep-red);
+  color: var(--deep-red);
+
+  &:hover {
+    background-color: var(--deep-red);
+    color: #fff;
+  }
+}
+
+.buttonDeleteDisabled {
+  opacity: .4;
+  &:hover {
+    cursor: default;
+    background-color: #fff;
+    opacity: .4;
+    color: var(--deep-red);
+  }
+}
+
+.buttonEditDisabled {
+  opacity: .4;
+
+  &:hover {
+    cursor: default;
+    opacity: .4;
+    color: var(--deep-green);
+    background-color: #fff;
+  }
+}
+
+.buttonSave {
+  border: 1px solid var(--deep-green);
+  color: var(--deep-green);
+  // margin unique to edit state
+  margin-top: 1.5rem;
+  grid-column: 4 / 5;
+
+  &:hover {
+    color: #fff;
+    background-color: var(--deep-green);
+  }
+}
+
+.buttonCancel {
+  color: var(--dark-gray);
+  border: 1px solid var(--dark-gray);
+  // margin unique to edit state
+  margin-top: 1.5rem;
+  grid-column: 5 / 6;
+
+  &:hover {
+    background-color: var(--dark-gray);
+    color: #fff;
+  }
+}
+
+.buttonCancelDisabled {
+  opacity: .4;
+  &:hover {
+    cursor: default;
+    background-color: #fff;
+    opacity: .4;
+    color: var(--dark-gray);
+  }
+}
+
+.buttonSaveDisabled {
+  opacity: .4;
+
+  &:hover {
+    cursor: default;
+    opacity: .4;
+    color: var(--deep-green);
+    background-color: #fff;
+  }
+}
+
+.input {
+  font-size: 1.6rem;
+  width: 7rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid gainsboro;
+  margin-top: 1.5rem;
+
+  &:focus {
+    border: 1px solid var(--deep-green);
+  }
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.inputShares {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+}
+
+.inputCostBasis {
+  grid-row: 2 / 3;
+  grid-column: 3 / 4;
+}
+
+// remove step for numbers
+/* Chrome, Safari, Edge, Opera */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.loading {
+  opacity: .2;
+}
+
+// Loading ellipsis animation
+.ldsEllipsis {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 80px;
+  height: 100%;
+}
+.ldsEllipsis div {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--dark-purple);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.ldsEllipsis div:nth-child(1) {
+  left: 8px;
+  animation: ldsEllipsis1 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(2) {
+  left: 8px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(3) {
+  left: 32px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(4) {
+  left: 56px;
+  animation: ldsEllipsis3 0.6s infinite;
+}
+@keyframes ldsEllipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes ldsEllipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes ldsEllipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}

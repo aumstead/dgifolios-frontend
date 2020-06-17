@@ -1,0 +1,75 @@
+.componentContainer {
+  width: 80rem;
+  position: relative;
+}
+
+.flexContainer {
+  display: flex;
+  width: 80rem;
+}
+
+.pieContainer {
+  margin-right: 3rem;
+}
+
+.topFiveContainer {
+  width: 34rem;
+  margin-left: 6rem;
+}
+
+.heading {
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.headingsGridContainer {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--color-dark-grey);
+  margin-bottom: .5rem;
+}
+
+.link {
+  font-size: 1.6rem;
+  color: var(--deep-green);
+  font-weight: 800;
+  margin-left: 6rem;
+
+  &:hover {
+    text-decoration: underline;
+    color: darken($color: #0f9a7a, $amount: 5);
+    cursor: pointer;
+  }
+}
+
+.btn {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  border: 1px solid var(--deep-green);
+  border-radius: 4px;
+  background-color: var(--deep-green);
+  color: #fff;
+  padding: .8rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: #0f9a7a, $amount: 5);
+    border: 1px solid darken($color: #0f9a7a, $amount: 5);
+  }
+}
+
+.btnPortfolio {
+  position: absolute;
+  bottom: 0;
+}
+
+.btnPie {
+  margin-left: auto;
+  margin-right: auto;
+}

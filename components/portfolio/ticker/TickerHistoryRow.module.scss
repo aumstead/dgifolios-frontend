@@ -1,0 +1,90 @@
+.rowContainer {
+  margin-left: 6rem;
+}
+
+.yearHeading {
+  font-size: 2rem;
+  color: #275cbe;
+  margin: 1rem 0;
+  text-decoration: underline;
+}
+
+.yearFlexContainer {
+  display: flex;
+}
+
+.keyContainer {
+  margin-bottom: 1rem;
+  margin-left: -1px;
+  font-size: 1.3rem;
+  width: 14rem;
+  height: 100%;
+}
+
+.tableContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.divFlexContainer {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-left: -1px;
+  font-size: 1.3rem;
+}
+
+.cellNormal {
+  min-width: 7rem;
+  // height: 1.6rem;
+  height: 1.7rem;
+  border: 1px solid gainsboro;
+  margin-bottom: -1px;
+}
+
+.cellGreen {
+  border: 1px solid gainsboro;
+  margin-bottom: -1px;
+  background-color: #d3ffd3;
+  color: #018667;
+}
+
+.cellRed {
+  border: 1px solid gainsboro;
+  margin-bottom: -1px;
+  background-color: #ffefef;
+  color: #ce3939;
+  height: 1.7rem;
+}
+
+.summaryContainer {
+  min-width: 7rem;
+  text-align: center;
+  font-size: 1.3rem;
+  margin-left: -1px;
+}
+
+.cellSummaryBlue {
+  border: 1px solid #275cbe;
+  margin-bottom: -1px;
+  background-color: #275cbe;
+  color: #fff;
+  height: 1.7rem;
+}
+
+.cellBlue {
+  border: 1px solid gainsboro;
+  margin-bottom: -1px;
+  background-color: #e7f2ff;
+  color: #134db9;
+  height: 1.7rem;
+}
+
+.cellYellow {
+  border: 1px solid gainsboro;
+  margin-bottom: -1px;
+  background-color: #fffab6;
+  color: #a79e2a;
+  // height: 1.6rem;
+  height: 1.7rem;
+}

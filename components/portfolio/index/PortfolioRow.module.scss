@@ -1,0 +1,25 @@
+.row {
+  display: grid;
+  grid-template-columns: 12rem 12rem 12rem 12rem 12rem;
+  text-align: center;
+  border-bottom: 1px solid gainsboro;
+  font-size: 1.6rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-left: 6rem;
+
+  &:hover {
+    background-color: var(--off-white);
+  }
+}
+
+.ticker {
+  font-weight: 700;
+  color: var(--dark-purple);
+  width: min-content;
+  margin: 0 auto;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

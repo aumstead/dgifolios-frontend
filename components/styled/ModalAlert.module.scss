@@ -1,0 +1,62 @@
+.modal {
+  width: 40rem;
+  height: 20rem;
+  background: white;
+  position: fixed;
+  top: 25%;
+  left: 50vw;
+  transform: translateX(-50%);
+  z-index: 50;
+  // opacity: 0;
+  // transition: opacity 1s;
+  border-radius: 4px;
+}
+
+.sectionHeading {
+  height: 32%;
+  border-bottom: 1px solid gainsboro;
+  display: flex;
+  align-items: center;
+
+  &__heading {
+    font-size: 1.8rem;
+    margin-left: 2rem;
+  }
+}
+
+.sectionText {
+  height: 32%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid gainsboro;
+
+  &__text {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+  }
+}
+
+.sectionButtons {
+  display: flex;
+  align-items: center;
+  height: 36%;
+  flex-direction: row-reverse;
+}
+
+.loadingSpinnerContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.loadingOverlay {
+  width: 40rem;
+  height: 20rem;
+  background: white;
+  position: absolute;
+  left: 20rem;
+  transform: translateX(-50%);
+  opacity: .8;
+  border-radius: 4px;
+}

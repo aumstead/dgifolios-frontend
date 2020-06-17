@@ -1,0 +1,41 @@
+.container {
+  position: relative;
+  width: min-content;
+}
+
+.ctaContainer {
+  position: absolute;
+  left: 50%;
+  top: 5rem;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.h3 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.ctaBtn {
+  color: #fff;
+  background-color: var(--deep-green);
+  height: 3.7rem;
+  font-size: 1.6rem;
+  border-radius: 4px;
+  align-self: center;
+  padding: 0 1rem;
+  margin-top: 2rem;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: #0f9a7a, $amount: 10);
+  }
+}
+
+.iconPlus {
+  line-height: 1.46rem;
+  font-size: 2rem;
+  margin-right: .5rem;
+}

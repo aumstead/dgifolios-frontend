@@ -1,0 +1,17 @@
+.row {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+  margin-right: 3rem;
+  font-size: 1.4rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  align-items: center;
+  justify-items: center;
+  border-bottom: 1px solid gainsboro;
+  position: relative;
+
+  &:hover {
+    background-color: var(--off-white);
+  }
+}
+

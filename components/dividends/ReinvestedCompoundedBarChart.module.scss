@@ -1,0 +1,135 @@
+.form {
+  margin-top: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+.input {
+  font-size: 1.6rem;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid gainsboro;
+  display: block;
+  height: 3.3rem;
+  width: 10rem;
+  margin-left: 3rem;
+
+  &:focus {
+    border: 1px solid var(--deep-green);
+  }
+}
+
+.label {
+  font-size: 1.6rem;
+  width: 15rem;
+}
+
+.checkbox {
+  margin-left: 2rem;
+  margin-right: 1rem;
+
+  &:focus {
+    outline: auto;
+  }
+}
+
+.labelCheckbox {
+  color: var(--dark-gray);
+  width: 15rem;
+}
+
+.contributionButton {
+  display: flex;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  border: none;
+  background-color: #fff;
+  color: var(--deep-green);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: darken($color: #0f9a7a, $amount: 5);
+  }
+}
+
+.iconPlus {
+  line-height: 1.46rem;
+  font-size: 2rem;
+  margin-right: .5rem;
+}
+
+.contributionFlexContainer {
+  display: flex;
+  align-items: baseline;
+}
+
+.contributionText {
+  font-size: 1.3rem;
+  color: var(--dark-gray);
+  margin-top: 1rem;
+}
+
+.contributionCancel {
+  font-size: 1.3rem;
+  color: var(--deep-green);
+  text-decoration: underline;
+  background-color: #fff;
+  border: none;
+  margin-left: 1rem;
+
+  &:hover {
+    cursor: pointer;
+    color: darken($color: #0f9a7a, $amount: 5);
+  }
+}
+
+.generateButton {
+  display: flex;
+  font-size: 1.6rem;
+  margin-top: 1.5rem;
+  margin-right: 3rem;
+  border: 1px solid var(--deep-green);
+  border-radius: 4px;
+  padding: .5rem 1rem;
+  background-color: var(--deep-green);
+  color: #fff;
+
+  &:focus {
+    outline: thick;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: #0f9a7a, $amount: 5);
+    border: 1px solid darken($color: #0f9a7a, $amount: 5);
+  }
+}
+
+.barContainer {
+  width: fit-content;
+  height: fit-content;
+}
+
+// remove step for numbers
+/* Chrome, Safari, Edge, Opera */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input[type=number] {
+  -moz-appearance: textfield;
+}
+.input[type=date] {
+  -moz-appearance: textfield;
+}

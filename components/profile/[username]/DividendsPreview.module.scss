@@ -1,0 +1,28 @@
+.componentContainer {
+  margin-left: 6rem;
+}
+
+.heading {
+  font-size: 1.6rem;
+  margin-top: 3rem;
+}
+
+.btn {
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--deep-green);
+  border-radius: 4px;
+  background-color: var(--deep-green);
+  color: #fff;
+  padding: .8rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: #0f9a7a, $amount: 5);
+    border: 1px solid darken($color: #0f9a7a, $amount: 5);
+  }
+}

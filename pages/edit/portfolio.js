@@ -1,0 +1,177 @@
+import SidebarMenu from "../../components/styled/SidebarMenu";
+import PageHeading from "../../components/styled/PageHeading";
+import EditPositionRow from "../../components/edit/portfolio/EditPositionRow";
+import AddPositionRow from "../../components/edit/portfolio/AddPositionRow";
+import ModalAlert from "../../components/styled/ModalAlert";
+import { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import baseUrl from "../../utils/baseUrl";
+import styles from "./portfolio.module.scss";
+import ZeroPositions from "../../components/edit/portfolio/ZeroPositions";
+import LoadingSpinner from "../../components/styled/LoadingSpinner";
+import cookie from "js-cookie";
+import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
+
+function portfolio({ ctx, user }) {
+  const portfolioContext = useContext(PortfolioContext);
+  const {
+    portfolio,
+    setPortfolio,
+    getPortfolio,
+    showZeroPositions,
+    setShowZeroPositions,
+    makeCalculations
+  } = portfolioContext;
+
+  const [addingNewTicker, setAddingNewTicker] = useState(false);
+  const [editState, setEditState] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [activePosition, setActivePosition] = useState({});
+  const [deleting, setDeleting] = useState(false);
+  const [showComponent, setShowComponent] = useState(false);
+
+  useEffect(() => {
+    // get data
+    async function getData() {
+      if (portfolio.length === 0) {
+        console.log("getting portfolio");
+        const res = await getPortfolio(ctx);
+        console.log(res);
+      } else {
+        console.log("portfolio array is not zero");
+      }
+      
+      setShowComponent(true);
+    }
+
+    getData()
+  }, []);
+
+  function addNewTicker() {
+    setAddingNewTicker((prevState) => !prevState);
+  }
+
+  async function handleDelete({ mongoId }) {
+    setDeleting(true);
+    try {
+      const url = `${baseUrl}/portfolio`;
+      const token = cookie.get("token");
+      const payload = {
+        params: { mongoId },
+        headers: { Authorization: token },
+      };
+      const response = await axios.delete(url, payload);
+      const data = makeCalculations(response.data)
+      setPortfolio(data);
+    } catch (error) {
+      console.error(error);
+    }
+    setShowAlert(false);
+    setDeleting(false);
+  }
+
+  function handleClick() {
+    if (!addingNewTicker) {
+      addNewTicker()
+    }
+    setShowZeroPositions(false)
+  }
+
+  if (!showComponent) {
+    return (
+      <SidebarMenu user={user}>
+        <PageHeading text="Edit Portfolio" />
+        <div className={styles.contentContainer}>
+          <div className={styles.loadingSpinnerContainer}>
+            <LoadingSpinner size="small" />
+          </div>
+        </div>
+      </SidebarMenu>
+    );
+  }
+
+  return (
+    <SidebarMenu user={user}>
+      <PageHeading text="Edit Portfolio" />
+      <div className={styles.contentContainer}>
+        <menu className={styles.secondaryMenu}>
+          <button
+            onClick={handleClick}
+            className={styles.btnSecondaryMenu}
+          >
+            &#43;&nbsp;New Ticker
+          </button>
+        </menu>
+        <div className={styles.tableHeadings}>
+          <h6 className={styles.tableHeading}>Ticker</h6>
+          <h6 className={styles.tableHeading}>Shares</h6>
+          <h6 className={styles.tableHeading}>Avg Cost / Share</h6>
+        </div>
+
+        {/* if adding new ticker display input row */}
+        {addingNewTicker && (
+          <AddPositionRow
+            setAddingNewTicker={setAddingNewTicker}
+            setAddingNewTicker={setAddingNewTicker}
+            portfolio={portfolio}
+            setPortfolio={setPortfolio}
+            makeCalculations={makeCalculations}
+          />
+        )}
+
+        <div>
+          {/* map over portfolio if there are positions in portfolio array */}
+          {showZeroPositions ? (
+            <ZeroPositions
+              setShowZeroPositions={setShowZeroPositions}
+              setAddingNewTicker={setAddingNewTicker}
+            />
+          ) : (
+            portfolio.map((position) => (
+              <EditPositionRow
+                mongoId={position._id}
+                ticker={position.ticker}
+                shares={position.shares}
+                costBasis={position.costBasis}
+                addingNewTicker={addingNewTicker}
+                editState={editState}
+                setEditState={setEditState}
+                setShowAlert={setShowAlert}
+                setActivePosition={setActivePosition}
+                setPortfolio={setPortfolio}
+                makeCalculations={makeCalculations}
+              />
+            ))
+          )}
+
+          {/* Are you sure you want to delete modal */}
+          {showAlert && (
+            <ModalAlert
+              backdropOnClick={setShowAlert}
+              heading={"Delete Ticker"}
+              text={`Are you sure you want to remove ${activePosition.ticker}?`}
+              loading={deleting}
+            >
+              <button
+                className={`${styles.buttonModalDelete}`}
+                onClick={() => handleDelete(activePosition)}
+                disabled={deleting}
+              >
+                Delete
+              </button>
+              <button
+                className={`${styles.buttonModalCancel}`}
+                onClick={() => setShowAlert(false)}
+                disabled={deleting}
+              >
+                Cancel
+              </button>
+            </ModalAlert>
+          )}
+        </div>
+      </div>
+    </SidebarMenu>
+  );
+}
+
+export default portfolio;

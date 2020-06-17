@@ -1,0 +1,234 @@
+.row {
+  display: grid;
+  grid-template-columns: 8rem 8rem 8rem 12rem 12rem 8rem 10rem 8rem 8rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  font-size: 1.6rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  align-items: center;
+  justify-items: center;
+  border-bottom: 1px solid gainsboro;
+  position: relative;
+
+  &:hover {
+    background-color: var(--off-white);
+  }
+}
+
+.ticker {
+  font-weight: 700;
+  color: var(--dark-purple);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.frequency {
+  text-transform: capitalize;
+}
+
+.button {
+  font-size: 1.4rem;
+  width: 6rem;
+  border-radius: 3px;
+  background-color: #fff;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttonEdit {
+  border: 1px solid var(--deep-green);
+  color: var(--deep-green);
+
+  &:hover {
+    background-color: var(--deep-green);
+    color: #fff;
+  }
+}
+
+.buttonDelete {
+  border: 1px solid var(--deep-red);
+  color: var(--red);
+
+  &:hover {
+    background-color: var(--deep-red);
+    color: #fff;
+  }
+}
+
+.buttonDeleteDisabled {
+  opacity: .4;
+  &:hover {
+    cursor: default;
+    background-color: #fff;
+    opacity: .4;
+    color: var(--deep-red);
+  }
+}
+
+.buttonEditDisabled {
+  opacity: .4;
+
+  &:hover {
+    cursor: default;
+    opacity: .4;
+    color: var(--deep-green);
+    background-color: #fff;
+  }
+}
+
+.buttonSave {
+  border: 1px solid var(--deep-green);
+  color: var(--deep-green);
+  // margin unique to edit state
+  margin-top: .5rem;
+
+  &:hover {
+    color: #fff;
+    background-color: var(--deep-green);
+  }
+}
+
+.buttonCancel {
+  color: var(--dark-gray);
+  border: 1px solid var(--dark-gray);
+  // margin unique to edit state
+  margin-top: .5rem;
+  &:hover {
+    background-color: var(--dark-gray);
+    color: #fff;
+  }
+}
+
+.buttonCancelDisabled {
+  opacity: .4;
+  &:hover {
+    cursor: default;
+    background-color: #fff;
+    opacity: .4;
+    color: var(--dark-gray);
+  }
+}
+
+.buttonSaveDisabled {
+  opacity: .4;
+
+  &:hover {
+    cursor: default;
+    opacity: .4;
+    color: var(--deep-green);
+    background-color: #fff;
+  }
+}
+
+.inputContainer {
+  margin-top: .5rem;
+  position: relative;
+}
+
+.input {
+  font-size: 1.6rem;
+  text-align: center;
+  border-radius: 4px;
+  border: 1px solid gainsboro;
+  margin: 0 auto;
+  display: block;
+  padding: .3rem 0;
+
+  &:focus {
+    border: 1px solid var(--deep-green);
+  }
+}
+
+.inputSmall {
+  width: 6rem;
+}
+
+.input[type=date]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  display: none;
+}
+
+// remove step for numbers
+/* Chrome, Safari, Edge, Opera */
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.input[type=number] {
+  -moz-appearance: textfield;
+}
+.input[type=date] {
+  -moz-appearance: textfield;
+}
+
+// remove clear button for date
+.input[type=date]::-webkit-clear-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+// Loading ellipsis animation
+.ldsEllipsis {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 80px;
+  height: 100%;
+  z-index: 2;
+}
+.ldsEllipsis div {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--dark-purple);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.ldsEllipsis div:nth-child(1) {
+  left: 8px;
+  animation: ldsEllipsis1 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(2) {
+  left: 8px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(3) {
+  left: 32px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(4) {
+  left: 56px;
+  animation: ldsEllipsis3 0.6s infinite;
+}
+@keyframes ldsEllipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes ldsEllipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes ldsEllipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}

@@ -1,0 +1,52 @@
+.row {
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem 9rem 9rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  font-size: 1.6rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  align-items: center;
+  justify-items: center;
+  border-bottom: 1px solid gainsboro;
+  opacity: .15;
+  &:hover {
+    cursor: default;
+  }
+}
+
+.ticker {
+  font-weight: 700;
+  color: var(--dark-purple);
+}
+
+.button {
+  font-size: 1.4rem;
+  width: 6rem;
+  border-radius: 3px;
+  background-color: #fff;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttonEdit {
+  border: 1px solid var(--deep-green);
+  color: var(--deep-green);
+
+  &:hover {
+    background-color: var(--deep-green);
+    color: #fff;
+  }
+}
+
+.buttonDelete {
+  border: 1px solid var(--deep-red);
+  color: var(--deep-red);
+
+  &:hover {
+    background-color: var(--deep-red);
+    color: #fff;
+  }
+}

@@ -1,0 +1,25 @@
+.tooltip {
+  background-color: var(--red);
+  color: #fff;
+  border-radius: 4px;
+  position: absolute;
+  z-index: 1;
+  top: -2.5rem;
+  left: 3.5rem;
+  font-size: 1.2rem;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    transform: translateX(-25%);
+    margin-left: -5px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: var(--red) transparent transparent transparent;
+  }
+}

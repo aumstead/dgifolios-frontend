@@ -1,0 +1,96 @@
+users: [
+  {
+    _id: mongoUserId,
+    username: thecrystalhaze,
+    password: gandalf,
+    email: aumstead@bc.com
+  }
+]
+
+portfolios: [
+  {
+    user: mongoUserId
+    _id: mongoPortfolioId
+    positions: [
+      {
+        _id: mongoTickerId,
+        ticker: AAPL,
+        costBasis: 212,
+        shares: 44
+      },
+      {
+        _id: mongoTickerId,
+        ticker: MSFT,
+        costBasis: 177
+        shares: 4
+      }
+    ]
+  }
+]
+
+dividends: [
+  {
+    user: mongoUserId,
+    divPayments: [
+      {
+        ticker: mongoTickerId,
+        _id: mongoDivId,
+        amount: .77,
+        exDivDate: 3/23/20,
+        divDate: 4/12/20,
+      }
+    ]
+  }
+]
+
+
+// optional
+
+tickers: [
+  {
+    ticker: "AAPL",
+  }
+]
+
+
+
+// months scratch pad 
+monthsArray = [
+  {
+    year: 2019,
+    months: [
+      { 
+        month: 0,
+        divs: []
+      },
+      {
+        month: 1,
+        divs: []
+      }
+    ]
+  },
+  {
+    year: 2020,
+    months: [
+      {
+        month: 0,
+        divs: []
+      }
+    ]
+  }
+]
+
+
+
+
+  {
+    month: 0,
+    year: 2019,
+    divs: []
+  },
+  {
+    month: 1,
+    year: 2019,
+    divs: []
+  }
+}

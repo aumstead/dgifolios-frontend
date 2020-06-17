@@ -1,0 +1,35 @@
+.footerContainer {
+  height: 12rem;
+  background-color: #fff;
+  width: calc(100vw - 20rem);
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 10rem 10rem 20rem;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.text__copy {
+  font-size: 1.2rem;
+  margin-right: .5rem;
+}
+
+.logo {
+  grid-column: 3 / 4;
+}
+
+.text__contact {
+  font-size: 1.2rem;
+  margin-right: 3rem;
+  margin-left: 3rem;
+
+}

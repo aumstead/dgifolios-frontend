@@ -1,0 +1,38 @@
+.row {
+  display: grid;
+  grid-template-columns: 8rem 8rem 8rem 12rem 12rem 8rem 10rem 8rem 8rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  font-size: 1.6rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  align-items: center;
+  justify-items: center;
+  border-bottom: 1px solid gainsboro;
+  opacity: .15;
+  &:hover {
+    cursor: default;
+  }
+}
+
+.ticker {
+  font-weight: 700;
+  color: var(--dark-purple);
+}
+
+.button {
+  font-size: 1.4rem;
+  width: 6rem;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.buttonEdit {
+  border: 1px solid var(--deep-green);
+  color: var(--deep-green);
+}
+
+.buttonDelete {
+  border: 1px solid var(--deep-red);
+  color: var(--deep-red);
+}

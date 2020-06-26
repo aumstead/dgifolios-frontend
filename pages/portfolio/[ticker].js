@@ -22,43 +22,46 @@ function ticker({ ticker, ctx, user }) {
   // State
   const [showComponent, setShowComponent] = useState(false);
 
-  useEffect(() => {
-    // get data
-    async function getData() {
-      if (dividends.length === 0) {
-        console.log("getting dividends");
-        const resDividends = await getDividends(ctx);
-        console.log(resDividends);
-      } else {
-        console.log("dividends array is not zero");
-      }
+  // useEffect(() => {
+  //   // get data
+  //   async function getData() {
+  //     if (dividends.length === 0) {
+  //       console.log("getting dividends");
+  //       const resDividends = await getDividends(ctx);
+  //       console.log(resDividends);
+  //     } else {
+  //       console.log("dividends array is not zero");
+  //     }
 
-      if (portfolio.length === 0) {
-        console.log("getting portfolio");
-        const resPortfolio = await getPortfolio(ctx);
-        console.log(resPortfolio);
-      } else {
-        console.log("portfolio array is not zero");
-      }
-      console.log("setting component to true");
-      setShowComponent(true);
-    }
+  //     if (portfolio.length === 0) {
+  //       console.log("getting portfolio");
+  //       const resPortfolio = await getPortfolio(ctx);
+  //       console.log(resPortfolio);
+  //     } else {
+  //       console.log("portfolio array is not zero");
+  //     }
+  //     console.log("setting component to true");
+  //     setShowComponent(true);
+  //   }
 
-    getData();
-  }, []);
+  //   getData();
+  // }, []);
 
-  if (!showComponent) {
-    return (
-      <SidebarMenu user={user}>
-        <div className={styles.contentContainer}>
-          <PageHeading text={`${ticker}`} />
-          <div className={styles.loadingSpinnerContainer}>
-            <LoadingSpinner size="small" />
-          </div>
-        </div>
-      </SidebarMenu>
-    );
-  }
+  // if (!showComponent) {
+  //   return (
+  //     <SidebarMenu user={user}>
+  //       <div className={styles.contentContainer}>
+  //         <PageHeading text={`${ticker}`} />
+  //         <div className={styles.loadingSpinnerContainer}>
+  //           <LoadingSpinner size="small" />
+  //         </div>
+  //         <Footer />
+  //       </div>
+  //     </SidebarMenu>
+  //   );
+  // }
+
+  
 
   return (
     <SidebarMenu user={user}>

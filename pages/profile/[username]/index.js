@@ -174,32 +174,6 @@ function index({ username, ctx, user }) {
     return data;
   }
 
-  // function calculateAllTimeDividends(dividends) {
-  //   // All-Time rankings calculations
-  //   const tickerList = [];
-  //   const tickerObjects = [];
-  //   dividends.forEach((div) => {
-  //     if (!tickerList.includes(div.ticker)) {
-  //       tickerList.push(div.ticker);
-  //       tickerObjects.push({ ticker: div.ticker, allTimeDividends: 0 });
-  //     }
-  //   });
-
-  //   tickerList.forEach((ticker) => {
-  //     dividends.forEach((div) => {
-  //       if (ticker === div.ticker) {
-  //         let myObj = tickerObjects.find((obj) => obj.ticker === ticker);
-  //         myObj.allTimeDividends += div.total;
-  //       }
-  //     });
-  //   });
-
-  //   const finalRankingsArray = sort(tickerObjects).desc(
-  //     (obj) => obj.allTimeDividends
-  //   );
-  //   setAllTimeRankings(finalRankingsArray);
-  // }
-
   async function handleFollow() {
     try {
       setLoading(true);
@@ -343,19 +317,21 @@ function index({ username, ctx, user }) {
         <Profile profileUser={profileUser} />
 
         <SectionHeading text="Statistics" />
-        {profileDividends.length !== 0 || profilePortfolio.length !== 0 ? (
+        {profileDividends.length === 0 || profilePortfolio.length === 0 ? (
+          user.username === profileUser.username ? (
+            <p className={styles.zeroStats}>
+              Add portfolio positions and dividends to generate statistics.
+            </p>
+          ) : (
+            <p className={styles.zeroStats}>
+              User must add positions and dividends to create statistics.
+            </p>
+          )
+        ) : (
           <Statistics
             portfolio={profilePortfolio}
             dividends={profileDividends}
           />
-        ) : user.username === profileUser.username ? (
-          <p className={styles.zeroStats}>
-            Add portfolio positions and dividends to generate statistics.
-          </p>
-        ) : (
-          <p className={styles.zeroStats}>
-            User must add positions and dividends to create statistics.
-          </p>
         )}
 
         <SectionHeading text="Portfolio" />

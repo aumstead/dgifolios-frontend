@@ -11,9 +11,10 @@ import Statistics from "../../components/dividends/Statistics";
 import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import CalendarComponent from "../../components/dividends/CalendarComponent";
 import CompoundingLineChart from "../../components/dividends/CompoundingLineChart";
-import ReinvestedCompoundedBarChart from '../../components/dividends/ReinvestedCompoundedBarChart'
-import Link from 'next/link'
-import Footer from '../../components/styled/Footer'
+import ReinvestedCompoundedBarChart from "../../components/dividends/ReinvestedCompoundedBarChart";
+import Link from "next/link";
+import Footer from "../../components/styled/Footer";
+import BarChartComponent from "../../components/dividends/BarChartComponent";
 
 function index({ ctx, user }) {
   const dividendContext = useContext(DividendContext);
@@ -25,6 +26,12 @@ function index({ ctx, user }) {
   const [showComponent, setShowComponent] = useState(false);
   // calculate these two stats in child components, pass back up to parent and back down to a different child
   const [daysWithDividend, setDaysWithDividend] = useState("");
+
+  // bar chart states
+  const [data, setData] = useState([]);
+  const [yScaleObject, setYScaleObject] = useState({ yMin: 0, yMax: 0 });
+  const [xAxisObject, setXAxisObject] = useState({});
+  const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {
     // get data
@@ -57,9 +64,12 @@ function index({ ctx, user }) {
         <PageHeading text="Dividends" />
         <div className={styles.contentContainer}>
           <div className={styles.messageContainer}>
-          <h2>You have zero dividends recorded.</h2>
-          <Link href="/edit/dividends"><a className={styles.btnZero}>&#43;&nbsp;Add dividends</a></Link>
+            <h2>You have zero dividends recorded.</h2>
+            <Link href="/edit/dividends">
+              <a className={styles.btnZero}>&#43;&nbsp;Add dividends</a>
+            </Link>
           </div>
+          <Footer />
         </div>
       </SidebarMenu>
     );
@@ -84,15 +94,12 @@ function index({ ctx, user }) {
       <PageHeading text="My Dividends" />
       <div className={styles.contentContainer}>
         <SectionHeading text="Statistics" />
-        <Statistics
-          portfolio={portfolio}
-          daysWithDividend={daysWithDividend}
-        />
+        <Statistics portfolio={portfolio} daysWithDividend={daysWithDividend} />
 
-        <SectionHeading text="Upcoming Dividends" />
-        <RecentDividends />
+        {/* <SectionHeading text="Upcoming Dividends" />
+        <RecentDividends /> */}
 
-        <SectionHeading text="Predicted Upcoming Ex-Dividend Dates" />
+        <SectionHeading text="Approaching Ex-Dividend Dates" explanation={"(programatically estimated)"}/>
         <UpcomingExDivDates dividends={dividends} />
 
         <SectionHeading
@@ -114,10 +121,34 @@ function index({ ctx, user }) {
           text="My Portfolio's Annual Dividends Visualizer"
           // explanation="Calculates compounded annual dividends based solely on organic dividend growth."
         />
-        <p className={`${styles.explanation} ${styles.mt_1}`}>Shows the future amount of dividends your portfolio will yield annually based on your portolfio's total current value and an annual dividend yield of your choice.</p>
-        <p className={styles.explanation}>Dividend growth can be accounted for in "Annual Dividend Growth Rate".</p>
-        <p className={styles.explanation}>In this calculation, dividends are reinvested and compounded annually.</p>
-        <ReinvestedCompoundedBarChart dividends={dividends} />
+        <p className={`${styles.explanation} ${styles.mt_1}`}>
+          Shows the future amount of dividends your portfolio will yield
+          annually based on your portolfio's total current value and an annual
+          dividend yield of your choice.
+        </p>
+        <p className={styles.explanation}>
+          Dividend growth can be accounted for in "Annual Dividend Growth Rate".
+        </p>
+        <p className={styles.explanation}>
+          In this calculation, dividends are reinvested and compounded annually.
+        </p>
+        <ReinvestedCompoundedBarChart
+          dividends={dividends}
+          setData={setData}
+          setShowChart={setShowChart}
+          setXAxisObject={setXAxisObject}
+          setYScaleObject={setYScaleObject}
+        />
+        <div className={showChart ? styles.barChartContainer : styles.hideBarChartContainer}>
+          {showChart && (
+            <BarChartComponent
+              data={data}
+              xAxisObject={xAxisObject}
+              yScaleObject={yScaleObject}
+            />
+          )}
+        </div>
+
         <Footer />
       </div>
     </SidebarMenu>

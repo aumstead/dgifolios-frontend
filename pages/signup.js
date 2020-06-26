@@ -1,41 +1,57 @@
 import Link from "next/link";
 import { useState } from "react";
-import LoadingSpinner from '../components/styled/LoadingSpinner'
-import catchErrors from '../utils/catchErrors'
-import axios from 'axios'
-import { handleLogin } from '../utils/auth'
-import baseUrl from '../utils/baseUrl'
+import LoadingSpinner from "../components/styled/LoadingSpinner";
+import catchErrors from "../utils/catchErrors";
+import axios from "axios";
+import { handleLogin } from "../utils/auth";
+import baseUrl from "../utils/baseUrl";
 import styles from "./signup.module.scss";
 
 const INITIAL_USER = {
   username: "",
   email: "",
   password: "",
+  confirmPassword: "",
 };
 
 function signup() {
   const [user, setUser] = useState(INITIAL_USER);
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [validateConfirmPass, setValidateConfirmPass] = useState(true);
 
   async function handleSubmit(event) {
     event.preventDefault();
+    // validate confirm password
+    if (user.password !== user.confirmPassword) {
+      setValidateConfirmPass(false);
+      setUser((prevState) => ({
+        ...prevState,
+        password: "",
+        confirmPassword: "",
+      }));
+      return;
+    }
     try {
-      setLoading(true)
-      setError('')
-      const url = `${baseUrl}/api/signup`
-      const payload = { ...user }
-      const response = await axios.post(url, payload)
-      handleLogin(response.data)
+      setLoading(true);
+      setError("");
+      const url = `${baseUrl}/signup`;
+      const payload = { ...user };
+      const response = await axios.post(url, payload);
+      handleLogin(response.data);
     } catch (error) {
-      catchErrors(error, setError)
+      catchErrors(error, setError);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   function handleChange(event) {
     const { name, value } = event.target;
+    console.log(name);
+    if (name === "password" || name === "confirmPassword") {
+      setValidateConfirmPass(true);
+    }
     setUser((prevState) => ({
       ...prevState,
       [name]: value,
@@ -58,6 +74,7 @@ function signup() {
           name="username"
           type="text"
           value={user.username}
+          disabled={loading}
         />
         <label className={styles.label} htmlFor="email">
           Email
@@ -68,20 +85,51 @@ function signup() {
           type="email"
           name="email"
           value={user.email}
+          disabled={loading}
         />
         <label className={styles.label} htmlFor="password">
           Password
         </label>
         <input
           onChange={handleChange}
-          className={styles.input}
+          className={validateConfirmPass ? styles.input : styles.invalidInput}
           type="password"
           name="password"
           value={user.password}
+          disabled={loading}
         />
-        <button className={styles.button} type="submit">
-          Sign up
+        <label className={styles.label} htmlFor="confirmPassword">
+          Confirm Password
+        </label>
+        <input
+          onChange={handleChange}
+          className={validateConfirmPass ? styles.input : styles.invalidInput}
+          type="password"
+          name="confirmPassword"
+          value={user.confirmPassword}
+          disabled={loading}
+        />
+        {!validateConfirmPass && (
+          <span className={styles.invalidText}>Passwords must match.</span>
+        )}
+        <button className={styles.button} type="submit" disabled={loading}>
+          {loading ? (
+            <div className={styles.ldsEllipsis}>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : (
+            "Sign up"
+          )}
         </button>
+        <div className={styles.guideContainer}>
+          <span>Already registered?&nbsp;</span>
+          <Link href="/signin">
+            <a className={styles.guideLink}>Login!</a>
+          </Link>
+        </div>
       </form>
       {loading && <LoadingSpinner />}
     </div>

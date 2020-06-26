@@ -35,6 +35,10 @@
   display: none;
 }
 
+.inputContainer {
+  position: relative;
+}
+
 // remove step for numbers
 /* Chrome, Safari, Edge, Opera */
 .input::-webkit-outer-spin-button,

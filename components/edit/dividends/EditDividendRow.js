@@ -8,6 +8,16 @@ import axios from "axios";
 import Link from "next/link";
 import DividendContext from '../../../contexts/dividends/DividendContext'
 
+const INITIAL_FORM_VALUES = {
+  ticker: '',
+  shares: '',
+  costBasis: '',
+  exDivDate: '',
+  divDate: '',
+  amount: '',
+  frequency: ''
+}
+
 function EditDividendRow({
   ticker,
   shares,
@@ -31,15 +41,7 @@ function EditDividendRow({
   // States
   const [showEditInterface, setShowEditInterface] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [editInputs, setEditInputs] = useState({
-    ticker,
-    shares,
-    costBasis,
-    exDivDate,
-    divDate,
-    amount,
-    frequency,
-  });
+  const [editInputs, setEditInputs] = useState({ INITIAL_FORM_VALUES });
   const [showTickerTooltip, setShowTickerTooltip] = useState(false);
   const [showSharesTooltip, setShowSharesTooltip] = useState(false);
   const [showDivDateTooltip, setShowDivDateTooltip] = useState(false);
@@ -69,8 +71,10 @@ function EditDividendRow({
         return { ...prevState, [name]: value.toUpperCase() };
       } else if (name === "divDate" || name === "exDivDate" || name === "frequency") {
         return { ...prevState, [name]: value };
+      // } else if (name === "costBasis") {
+      //   return { ...prevState, [name]: Number(value)}
       } else {
-        return { ...prevState, [name]: Number(value) };
+        return { ...prevState, [name]: value };
       }
     });
   }
@@ -352,7 +356,7 @@ function EditDividendRow({
           {showDivDateTooltip && (
             <Tooltip
               text="Field required"
-              style={{ top: "-3.3rem", left: "6rem" }}
+              style={{ top: "-3.3rem", left: "5rem" }}
             />
           )}
         </div>

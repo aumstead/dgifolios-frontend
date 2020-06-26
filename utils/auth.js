@@ -3,12 +3,10 @@ import Router from 'next/router'
 
 export function handleLogin(token) {
   cookie.set('token', token)
-  console.log('in handle login')
-  Router.push('/')
+  Router.push('/explore')
 }
 
 export function handleLogout() {
-  console.log('logout triggered')
   cookie.remove('token')
   window.localStorage.setItem("logout", Date.now())
   Router.push('/signin')

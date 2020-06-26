@@ -25,6 +25,7 @@ function Statistics({ daysWithDividend }) {
   const [monthlyPaymentAverage, setMonthlyPaymentAverage] = useState("");
   const [topThreePayers, setTopThreePayers] = useState([]);
   const [topThreeYielders, setTopThreeYielders] = useState([]);
+  const [hideTopThreeYielders, setHideTopThreeYielders] = useState(false)
 
   useEffect(() => {
     calculateAllTimeTotal();
@@ -195,6 +196,11 @@ function Statistics({ daysWithDividend }) {
         }
       });
     });
+    // there are less than 3 portfolio positions yielding dividends
+    if (divsInPortfolio[2] === undefined) {
+      setHideTopThreeYielders(true)
+      return;
+    }
     // sort by yield
     const sortedDivs = sort(divsInPortfolio).desc(div => div.yield);
     // take top three
@@ -203,7 +209,8 @@ function Statistics({ daysWithDividend }) {
     topThreeArray.push(sortedDivs[0])
     let count = 0
     let i = 0
-
+    console.log('topthreearr:', topThreeArray)
+    console.log('sortedDivs:', sortedDivs)
     while (count < 2) {
       const someResult = topThreeArray.some(div => div.ticker === sortedDivs[i].ticker)
       if (!someResult) {
@@ -289,7 +296,8 @@ function Statistics({ daysWithDividend }) {
               <span>Top 3 all-time payers</span>
             </td>
             <td className={styles.value}>
-              {topThreePayers.map((position) => (
+              
+              {hideTopThreeYielders ? <span>n.a.</span> : topThreePayers.map((position) => (
                 <div className={styles.tickerDiv}>
                   <span>
                     <Link

@@ -25,7 +25,9 @@ function Navbar({ user }) {
       {showUserMenu && <div className={styles.overlay} onClick={handleClick} />}
       <div className={styles.navbar__logo}>
         <Link href="/">
-          <LogoSvg />
+          <a>
+            <LogoSvg />
+          </a>
         </Link>
       </div>
 
@@ -37,10 +39,11 @@ function Navbar({ user }) {
           <Link href="/explore">
             <a className={styles.navbar__a}>Explore Portfolios</a>
           </Link>
-          {user &&
-          <Link href={`/profile/${user.username}`}>
-            <a className={styles.navbar__a}>My Public Profile</a>
-          </Link>}
+          {user && (
+            <Link href={`/profile/${user.username}`}>
+              <a className={styles.navbar__a}>My Public Profile</a>
+            </Link>
+          )}
         </div>
         <div className={styles.navbar__linksAccount}>
           {!user ? (
@@ -67,11 +70,11 @@ function Navbar({ user }) {
               <a className={styles.a}>Edit profile</a>
             </Link>
           </li>
-          <li onClick={handleClickList} className={styles.li}>
+          {/* <li onClick={handleClickList} className={styles.li}>
             <Link href={`#`}>
               <a className={styles.a}>Edit preferences</a>
             </Link>
-          </li>
+          </li> */}
           <li
             className={`${styles.li} ${styles.liSignOut}`}
             onClick={handleClickLogout}

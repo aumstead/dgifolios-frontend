@@ -10,6 +10,10 @@
   justify-items: center;
   margin-bottom: 1.5rem;
   margin-left: 6rem;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .tableHeading {

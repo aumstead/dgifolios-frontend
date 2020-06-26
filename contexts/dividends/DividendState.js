@@ -75,7 +75,7 @@ function DividendState({ children }) {
       }
 
       // Set states
-      const sortedYears = sort(yearsArray).desc()
+      const sortedYears = sort(yearsArray).asc()
       setYears(sortedYears)
     })
     return data;

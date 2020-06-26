@@ -20,7 +20,7 @@ function PortfolioTable({ portfolio }) {
   const [directionByTicker, setDirectionByTicker] = useState(false)
 
   useEffect(() => {
-    setPortfolioState(portfolio)
+    setPortfolioState(sort(portfolio).desc(stock => stock.percentOfPortfolio))
   }, [])
 
   function sortByTicker() {

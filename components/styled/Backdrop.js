@@ -1,6 +1,6 @@
 import styles from './Backdrop.module.scss'
 
-function Backdrop({ children, onClick, loading }) {
+function Backdrop({ children, onClick, loading, styleObj }) {
   function handleClick() {
     if (loading) {
       return
@@ -9,7 +9,7 @@ function Backdrop({ children, onClick, loading }) {
     }
   }
   return (
-    <div onClick={handleClick} className={styles.backdrop}>
+    <div onClick={handleClick} className={styles.backdrop} style={styleObj}>
       {children}
     </div>
   )

@@ -11,6 +11,8 @@ import ZeroPositions from "../../components/edit/portfolio/ZeroPositions";
 import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import cookie from "js-cookie";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
+import Footer from "../../components/styled/Footer";
+import sort from 'fast-sort'
 
 function portfolio({ ctx, user }) {
   const portfolioContext = useContext(PortfolioContext);
@@ -20,7 +22,7 @@ function portfolio({ ctx, user }) {
     getPortfolio,
     showZeroPositions,
     setShowZeroPositions,
-    makeCalculations
+    makeCalculations,
   } = portfolioContext;
 
   const [addingNewTicker, setAddingNewTicker] = useState(false);
@@ -29,6 +31,9 @@ function portfolio({ ctx, user }) {
   const [activePosition, setActivePosition] = useState({});
   const [deleting, setDeleting] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
+  const [directionByCostBasis, setDirectionByCostBasis] = useState(true)
+  const [directionByShares, setDirectionByShares] = useState(true)
+  const [directionByTicker, setDirectionByTicker] = useState(false)
 
   useEffect(() => {
     // get data
@@ -40,11 +45,11 @@ function portfolio({ ctx, user }) {
       } else {
         console.log("portfolio array is not zero");
       }
-      
+
       setShowComponent(true);
     }
 
-    getData()
+    getData();
   }, []);
 
   function addNewTicker() {
@@ -61,7 +66,7 @@ function portfolio({ ctx, user }) {
         headers: { Authorization: token },
       };
       const response = await axios.delete(url, payload);
-      const data = makeCalculations(response.data)
+      const data = makeCalculations(response.data);
       setPortfolio(data);
     } catch (error) {
       console.error(error);
@@ -72,9 +77,39 @@ function portfolio({ ctx, user }) {
 
   function handleClick() {
     if (!addingNewTicker) {
-      addNewTicker()
+      addNewTicker();
     }
-    setShowZeroPositions(false)
+    setShowZeroPositions(false);
+  }
+
+  function sortByTicker() {
+    setDirectionByTicker(!directionByTicker)
+    if (directionByTicker) {
+      sort(portfolio).desc(stock => stock.ticker)
+    } else {
+      sort(portfolio).asc(stock => stock.ticker)
+    }
+    setPortfolio([...portfolio])
+  }
+
+  function sortByShares() {
+    setDirectionByShares(!directionByShares)
+    if (directionByShares) {
+      sort(portfolio).desc(stock => stock.shares)
+    } else {
+      sort(portfolio).asc(stock => stock.shares)
+    }
+    setPortfolio([...portfolio])
+  }
+
+  function sortByCostBasis() {
+    setDirectionByCostBasis(!directionByCostBasis)
+    if (directionByCostBasis) {
+      sort(portfolio).desc(stock => stock.costBasis)
+    } else {
+      sort(portfolio).asc(stock => stock.costBasis)
+    }
+    setPortfolio([...portfolio])
   }
 
   if (!showComponent) {
@@ -85,6 +120,7 @@ function portfolio({ ctx, user }) {
           <div className={styles.loadingSpinnerContainer}>
             <LoadingSpinner size="small" />
           </div>
+          <Footer />
         </div>
       </SidebarMenu>
     );
@@ -94,81 +130,82 @@ function portfolio({ ctx, user }) {
     <SidebarMenu user={user}>
       <PageHeading text="Edit Portfolio" />
       <div className={styles.contentContainer}>
-        <menu className={styles.secondaryMenu}>
-          <button
-            onClick={handleClick}
-            className={styles.btnSecondaryMenu}
-          >
-            &#43;&nbsp;New Ticker
-          </button>
-        </menu>
-        <div className={styles.tableHeadings}>
-          <h6 className={styles.tableHeading}>Ticker</h6>
-          <h6 className={styles.tableHeading}>Shares</h6>
-          <h6 className={styles.tableHeading}>Avg Cost / Share</h6>
-        </div>
-
-        {/* if adding new ticker display input row */}
-        {addingNewTicker && (
-          <AddPositionRow
-            setAddingNewTicker={setAddingNewTicker}
-            setAddingNewTicker={setAddingNewTicker}
-            portfolio={portfolio}
-            setPortfolio={setPortfolio}
-            makeCalculations={makeCalculations}
-          />
-        )}
-
+        {/* div to prevent flex space between from footer */}
         <div>
-          {/* map over portfolio if there are positions in portfolio array */}
-          {showZeroPositions ? (
-            <ZeroPositions
-              setShowZeroPositions={setShowZeroPositions}
+          <menu className={styles.secondaryMenu}>
+            <button onClick={handleClick} className={styles.btnSecondaryMenu}>
+              &#43;&nbsp;New Ticker
+            </button>
+          </menu>
+          <div className={styles.tableHeadings}>
+            <h6 onClick={sortByTicker} className={styles.tableHeading}>Ticker</h6>
+            <h6 onClick={sortByShares} className={styles.tableHeading}>Shares</h6>
+            <h6 onClick={sortByCostBasis} className={styles.tableHeading}>Avg Cost / Share</h6>
+          </div>
+
+          {/* if adding new ticker display input row */}
+          {addingNewTicker && (
+            <AddPositionRow
               setAddingNewTicker={setAddingNewTicker}
+              setAddingNewTicker={setAddingNewTicker}
+              portfolio={portfolio}
+              setPortfolio={setPortfolio}
+              makeCalculations={makeCalculations}
             />
-          ) : (
-            portfolio.map((position) => (
-              <EditPositionRow
-                mongoId={position._id}
-                ticker={position.ticker}
-                shares={position.shares}
-                costBasis={position.costBasis}
-                addingNewTicker={addingNewTicker}
-                editState={editState}
-                setEditState={setEditState}
-                setShowAlert={setShowAlert}
-                setActivePosition={setActivePosition}
-                setPortfolio={setPortfolio}
-                makeCalculations={makeCalculations}
-              />
-            ))
           )}
 
-          {/* Are you sure you want to delete modal */}
-          {showAlert && (
-            <ModalAlert
-              backdropOnClick={setShowAlert}
-              heading={"Delete Ticker"}
-              text={`Are you sure you want to remove ${activePosition.ticker}?`}
-              loading={deleting}
-            >
-              <button
-                className={`${styles.buttonModalDelete}`}
-                onClick={() => handleDelete(activePosition)}
-                disabled={deleting}
+          <div>
+            {/* map over portfolio if there are positions in portfolio array */}
+            {showZeroPositions ? (
+              <ZeroPositions
+                setShowZeroPositions={setShowZeroPositions}
+                setAddingNewTicker={setAddingNewTicker}
+              />
+            ) : (
+              portfolio.map((position) => (
+                <EditPositionRow
+                  mongoId={position._id}
+                  ticker={position.ticker}
+                  shares={position.shares}
+                  costBasis={position.costBasis}
+                  addingNewTicker={addingNewTicker}
+                  editState={editState}
+                  setEditState={setEditState}
+                  setShowAlert={setShowAlert}
+                  setActivePosition={setActivePosition}
+                  setPortfolio={setPortfolio}
+                  makeCalculations={makeCalculations}
+                />
+              ))
+            )}
+
+            {/* Are you sure you want to delete modal */}
+            {showAlert && (
+              <ModalAlert
+                backdropOnClick={setShowAlert}
+                heading={"Delete Ticker"}
+                text={`Are you sure you want to remove ${activePosition.ticker}?`}
+                loading={deleting}
               >
-                Delete
-              </button>
-              <button
-                className={`${styles.buttonModalCancel}`}
-                onClick={() => setShowAlert(false)}
-                disabled={deleting}
-              >
-                Cancel
-              </button>
-            </ModalAlert>
-          )}
+                <button
+                  className={`${styles.buttonModalDelete}`}
+                  onClick={() => handleDelete(activePosition)}
+                  disabled={deleting}
+                >
+                  Delete
+                </button>
+                <button
+                  className={`${styles.buttonModalCancel}`}
+                  onClick={() => setShowAlert(false)}
+                  disabled={deleting}
+                >
+                  Cancel
+                </button>
+              </ModalAlert>
+            )}
+          </div>
         </div>
+        <Footer />
       </div>
     </SidebarMenu>
   );

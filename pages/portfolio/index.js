@@ -68,10 +68,12 @@ function index({ ctx, user }) {
     <SidebarMenu user={user}>
       <PageHeading text="My Portfolio" />
       <div className={styles.contentContainer}>
-        <SectionHeading text="Portfolio Pie" />
-        <PortfolioPie portfolio={portfolio} />
-        <SectionHeading text="Portfolio Positions" />
-        <PortfolioTable portfolio={portfolio} />
+        <div>
+          <SectionHeading text="Portfolio Pie" />
+          <PortfolioPie portfolio={portfolio} />
+          <SectionHeading text="Portfolio Positions" />
+          <PortfolioTable portfolio={portfolio} />
+        </div>
         <Footer />
       </div>
     </SidebarMenu>

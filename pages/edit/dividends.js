@@ -9,7 +9,7 @@ import baseUrl from "../../utils/baseUrl";
 import ModalAlert from "../../components/styled/ModalAlert";
 import cookie from "js-cookie";
 import LoadingSpinner from "../../components/styled/LoadingSpinner";
-import Footer from '../../components/styled/Footer'
+import Footer from "../../components/styled/Footer";
 
 function dividends({ ctx, user }) {
   // Context
@@ -70,9 +70,9 @@ function dividends({ ctx, user }) {
 
   function handleClick() {
     if (!addingNewDividend) {
-      setAddingNewDividend(true)
+      setAddingNewDividend(true);
     }
-    setShowZeroDividends(false)
+    setShowZeroDividends(false);
   }
 
   if (!showComponent) {
@@ -93,49 +93,49 @@ function dividends({ ctx, user }) {
     <SidebarMenu user={user}>
       <PageHeading text="Edit Dividends" />
       <div className={styles.contentContainer}>
-        <menu className={styles.secondaryMenu}>
-          <button
-            onClick={handleClick}
-            className={styles.btnSecondaryMenu}
-          >
-            &#43;&nbsp;New Dividend
-          </button>
-        </menu>
-        <DividendHistoryTable
-          setAddingNewDividend={setAddingNewDividend}
-          addingNewDividend={addingNewDividend}
-          dividends={dividends}
-          setDividends={setDividends}
-          setShowAlert={setShowAlert}
-          setActiveDividend={setActiveDividend}
-          showZeroDividends={showZeroDividends}
-          setShowZeroDividends={setShowZeroDividends}
-        />
+        {/* div to prevent flex space between from footer */}
+        <div>
+          <menu className={styles.secondaryMenu}>
+            <button onClick={handleClick} className={styles.btnSecondaryMenu}>
+              &#43;&nbsp;New Dividend
+            </button>
+          </menu>
+          <DividendHistoryTable
+            setAddingNewDividend={setAddingNewDividend}
+            addingNewDividend={addingNewDividend}
+            dividends={dividends}
+            setDividends={setDividends}
+            setShowAlert={setShowAlert}
+            setActiveDividend={setActiveDividend}
+            showZeroDividends={showZeroDividends}
+            setShowZeroDividends={setShowZeroDividends}
+          />
 
-        {/* Are you sure you want to delete modal */}
-        {showAlert && (
-          <ModalAlert
-            backdropOnClick={setShowAlert}
-            heading={"Delete Ticker"}
-            text={`Are you sure you want to remove this ${activeDividend.ticker} dividend?`}
-            loading={deleting}
-          >
-            <button
-              className={`${styles.buttonModalDelete}`}
-              onClick={() => handleDelete(activeDividend)}
-              disabled={deleting}
+          {/* Are you sure you want to delete modal */}
+          {showAlert && (
+            <ModalAlert
+              backdropOnClick={setShowAlert}
+              heading={"Delete Ticker"}
+              text={`Are you sure you want to remove this ${activeDividend.ticker} dividend?`}
+              loading={deleting}
             >
-              Delete
-            </button>
-            <button
-              className={`${styles.buttonModalCancel}`}
-              onClick={() => setShowAlert(false)}
-              disabled={deleting}
-            >
-              Cancel
-            </button>
-          </ModalAlert>
-        )}
+              <button
+                className={`${styles.buttonModalDelete}`}
+                onClick={() => handleDelete(activeDividend)}
+                disabled={deleting}
+              >
+                Delete
+              </button>
+              <button
+                className={`${styles.buttonModalCancel}`}
+                onClick={() => setShowAlert(false)}
+                disabled={deleting}
+              >
+                Cancel
+              </button>
+            </ModalAlert>
+          )}
+        </div>
         <Footer />
       </div>
     </SidebarMenu>

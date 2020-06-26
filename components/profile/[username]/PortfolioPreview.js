@@ -10,10 +10,10 @@ function PortfolioPreview({ portfolio, user, setShowModalPie, setShowModalPortfo
   );
   const topFive = [];
   topFive.push(sortedPositions[0]);
-  topFive.push(sortedPositions[1]);
-  topFive.push(sortedPositions[2]);
-  topFive.push(sortedPositions[3]);
-  topFive.push(sortedPositions[4]);
+  if (sortedPositions[1]) topFive.push(sortedPositions[1]);
+  if (sortedPositions[2]) topFive.push(sortedPositions[2]);
+  if (sortedPositions[3]) topFive.push(sortedPositions[3]);
+  if (sortedPositions[4]) topFive.push(sortedPositions[4]);
 
   return (
     <div className={styles.componentContainer}>

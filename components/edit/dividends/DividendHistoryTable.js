@@ -1,8 +1,9 @@
 import styles from "./DividendHistoryTable.module.scss";
 import EditDividendRow from "./EditDividendRow";
 import AddDividendRow from "./AddDividendRow";
-import { useState } from 'react'
-import ZeroDividends from './ZeroDividends'
+import { useState, useEffect } from "react";
+import ZeroDividends from "./ZeroDividends";
+import Pagination from "./Pagination";
 
 function DividendHistoryTable({
   addingNewDividend,
@@ -12,26 +13,58 @@ function DividendHistoryTable({
   setShowAlert,
   setActiveDividend,
   showZeroDividends,
-  setShowZeroDividends
+  setShowZeroDividends,
 }) {
   // State
-  const [editState, setEditState] = useState(false)
+  const [editState, setEditState] = useState(false);
+  const [page, setPage] = useState(1);
+  const [currentPageDivs, setCurrentPageDivs] = useState([]);
+
+  // Variables
+  const divsPerPage = 50;
+  const totalPages = Math.ceil(dividends.length / divsPerPage);
+
+  useEffect(() => {
+    createPageDivsArray();
+  }, [page, dividends]);
+
+  function createPageDivsArray() {
+    let lastDivIndex = page * 50;
+    let firstDivIndex = lastDivIndex - 50;
+    const thisPageDivsArr = dividends.slice(firstDivIndex, lastDivIndex);
+    setCurrentPageDivs(thisPageDivsArr);
+  }
+
+  function handlePreviousPage() {
+    setPage(page - 1);
+  }
+
+  function handleNextPage() {
+    setPage(page + 1);
+  }
 
   if (showZeroDividends) {
     return (
-    <div>
-      <div className={styles.tableHeadings}>
-        <h6 className={styles.tableHeading}>Ticker</h6>
-        <h6 className={styles.tableHeading}>Shares</h6>
-        <h6 className={styles.tableHeading}>Cost Basis<br/>(Avg Price / Share)</h6>
-        <h6 className={styles.tableHeading}>Ex-Dividend Date</h6>
-        <h6 className={styles.tableHeading}>Dividend Payout Date</h6>
-        <h6 className={styles.tableHeading}>Dividend Amount</h6>
-        <h6 className={styles.tableHeading}>Payout Frequency</h6>
+      <div>
+        <div className={styles.tableHeadings}>
+          <h6 className={styles.tableHeading}>Ticker</h6>
+          <h6 className={styles.tableHeading}>Shares</h6>
+          <h6 className={styles.tableHeading}>
+            Cost Basis
+            <br />
+            (Avg Price / Share)
+          </h6>
+          <h6 className={styles.tableHeading}>Ex-Dividend Date</h6>
+          <h6 className={styles.tableHeading}>Dividend Payout Date</h6>
+          <h6 className={styles.tableHeading}>Dividend Amount</h6>
+          <h6 className={styles.tableHeading}>Payout Frequency</h6>
+        </div>
+        <ZeroDividends
+          setShowZeroDividends={setShowZeroDividends}
+          setAddingNewDividend={setAddingNewDividend}
+        />
       </div>
-      <ZeroDividends setShowZeroDividends={setShowZeroDividends} setAddingNewDividend={setAddingNewDividend} />
-    </div>
-    )
+    );
   }
 
   return (
@@ -39,7 +72,11 @@ function DividendHistoryTable({
       <div className={styles.tableHeadings}>
         <h6 className={styles.tableHeading}>Ticker</h6>
         <h6 className={styles.tableHeading}>Shares</h6>
-        <h6 className={styles.tableHeading}>Cost Basis<br/>(Avg Price / Share)</h6>
+        <h6 className={styles.tableHeading}>
+          Cost Basis
+          <br />
+          (Avg Price / Share)
+        </h6>
         <h6 className={styles.tableHeading}>Ex-Dividend Date</h6>
         <h6 className={styles.tableHeading}>Dividend Payout Date</h6>
         <h6 className={styles.tableHeading}>Dividend Amount</h6>
@@ -52,7 +89,7 @@ function DividendHistoryTable({
           setAddingNewDividend={setAddingNewDividend}
         />
       )}
-      {dividends.map((div) => (
+      {currentPageDivs.map((div) => (
         <EditDividendRow
           mongoId={div._id}
           key={div._id}
@@ -71,6 +108,13 @@ function DividendHistoryTable({
           setEditState={setEditState}
         />
       ))}
+      <Pagination
+        totalPages={totalPages}
+        page={page}
+        setPage={setPage}
+        handleNextPage={handleNextPage}
+        handlePreviousPage={handlePreviousPage}
+      />
     </div>
   );
 }

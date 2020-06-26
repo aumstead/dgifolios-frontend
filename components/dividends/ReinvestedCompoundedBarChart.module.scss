@@ -1,3 +1,7 @@
+.componentContainer {
+  margin-left: 6rem;
+}
+
 .form {
   margin-top: 1.5rem;
 }
@@ -93,12 +97,15 @@
 
 .generateButton {
   display: flex;
-  font-size: 1.6rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  width: 12rem;
+  height: 3.6rem;
   margin-top: 1.5rem;
   margin-right: 3rem;
   border: 1px solid var(--deep-green);
   border-radius: 4px;
-  padding: .5rem 1rem;
   background-color: var(--deep-green);
   color: #fff;
 

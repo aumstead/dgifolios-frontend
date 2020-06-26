@@ -1,11 +1,11 @@
 .modal {
-  width: 60rem;
-  height: 45rem;
+  width: 80rem;
+  height: 55rem;
   background: white;
   position: fixed;
-  top: 20%;
+  top: 50vh;
   left: 50vw;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-50%);
   z-index: 50;
   // opacity: 0;
   // transition: opacity 1s;
@@ -28,4 +28,10 @@
   margin-left: 3rem;
   font-size: 1.4rem;
   margin-bottom: 1rem;
+
+  &__col {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

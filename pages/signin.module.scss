@@ -1,11 +1,11 @@
 .container {
-  padding-top: 5rem;
+  padding-top: 10%;
 }
 
 .h1 {
   text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
 }
 
 .form {
@@ -17,6 +17,7 @@
 
 .label {
   font-size: 1.4rem;
+  margin-bottom: .5rem;
 }
 
 .input {
@@ -25,10 +26,100 @@
   margin-bottom: 2rem;
   border-radius: 4px;
   border: 1px solid gainsboro;
+
+  &:focus {
+    border: 1px solid var(--deep-green);
+  }
 }
 
 .button {
   font-size: 1.6rem;
   padding: 1rem;
   border-radius: 4px;
+  background-color: var(--deep-green);
+  color: #fff;
+  border: 1px solid var(--deep-green);
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color: #0f9a7a, $amount: 5);
+    border: 1px solid darken($color: #0f9a7a, $amount: 5);
+  }
+}
+
+.guideContainer {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+
+.guideLink {
+  color: var(--deep-green);
+
+  &:hover {
+    color: darken($color: #0f9a7a, $amount: 5);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+// Loading ellipsis animation
+.ldsEllipsis {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 80px;
+  z-index: 2;
+}
+.ldsEllipsis div {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: gainsboro;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.ldsEllipsis div:nth-child(1) {
+  left: 12px;
+  animation: ldsEllipsis1 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(2) {
+  left: 12px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(3) {
+  left: 36px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(4) {
+  left: 60px;
+  animation: ldsEllipsis3 0.6s infinite;
+}
+@keyframes ldsEllipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes ldsEllipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes ldsEllipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
 }

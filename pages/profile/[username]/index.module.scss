@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100rem;
 }
 
 .loadingSpinnerContainer {
@@ -11,7 +12,6 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 10%;
 }
 
 .btnFollowing {

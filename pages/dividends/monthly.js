@@ -10,6 +10,7 @@ import DateContext from "../../contexts/date/DateContext";
 import DivsByMonth from "../../components/dividends/DivsByMonth";
 import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import Link from "next/link";
+import Footer from '../../components/styled/Footer'
 
 function monthly({ ctx, user }) {
   // Contexts
@@ -78,6 +79,7 @@ function monthly({ ctx, user }) {
               <a className={styles.btnZero}>&#43;&nbsp;Add dividends</a>
             </Link>
           </div>
+          <Footer />
         </div>
       </SidebarMenu>
     );
@@ -91,6 +93,7 @@ function monthly({ ctx, user }) {
           <div className={styles.loadingSpinnerContainer}>
             <LoadingSpinner size="small" />
           </div>
+          <Footer />
         </div>
       </SidebarMenu>
     );
@@ -126,6 +129,7 @@ function monthly({ ctx, user }) {
         <div className={styles.barChartContainer}>
           <MonthlyBarChart dividends={dividends} years={years} />
         </div>
+        <Footer />
       </div>
     </SidebarMenu>
   );

@@ -5,7 +5,7 @@ import sort from "fast-sort";
 import DividendContext from "../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 
-function ReinvestedCompoundedBarChart() {
+function ReinvestedCompoundedBarChart({ setShowChart, setData, setXAxisObject, setYScaleObject }) {
   // Contexts
   const dividendContext = useContext(DividendContext);
   const { lastTwelveMonthYield } = dividendContext;
@@ -23,10 +23,6 @@ function ReinvestedCompoundedBarChart() {
     contribution: "",
   });
   const [useLastTwelveMonthYield, setUseLastTwelveMonthYield] = useState(false);
-  const [data, setData] = useState([]);
-  const [yScaleObject, setYScaleObject] = useState({ yMin: 0, yMax: 0 });
-  const [xAxisObject, setXAxisObject] = useState({});
-  const [showChart, setShowChart] = useState(false);
   const [addContribution, setAddContribution] = useState(false);
 
   const { years, divGrowthRate, annualYield, contribution } = values;
@@ -127,14 +123,7 @@ function ReinvestedCompoundedBarChart() {
   }
 
   return (
-    <div
-      style={{
-        height: "min-content",
-        width: "80rem",
-        marginLeft: "6rem",
-        display: "block",
-      }}
-    >
+    <div className={styles.componentContainer}>
       <form className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor="annualYield" className={styles.label}>
@@ -224,45 +213,7 @@ function ReinvestedCompoundedBarChart() {
           Generate Chart
         </button>
       </form>
-      <div className={styles.barContainer}>
-        {showChart && (
-          <ResponsiveBar
-            data={data}
-            keys={["divs"]}
-            indexBy="year"
-            margin={{ top: 20, right: 130, bottom: 50, left: 60 }}
-            padding={0.3}
-            colors={{ scheme: "paired" }}
-            maxValue={yScaleObject.yMax}
-            enableLabel={false}
-            borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: xAxisObject.tickRotation,
-              legend: "Year",
-              legendPosition: "middle",
-              legendOffset: 40,
-            }}
-            axisLeft={{
-              tickSize: 5,
-              tickPadding: 5,
-              tickRotation: 0,
-              legend: "Annual Dividends",
-              legendPosition: "middle",
-              legendOffset: -55,
-            }}
-            labelSkipWidth={12}
-            labelSkipHeight={12}
-            labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-            animate={true}
-            motionStiffness={90}
-            motionDamping={15}
-          />
-        )}
-      </div>
+      
     </div>
   );
 }

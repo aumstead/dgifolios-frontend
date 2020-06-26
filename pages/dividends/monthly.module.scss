@@ -7,6 +7,10 @@
 
 .contentContainer {
   width: 100rem;
+  min-height: calc(100vh - 11.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .barChartContainer {

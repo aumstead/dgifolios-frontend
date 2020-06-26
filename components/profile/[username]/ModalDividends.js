@@ -4,6 +4,7 @@ import CloseBtnSvg from "./CloseBtnSvg";
 import { useState, useContext } from "react";
 import DateContext from "../../../contexts/date/DateContext";
 import ProfileDivsByMonth from "./ProfileDivsByMonth";
+import { useEffect } from 'react'
 
 function ModalDividends({ backdropOnClick, dividends, years }) {
   // Contexts
@@ -13,6 +14,14 @@ function ModalDividends({ backdropOnClick, dividends, years }) {
   // States
   const [showYearMenu, setShowYearMenu] = useState(false);
   const [yearState, setYearState] = useState(currentYear);
+
+  useEffect(() => {
+    document.body.classList.add('disableBodyScroll');
+
+    return () => {
+      document.body.classList.remove('disableBodyScroll')
+    }
+  }, [])
 
   function handleClickYear(e) {
     setYearState(e.currentTarget.innerHTML);

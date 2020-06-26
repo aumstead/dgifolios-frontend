@@ -1,30 +1,43 @@
 import styles from "./AddDividendRow.module.scss";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import baseUrl from "../../../utils/baseUrl";
 import cookie from "js-cookie";
 import catchErrors from "../../../utils/catchErrors";
-import DividendContext from '../../../contexts/dividends/DividendContext'
+import DividendContext from "../../../contexts/dividends/DividendContext";
+import { validateIsGreaterThanZero } from "../../../utils/validation";
+import Tooltip from "../../styled/Tooltip";
 
+const INITIAL_FORM_VALUES = {
+  ticker: "",
+  shares: "",
+  costBasis: "",
+  exDivDate: "",
+  divDate: "",
+  amount: "",
+  frequency: "quarterly",
+};
 
-function AddDividendRow({
-  setAddingNewDividend,
-  setDividends
-}) {
+function AddDividendRow({ setAddingNewDividend, setDividends }) {
   // Context
-  const dividendContext = useContext(DividendContext)
-  const { makeCalculations, calculateAllTimeDividends } = dividendContext
+  const dividendContext = useContext(DividendContext);
+  const { makeCalculations, calculateAllTimeDividends } = dividendContext;
 
-  const [newDividend, setNewDividend] = useState({
-    ticker: "",
-    shares: "",
-    costBasis: "",
-    divDate: "",
-    exDivDate: "",
-    amount: "",
-    frequency: "quarterly",
-  });
+  const [newDividend, setNewDividend] = useState(INITIAL_FORM_VALUES);
   const [loading, setLoading] = useState(false);
+
+  // States
+  const [showTickerTooltip, setShowTickerTooltip] = useState(false);
+  const [showSharesTooltip, setShowSharesTooltip] = useState(false);
+  const [showDivDateTooltip, setShowDivDateTooltip] = useState(false);
+  const [showAmountTooltip, setShowAmountTooltip] = useState(false);
+
+  // variable for clearTimeout cleanup function
+  let timeout;
+
+  useEffect(() => {
+    return clearTimeout(timeout);
+  }, []);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -38,37 +51,100 @@ function AddDividendRow({
       ) {
         return { ...prevState, [name]: value };
       } else {
-        return { ...prevState, [name]: Number(value) };
+        return { ...prevState, [name]: value };
       }
     });
   }
 
   async function handleSave() {
+    // validate inputs
+    const {
+      ticker,
+      shares,
+      costBasis,
+      exDivDate,
+      divDate,
+      amount,
+      frequency,
+    } = newDividend;
+
+    const tickerValid = ticker.length > 0;
+    if (!tickerValid) {
+      return handleTooltip("ticker");
+    }
+
+    const sharesValid = validateIsGreaterThanZero(shares);
+    if (!sharesValid) {
+      return handleTooltip("shares");
+    }
+
+    const divDateValid = divDate.length > 0;
+    if (!divDateValid) {
+      return handleTooltip("divDate");
+    }
+
+    const amountValid = validateIsGreaterThanZero(amount);
+    if (!amountValid) {
+      return handleTooltip("amount");
+    }
+
     try {
       setLoading(true);
       const token = cookie.get("token");
       const headers = { headers: { Authorization: token } };
       const url = `${baseUrl}/dividends`;
       const payload = {
-        ...newDividend,
+        ticker,
+        shares,
+        costBasis,
+        exDivDate,
+        divDate,
+        amount,
+        frequency,
       };
       const response = await axios.post(url, payload, headers);
-      const data = makeCalculations(response.data)
-      calculateAllTimeDividends(response.data)
+      console.log(response);
+      const data = makeCalculations(response.data);
+      calculateAllTimeDividends(response.data);
       setDividends(data);
       setAddingNewDividend(false);
     } catch (error) {
       catchErrors(error, window.alert);
     } finally {
-      setNewDividend({
-        ticker: "",
-        shares: "",
-        divDate: "",
-        exDivDate: "",
-        amount: "",
-        frequency: "quarterly"
-      });
+      setNewDividend(INITIAL_FORM_VALUES);
       setLoading(false);
+    }
+  }
+
+  function handleTooltip(type) {
+    switch (type) {
+      case "ticker":
+        setShowTickerTooltip(true);
+        timeout = setTimeout(() => {
+          setShowTickerTooltip(false);
+        }, 3000);
+        break;
+      case "shares":
+        setShowSharesTooltip(true);
+        timeout = setTimeout(() => {
+          setShowSharesTooltip(false);
+        }, 3000);
+        break;
+      case "divDate":
+        setShowDivDateTooltip(true);
+        timeout = setTimeout(() => {
+          setShowDivDateTooltip(false);
+        }, 3000);
+        break;
+      case "amount":
+        setShowAmountTooltip(true);
+        timeout = setTimeout(() => {
+          setShowAmountTooltip(false);
+        }, 3000);
+        break;
+      default:
+        console.error("Error in switch statement.");
+        break;
     }
   }
 
@@ -83,7 +159,7 @@ function AddDividendRow({
           <div></div>
         </div>
       )}
-      <div>
+      <div className={styles.inputContainer}>
         <input
           className={`${styles.input} ${styles.inputSmall}`}
           value={newDividend.ticker}
@@ -94,8 +170,14 @@ function AddDividendRow({
           disabled={loading}
           autoFocus
         />
+        {showTickerTooltip && (
+          <Tooltip
+            text="Ticker required"
+            style={{ top: "-3.3rem", left: "3.2rem" }}
+          />
+        )}
       </div>
-      <div>
+      <div className={styles.inputContainer}>
         <input
           className={`${styles.input} ${styles.inputSmall}`}
           value={newDividend.shares}
@@ -105,6 +187,12 @@ function AddDividendRow({
           autoComplete="off"
           disabled={loading}
         />
+        {showSharesTooltip && (
+          <Tooltip
+            text="Invalid amount"
+            style={{ top: "-3.3rem", left: "3.2rem" }}
+          />
+        )}
       </div>
       <div>
         <input
@@ -127,7 +215,7 @@ function AddDividendRow({
           disabled={loading}
         />
       </div>
-      <div>
+      <div className={styles.inputContainer}>
         <input
           className={styles.input}
           value={newDividend.divDate}
@@ -136,8 +224,14 @@ function AddDividendRow({
           type="date"
           disabled={loading}
         />
+        {showDivDateTooltip && (
+          <Tooltip
+            text="Field required"
+            style={{ top: "-3.3rem", left: "5rem" }}
+          />
+        )}
       </div>
-      <div>
+      <div className={styles.inputContainer}>
         <input
           className={`${styles.input} ${styles.inputSmall}`}
           value={newDividend.amount}
@@ -147,6 +241,12 @@ function AddDividendRow({
           autoComplete="off"
           disabled={loading}
         />
+        {showAmountTooltip && (
+          <Tooltip
+            text="Invalid amount"
+            style={{ top: "-3.3rem", left: "3.2rem" }}
+          />
+        )}
       </div>
       <div>
         <select

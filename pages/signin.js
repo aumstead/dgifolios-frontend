@@ -26,7 +26,6 @@ function signin() {
 
       const payload = { ...user }
       const response = await axios.post(url, payload)
-      console.log(response)
       handleLogin(response.data)
     } catch (error) {
       catchErrors(error, setError)
@@ -58,6 +57,7 @@ function signin() {
           type="email"
           name="email"
           value={user.email}
+          disabled={loading}
         />
         <label className={styles.label} htmlFor="password">
           Password
@@ -68,10 +68,24 @@ function signin() {
           type="password"
           name="password"
           value={user.password}
+          disabled={loading}
         />
-        <button className={styles.button} type="submit">
-          Login
+        <button className={styles.button} type="submit" disabled={loading}>
+        {loading ? (
+            <div className={styles.ldsEllipsis}>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : (
+            "Login"
+          )}
         </button>
+        <div className={styles.guideContainer}>
+          <span>Need an account?&nbsp;</span>
+          <Link href='/signup'><a className={styles.guideLink}>Sign up!</a></Link>
+        </div>
       </form>
       {loading && <LoadingSpinner />}
     </div>

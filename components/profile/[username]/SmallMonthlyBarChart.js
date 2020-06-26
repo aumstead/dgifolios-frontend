@@ -98,7 +98,19 @@ function SmallMonthlyBarChart({ dividends, years }) {
         margin={{ top: 25, right: 100, bottom: 50, left: 80 }}
         padding={0.3}
         groupMode="grouped"
-        colors={["#931b9e", "#275cbe", "var(--deep-red)", "var(--deep-green)", "#fa9b99", "#FFFF99", "#cab2d6", "#fb9a99", "#b15928", "#a6cee3", "#fdbf6f"]}
+        colors={[
+          "#a6cee3",
+          "#1f78b4",
+          "#b2df8a",
+          "#33a02c",
+          "#fb9a99",
+          "#e31a1c",
+          "#fdbf6f",
+          "#ff7f00",
+          "#cab2d6",
+          "#6a3d9a",
+          "#b15928",
+        ]}
         borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
         axisTop={null}
         axisRight={null}

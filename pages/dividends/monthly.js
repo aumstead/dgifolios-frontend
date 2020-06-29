@@ -31,29 +31,6 @@ function monthly({ ctx, user }) {
   const [showYearMenu, setShowYearMenu] = useState(false);
   const [yearState, setYearState] = useState(currentYear);
 
-  useEffect(() => {
-    // get data
-    async function getData() {
-      if (dividends.length === 0) {
-        console.log("getting dividends");
-        const res = await getDividends(ctx);
-      } else {
-        console.log("dividends array is not zero");
-      }
-
-      if (portfolio.length === 0) {
-        console.log("getting portfolio");
-        const res = await getPortfolio(ctx);
-      } else {
-        console.log("portfolio array is not zero");
-      }
-      console.log("setting component to true");
-      setShowComponent(true);
-    }
-
-    getData();
-  }, []);
-
   function handleClickBtn(e) {
     e.preventDefault();
     setShowYearMenu((prevState) => !prevState);
@@ -72,26 +49,12 @@ function monthly({ ctx, user }) {
     return (
       <SidebarMenu user={user}>
         <PageHeading text="Monthly View" />
-        <div className={styles.contentContainer}>
+        <div className={styles.contentContainerZero}>
           <div className={styles.messageContainer}>
             <h2>You have zero dividends recorded.</h2>
             <Link href="/edit/dividends">
               <a className={styles.btnZero}>&#43;&nbsp;Add dividends</a>
             </Link>
-          </div>
-          <Footer />
-        </div>
-      </SidebarMenu>
-    );
-  }
-
-  if (!showComponent) {
-    return (
-      <SidebarMenu user={user}>
-        <PageHeading text="Monthly View" />
-        <div className={styles.contentContainer}>
-          <div className={styles.loadingSpinnerContainer}>
-            <LoadingSpinner size="small" />
           </div>
           <Footer />
         </div>

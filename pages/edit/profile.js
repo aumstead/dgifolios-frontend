@@ -5,7 +5,6 @@ import PageHeading from "../../components/styled/PageHeading";
 import baseUrl from "../../utils/baseUrl";
 import cookie from "js-cookie";
 import axios from "axios";
-import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import Footer from '../../components/styled/Footer'
 
 function profile({ user }) {

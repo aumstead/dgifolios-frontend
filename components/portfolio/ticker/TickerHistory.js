@@ -10,14 +10,18 @@ function TickerHistory({ dividends, ticker }) {
 
   useEffect(() => {
     manipulateDividends();
-  }, []);
+
+    return () => {
+      setNoDivHistory(false)
+      setData([])
+    }
+  }, [ticker]);
 
   function manipulateDividends() {
     // Does this ticker actually have any dividends? Some in portfolio may not yet.
     const dividendsArray = dividends.filter((div) => div.ticker === ticker);
 
     if (dividendsArray.length === 0) {
-      console.log("handle no dividends UI");
       setNoDivHistory(true)
     } else {
       // Make all calculations for data object

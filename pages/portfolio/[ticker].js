@@ -1,26 +1,24 @@
 import SidebarMenu from "../../components/styled/SidebarMenu";
 import styles from "./[ticker].module.scss";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import DividendContext from "../../contexts/dividends/DividendContext";
 import PageHeading from "../../components/styled/PageHeading";
 import TickerInfo from "../../components/portfolio/ticker/TickerInfo";
 import SectionHeading from "../../components/styled/SectionHeading";
 import TickerHistory from "../../components/portfolio/ticker/TickerHistory";
-import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import Footer from "../../components/styled/Footer";
 import AmountLineChart from "../../components/portfolio/ticker/AmountLineChart";
 import TotalLineChart from "../../components/portfolio/ticker/TotalLineChart";
 
-function ticker({ ticker, ctx, user }) {
+function ticker({ ticker, user }) {
   // Contexts
   const portfolioContext = useContext(PortfolioContext);
-  const { portfolio, getPortfolio } = portfolioContext;
+  const { portfolio } = portfolioContext;
   const dividendContext = useContext(DividendContext);
-  const { dividends, getDividends, allTimeRankings } = dividendContext;
+  const { dividends, allTimeRankings } = dividendContext;
 
-  // State
-  const [showComponent, setShowComponent] = useState(false);
+
 
   // useEffect(() => {
   //   // get data

@@ -16,14 +16,13 @@ import Link from "next/link";
 import Footer from "../../components/styled/Footer";
 import BarChartComponent from "../../components/dividends/BarChartComponent";
 
-function index({ ctx, user }) {
+function index({ user }) {
   const dividendContext = useContext(DividendContext);
   const portfolioContext = useContext(PortfolioContext);
-  const { dividends, getDividends, showZeroDividends } = dividendContext;
-  const { portfolio, getPortfolio } = portfolioContext;
+  const { dividends, showZeroDividends } = dividendContext;
+  const { portfolio } = portfolioContext;
 
   // States
-  const [showComponent, setShowComponent] = useState(false);
   // calculate these two stats in child components, pass back up to parent and back down to a different child
   const [daysWithDividend, setDaysWithDividend] = useState("");
 
@@ -33,55 +32,16 @@ function index({ ctx, user }) {
   const [xAxisObject, setXAxisObject] = useState({});
   const [showChart, setShowChart] = useState(false);
 
-  useEffect(() => {
-    // get data
-    async function getData() {
-      if (dividends.length === 0) {
-        console.log("getting dividends");
-        const res = await getDividends(ctx);
-        console.log(res);
-      } else {
-        console.log("dividends array is not zero");
-      }
-
-      if (portfolio.length === 0) {
-        console.log("getting portfolio");
-        const res = await getPortfolio(ctx);
-        console.log(res);
-      } else {
-        console.log("portfolio array is not zero");
-      }
-      console.log("setting component to true");
-      setShowComponent(true);
-    }
-
-    getData();
-  }, []);
-
   if (showZeroDividends) {
     return (
       <SidebarMenu user={user}>
         <PageHeading text="Dividends" />
-        <div className={styles.contentContainer}>
+        <div className={styles.contentContainerZero}>
           <div className={styles.messageContainer}>
             <h2>You have zero dividends recorded.</h2>
             <Link href="/edit/dividends">
               <a className={styles.btnZero}>&#43;&nbsp;Add dividends</a>
             </Link>
-          </div>
-          <Footer />
-        </div>
-      </SidebarMenu>
-    );
-  }
-
-  if (!showComponent) {
-    return (
-      <SidebarMenu user={user}>
-        <PageHeading text="Dividends" />
-        <div className={styles.contentContainer}>
-          <div className={styles.loadingSpinnerContainer}>
-            <LoadingSpinner size="small" />
           </div>
           <Footer />
         </div>
@@ -99,7 +59,7 @@ function index({ ctx, user }) {
         {/* <SectionHeading text="Upcoming Dividends" />
         <RecentDividends /> */}
 
-        <SectionHeading text="Approaching Ex-Dividend Dates" explanation={"(programatically estimated)"}/>
+        <SectionHeading text="Approaching Ex-Dividend Dates" explanation={"(estimated programatically)"}/>
         <UpcomingExDivDates dividends={dividends} />
 
         <SectionHeading

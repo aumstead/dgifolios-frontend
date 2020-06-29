@@ -3,23 +3,21 @@ import PageHeading from "../../components/styled/PageHeading";
 import EditPositionRow from "../../components/edit/portfolio/EditPositionRow";
 import AddPositionRow from "../../components/edit/portfolio/AddPositionRow";
 import ModalAlert from "../../components/styled/ModalAlert";
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import baseUrl from "../../utils/baseUrl";
 import styles from "./portfolio.module.scss";
 import ZeroPositions from "../../components/edit/portfolio/ZeroPositions";
-import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import cookie from "js-cookie";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import Footer from "../../components/styled/Footer";
 import sort from 'fast-sort'
 
-function portfolio({ ctx, user }) {
+function portfolio({ user }) {
   const portfolioContext = useContext(PortfolioContext);
   const {
     portfolio,
     setPortfolio,
-    getPortfolio,
     showZeroPositions,
     setShowZeroPositions,
     makeCalculations,
@@ -30,27 +28,9 @@ function portfolio({ ctx, user }) {
   const [showAlert, setShowAlert] = useState(false);
   const [activePosition, setActivePosition] = useState({});
   const [deleting, setDeleting] = useState(false);
-  const [showComponent, setShowComponent] = useState(false);
   const [directionByCostBasis, setDirectionByCostBasis] = useState(true)
   const [directionByShares, setDirectionByShares] = useState(true)
   const [directionByTicker, setDirectionByTicker] = useState(false)
-
-  useEffect(() => {
-    // get data
-    async function getData() {
-      if (portfolio.length === 0) {
-        console.log("getting portfolio");
-        const res = await getPortfolio(ctx);
-        console.log(res);
-      } else {
-        console.log("portfolio array is not zero");
-      }
-
-      setShowComponent(true);
-    }
-
-    getData();
-  }, []);
 
   function addNewTicker() {
     setAddingNewTicker((prevState) => !prevState);
@@ -110,20 +90,6 @@ function portfolio({ ctx, user }) {
       sort(portfolio).asc(stock => stock.costBasis)
     }
     setPortfolio([...portfolio])
-  }
-
-  if (!showComponent) {
-    return (
-      <SidebarMenu user={user}>
-        <PageHeading text="Edit Portfolio" />
-        <div className={styles.contentContainer}>
-          <div className={styles.loadingSpinnerContainer}>
-            <LoadingSpinner size="small" />
-          </div>
-          <Footer />
-        </div>
-      </SidebarMenu>
-    );
   }
 
   return (

@@ -1,6 +1,6 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://deployment-url.now.sh"
+    ? "https://divfolios.herokuapp.com"
     : "http://localhost:8080";
 
 export default baseUrl;

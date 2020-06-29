@@ -2,13 +2,12 @@ import SidebarMenu from "../../components/styled/SidebarMenu";
 import styles from "./dividends.module.scss";
 import PageHeading from "../../components/styled/PageHeading";
 import DividendHistoryTable from "../../components/edit/dividends/DividendHistoryTable";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import DividendContext from "../../contexts/dividends/DividendContext";
 import axios from "axios";
 import baseUrl from "../../utils/baseUrl";
 import ModalAlert from "../../components/styled/ModalAlert";
 import cookie from "js-cookie";
-import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import Footer from "../../components/styled/Footer";
 
 function dividends({ ctx, user }) {
@@ -17,7 +16,6 @@ function dividends({ ctx, user }) {
   const {
     dividends,
     setDividends,
-    getDividends,
     makeCalculations,
     calculateAllTimeDividends,
     showZeroDividends,
@@ -29,23 +27,6 @@ function dividends({ ctx, user }) {
   const [showAlert, setShowAlert] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [activeDividend, setActiveDividend] = useState({});
-  const [showComponent, setShowComponent] = useState(false);
-
-  useEffect(() => {
-    // get data
-    async function getData() {
-      if (dividends.length === 0) {
-        console.log("getting dividends");
-        const res = await getDividends(ctx);
-        console.log(res);
-      } else {
-        console.log("dividends array is not zero");
-      }
-      setShowComponent(true);
-    }
-
-    getData();
-  }, []);
 
   async function handleDelete({ mongoId }) {
     setDeleting(true);
@@ -73,20 +54,6 @@ function dividends({ ctx, user }) {
       setAddingNewDividend(true);
     }
     setShowZeroDividends(false);
-  }
-
-  if (!showComponent) {
-    return (
-      <SidebarMenu user={user}>
-        <PageHeading text="Edit Dividends" />
-        <div className={styles.contentContainer}>
-          <div className={styles.loadingSpinnerContainer}>
-            <LoadingSpinner size="small" />
-          </div>
-          <Footer />
-        </div>
-      </SidebarMenu>
-    );
   }
 
   return (

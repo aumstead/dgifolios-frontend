@@ -1,6 +1,6 @@
 import styles from "./TickerInfo.module.scss";
 import { useState, useEffect } from "react";
-import sort from 'fast-sort'
+import sort from "fast-sort";
 
 function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
   // States
@@ -13,9 +13,9 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
   });
   const [dividendData, setDividendData] = useState({
     dividendStatus: false,
-    allTimeDividends: '',
-    allTimeRank: '',
-    yieldOnCost: ''
+    allTimeDividends: "",
+    allTimeRank: "",
+    yieldOnCost: "",
   });
   const [showComponent, setShowComponent] = useState(false);
 
@@ -28,14 +28,36 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
     portfolioStatus,
   } = portfolioData;
 
-  const { dividendStatus, allTimeDividends, allTimeRank, yieldOnCost } = dividendData;
+  const {
+    dividendStatus,
+    allTimeDividends,
+    allTimeRank,
+    yieldOnCost,
+  } = dividendData;
 
   useEffect(() => {
     manipulatePortfolioData();
     manipulateDividendData();
     manipulateAllTimeRankingsData();
     setShowComponent(true);
-  }, []);
+
+    return () => {
+      setDividendData({
+        dividendStatus: false,
+        allTimeDividends: "",
+        allTimeRank: "",
+        yieldOnCost: "",
+      });
+
+      setPortfolioData({
+        costBasis: "",
+        investedCapital: "",
+        percentOfPortfolio: "",
+        shares: "",
+        portfolioStatus: false,
+      });
+    };
+  }, [ticker]);
 
   function manipulatePortfolioData() {
     const tickerFromPortfolio = portfolio.find(
@@ -68,48 +90,51 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
     const tickerFromPortfolio = portfolio.find(
       (stock) => stock.ticker === ticker
     );
-    
+
     // Get yieldOnCost
     let yieldOnCost = false;
     // If there are dividends and ticker is in the portfolio
     if (dividendsArray.length !== 0 && tickerFromPortfolio) {
       // sort array so most recent is at start
-      sort(dividendsArray).desc(div => div.divDate)
+      sort(dividendsArray).desc((div) => div.divDate);
       // if the most recent dividend is quarterly and costBasis property is truthy
-      if (dividendsArray[0].frequency === "quarterly" && tickerFromPortfolio.costBasis) {
-        yieldOnCost = Number((((dividendsArray[0].amount * 4) / tickerFromPortfolio.costBasis) * 100).toFixed(2))
+      if (
+        dividendsArray[0].frequency === "quarterly" &&
+        tickerFromPortfolio.costBasis
+      ) {
+        yieldOnCost = Number(
+          (
+            ((dividendsArray[0].amount * 4) / tickerFromPortfolio.costBasis) *
+            100
+          ).toFixed(2)
+        );
       }
     }
-    
+
     // If there are some dividends create statistics
     if (dividendsArray.length !== 0) {
       // create some statistics
-      
-
 
       setDividendData((prevState) => ({
         ...prevState,
         dividendStatus: true,
-        yieldOnCost: yieldOnCost
+        yieldOnCost: yieldOnCost,
       }));
     }
   }
-  
 
   function manipulateAllTimeRankingsData() {
-    const obj = allTimeRankings.find((obj) => obj.ticker === ticker)
+    const obj = allTimeRankings.find((obj) => obj.ticker === ticker);
     if (!obj) {
       return;
     }
-    let rank = (allTimeRankings.indexOf(obj)) + 1
+    let rank = allTimeRankings.indexOf(obj) + 1;
     setDividendData((prevState) => ({
       ...prevState,
       allTimeDividends: obj.allTimeDividends.toFixed(2),
-      allTimeRank: rank
-    }))
+      allTimeRank: rank,
+    }));
   }
-
-  
 
   if (!showComponent) {
     return <p>loading</p>;
@@ -133,7 +158,7 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
                       : `${styles.value} ${styles.absent}`
                   }
                 >
-                  {portfolioStatus ? "In portfolio" : "No current position"}
+                  {portfolioData.portfolioStatus ? "In portfolio" : "No current position"}
                 </span>
               </td>
             </tr>
@@ -200,7 +225,7 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
               </td>
               <td>
                 <span className={styles.value}>
-                {dividendStatus ? `${allTimeRank}` : "n/a"}
+                  {dividendStatus ? `${allTimeRank}` : "n/a"}
                 </span>
               </td>
             </tr>
@@ -210,7 +235,7 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
               </td>
               <td>
                 <span className={styles.value}>
-                {yieldOnCost ? `${yieldOnCost}%` : "n/a"}
+                  {yieldOnCost ? `${yieldOnCost}%` : "n/a"}
                 </span>
               </td>
             </tr>

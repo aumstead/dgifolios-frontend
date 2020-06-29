@@ -1,8 +1,7 @@
 import styles from "./index.module.scss";
 import SidebarMenu from "../../../components/styled/SidebarMenu";
 import PageHeading from "../../../components/styled/PageHeading";
-import LoadingSpinner from "../../../components/styled/LoadingSpinner";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import baseUrl from "../../../utils/baseUrl";
 import axios from "axios";
 import SectionHeading from "../../../components/styled/SectionHeading";
@@ -17,10 +16,17 @@ import cookie from "js-cookie";
 import Link from "next/link";
 import sort from "fast-sort";
 import Footer from "../../../components/styled/Footer";
+import DividendContext from "../../../contexts/dividends/DividendContext";
+import PortfolioContext from "../../../contexts/portfolio/PortfolioContext";
 
 function index({ username, ctx, user }) {
+  // Contexts
+  const dividendContext = useContext(DividendContext);
+  const portfolioContext = useContext(PortfolioContext);
+  const { dividends } = dividendContext;
+  const { portfolio } = portfolioContext;
+
   // States
-  const [showComponent, setShowComponent] = useState(false);
   const [profilePortfolio, setProfilePortfolio] = useState([]);
   const [profileDividends, setProfileDividends] = useState([]);
   const [profileUser, setProfileUser] = useState({});
@@ -46,9 +52,10 @@ function index({ username, ctx, user }) {
       // get user _id
       console.log("getting user info");
       // the profile user, not current site user.
-      const user = await getUserInfo(ctx);
-      setProfileUser(user);
-      const { _id } = user;
+      const profileUser = await getUserInfo(ctx);
+      setProfileUser(profileUser);
+      console.log(profileUser);
+      const { _id } = profileUser;
       const divUrl = `${baseUrl}/profileDividends`;
       const divPromise = axios.get(divUrl, {
         params: {
@@ -76,22 +83,34 @@ function index({ username, ctx, user }) {
           setProfilePortfolio(portfolioData);
         })
         .catch((error) => console.log(error));
-
-      console.log("setting component to true");
-      setShowComponent(true);
     }
 
-    getData();
+    if (username === user.username) {
+      setProfileUser(user);
+      console.log("users own profile");
+      return;
+    } else {
+      getData();
+    }
 
     // is current user following the profile user?
     const isFollowing = user.following.find(
       (user) => user.username === username
     );
     if (isFollowing) {
-      console.log("found and setting to true");
       setFollowing(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (username === user.username) {
+      console.log("dividends", dividends);
+      const dividendsData = dividendCalculations(dividends);
+      setProfileDividends(dividendsData);
+      const portfolioData = portfolioCalculations(portfolio);
+      setProfilePortfolio(portfolioData);
+    }
+  }, [dividends, portfolio]);
 
   async function getUserInfo() {
     try {
@@ -249,26 +268,12 @@ function index({ username, ctx, user }) {
     }
   }
 
-  if (!showComponent) {
-    return (
-      <SidebarMenu user={user}>
-        <div className={styles.contentContainer}>
-          <PageHeading text={`${username}'s portfolio`} />
-          <div className={styles.loadingSpinnerContainer}>
-            <LoadingSpinner size="small" />
-          </div>
-          <Footer />
-        </div>
-      </SidebarMenu>
-    );
-  }
-
   return (
     <SidebarMenu user={user}>
       <div className={styles.contentContainer}>
         <PageHeading text={`${username}'s portfolio`} />
 
-        {profileUser.username === user.username ? (
+        {username === user.username ? (
           <div></div>
         ) : following ? (
           <button

@@ -1,0 +1,35 @@
+.card {
+  border: 1px solid gainsboro;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  padding: 1rem 1.3rem;
+
+  &:hover {
+    cursor: pointer;
+    // border: 1px solid var(--dark-purple);
+    background-color: var(--off-white);
+    box-shadow: 0px 15px 15px -24px rgba(0, 0, 0, 0.62);
+  }
+
+}
+
+.cardFiller {
+  height: 100%;
+  width: 100%;
+}
+
+.lightText {
+  color: var(--dark-gray);
+}
+
+.greenText {
+  color: var(--deep-green);
+}
+
+.label {
+  margin-right: 1rem;
+}
+
+.value {
+  color: var(--deep-green);
+}

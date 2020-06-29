@@ -8,17 +8,18 @@
   color: var(--color-dark-grey);
   width: 3rem;
   justify-items: center;
-  margin-bottom: 1.5rem;
   margin-left: 6rem;
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 .tableHeading {
   font-weight: normal;
   font-size: 1.2rem;
   text-align: center;
-  margin: 0 2rem;
+  padding: 1rem 0rem;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--off-white);
+  }
 }

@@ -72,6 +72,24 @@ function ZeroDividends({ setShowZeroDividends, setAddingNewDividend }) {
         amount={".44"}
         frequency={"Quarterly"}
       />
+      <DummyRow
+        ticker="MMM"
+        shares={5}
+        costBasis={181.98}
+        exDivDate={"2020-05-21"}
+        divDate={"2020-06-12"}
+        amount={"1.47"}
+        frequency={"Quarterly"}
+      />
+      <DummyRow
+        ticker="NVDA"
+        shares={9}
+        costBasis={165.5}
+        exDivDate={"2020-0-04"}
+        divDate={"2020-06-26"}
+        amount={".16"}
+        frequency={"Quarterly"}
+      />
       <div className={styles.ctaContainer}>
         <h3 className={styles.h3}>Add your dividends!</h3>
         <button onClick={handleClick} className={styles.ctaBtn}>

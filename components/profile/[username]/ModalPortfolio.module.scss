@@ -27,11 +27,14 @@
   color: var(--color-dark-grey);
   margin-left: 3rem;
   font-size: 1.4rem;
-  margin-bottom: 1rem;
+  padding: .5rem 0rem;
 
   &__col {
+    padding: 1rem 0rem;
+
     &:hover {
       cursor: pointer;
+      background-color: var(--off-white);
     }
   }
 }

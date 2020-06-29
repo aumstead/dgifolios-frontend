@@ -5,6 +5,7 @@ import Fuse from "fuse.js";
 import { useState, useEffect, useContext } from "react";
 import DividendContext from "../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
+import LoadingSpinner from "./LoadingSpinner";
 
 function SidebarMenu({ children, user, ctx }) {
   const router = useRouter();
@@ -20,7 +21,7 @@ function SidebarMenu({ children, user, ctx }) {
   // State
   const [searchQuery, setSearchQuery] = useState("");
   const [tickers, setTickers] = useState([]);
-  const [showComponent, setShowComponent] = useState(false)
+  const [showComponent, setShowComponent] = useState(false);
 
   useEffect(() => {
     // get data
@@ -45,13 +46,12 @@ function SidebarMenu({ children, user, ctx }) {
       setShowComponent(true);
     }
 
-
     getData();
   }, []);
 
   useEffect(() => {
     setTickers(createTickersArr());
-  }, [dividends, portfolio])
+  }, [dividends, portfolio]);
 
   const fuse = new Fuse(tickers, {
     threshold: 0.4,
@@ -60,8 +60,6 @@ function SidebarMenu({ children, user, ctx }) {
 
   const results = fuse.search(searchQuery);
   const tickerResults = results.map((ticker) => ticker.item);
-
-
 
   function createTickersArr() {
     const hashTable = {};
@@ -77,7 +75,6 @@ function SidebarMenu({ children, user, ctx }) {
     keysArr.forEach((key) => {
       tickers.push({ ticker: key });
     });
-    console.log('tickers', tickers)
     return tickers;
   }
 
@@ -88,13 +85,19 @@ function SidebarMenu({ children, user, ctx }) {
 
   function handleKeyUp(e) {
     if (e.keyCode === 13) {
-      router.push(`/portfolio/[ticker]?ticker=${tickerResults[0].ticker}`, `/portfolio/${tickerResults[0].ticker}`)
-      document.getElementById('inputSearchId').blur()
+      router.push(
+        `/portfolio/[ticker]?ticker=${tickerResults[0].ticker}`,
+        `/portfolio/${tickerResults[0].ticker}`
+      );
+      document.getElementById("inputSearchId").blur();
     }
   }
 
   function handleMouseDown(e) {
-    router.push(`/portfolio/[ticker]?ticker=${e.target.innerHTML}`, `/portfolio/${e.target.innerHTML}`)
+    router.push(
+      `/portfolio/[ticker]?ticker=${e.target.innerHTML}`,
+      `/portfolio/${e.target.innerHTML}`
+    );
   }
 
   if (!user) {
@@ -121,8 +124,10 @@ function SidebarMenu({ children, user, ctx }) {
 
   if (!showComponent) {
     return (
-      <div></div>
-    )
+      <div className={styles.loadingSpinnerContainer}>
+        <LoadingSpinner size="big" />
+      </div>
+    );
   }
 
   return (
@@ -179,12 +184,12 @@ function SidebarMenu({ children, user, ctx }) {
             placeholder="i.e. AAPL, VZ"
             className={styles.searchInput}
             onKeyUp={handleKeyUp}
-            id='inputSearchId'
-            onBlur={() => setSearchQuery('')}
+            id="inputSearchId"
+            onBlur={() => setSearchQuery("")}
           />
           <div className={styles.search__ulContainer}>
             {tickerResults.length > 0 && (
-              <ul className={styles.search__ul} >
+              <ul className={styles.search__ul}>
                 {tickerResults.map((ticker) => (
                   // <Link
                   //   href={`/portfolio/[ticker]?ticker=${ticker.ticker}`}
@@ -192,7 +197,12 @@ function SidebarMenu({ children, user, ctx }) {
                   // >
                   //   <li className={styles.search__li}>{ticker.ticker}</li>
                   // </Link>
-                  <li onMouseDown={handleMouseDown} className={styles.search__li}>{ticker.ticker}</li>
+                  <li
+                    onMouseDown={handleMouseDown}
+                    className={styles.search__li}
+                  >
+                    {ticker.ticker}
+                  </li>
                 ))}
               </ul>
             )}

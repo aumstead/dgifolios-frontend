@@ -16,41 +16,41 @@ function index({ ctx, user }) {
 
   const [showComponent, setShowComponent] = useState(false);
 
-  useEffect(() => {
-    // get data
-    async function getData() {
-      if (portfolio.length === 0) {
-        console.log("getting portfolio");
-        const res = await getPortfolio(ctx);
-      } else {
-        console.log("portfolio array is not zero");
-      }
-      console.log("setting component to true");
-      setShowComponent(true);
-    }
+  // useEffect(() => {
+  //   // get data
+  //   async function getData() {
+  //     if (portfolio.length === 0) {
+  //       console.log("getting portfolio");
+  //       const res = await getPortfolio(ctx);
+  //     } else {
+  //       console.log("portfolio array is not zero");
+  //     }
+  //     console.log("setting component to true");
+  //     setShowComponent(true);
+  //   }
 
-    getData();
-  }, []);
+  //   getData();
+  // }, []);
 
-  if (!showComponent) {
-    return (
-      <SidebarMenu user={user}>
-        <PageHeading text="My Portfolio" />
-        <div className={styles.contentContainer}>
-          <div className={styles.loadingSpinnerContainer}>
-            <LoadingSpinner size="small" />
-          </div>
-          <Footer />
-        </div>
-      </SidebarMenu>
-    );
-  }
+  // if (!showComponent) {
+  //   return (
+  //     <SidebarMenu user={user}>
+  //       <PageHeading text="My Portfolio" />
+  //       <div className={styles.contentContainer}>
+  //         <div className={styles.loadingSpinnerContainer}>
+  //           <LoadingSpinner size="small" />
+  //         </div>
+  //         <Footer />
+  //       </div>
+  //     </SidebarMenu>
+  //   );
+  // }
 
   if (showZeroPositions) {
     return (
       <SidebarMenu user={user}>
         <PageHeading text="My Portfolio" />
-        <div className={styles.contentContainer}>
+        <div className={styles.contentContainerZero}>
           <div className={styles.messageContainer}>
             <h2>You have zero positions in your portfolio.</h2>
             <Link href="/edit/portfolio">

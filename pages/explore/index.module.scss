@@ -15,18 +15,19 @@
   // border-bottom: 2px gainsboro solid;
 }
 
-.menuItem {
+
+.portfoliosBtn {
   font-size: 1.4rem;
-  width: fit-content;
   background-color: white;
   color: var(--deep-green);
   border: none;
   padding: 1rem .5rem;
+  width: 15rem;
   margin-right: 2rem;
 
   &:hover {
     cursor: pointer;
-    border-bottom: 2px solid var(--deep-green);
+    border-bottom: 3px solid var(--deep-green);
   }
 
   &:focus {
@@ -34,14 +35,44 @@
   }
 }
 
-.menuItemActive {
+.followersBtn {
   font-size: 1.4rem;
-  width: fit-content;
   background-color: white;
   color: var(--deep-green);
   border: none;
   padding: 1rem .5rem;
+  width: 10rem;
   margin-right: 2rem;
+
+  &:hover {
+    cursor: pointer;
+    border-bottom: 3px solid var(--deep-green);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.randomBtn {
+  font-size: 1.4rem;
+  background-color: white;
+  color: var(--deep-green);
+  border: none;
+  padding: 1rem .5rem;
+  width: 14rem;
+
+  &:hover {
+    cursor: pointer;
+    border-bottom: 3px solid var(--deep-green);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.activeBtn {
   font-weight: 800;
   border-bottom: 3px solid var(--deep-green);
 
@@ -66,15 +97,6 @@
   list-style: none;
   margin-top: 3rem;
   margin-left: .5rem;
-}
-
-.li {
-  font-size: 1.6rem;
-  color: var(--dark-purple);
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .a {

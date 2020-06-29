@@ -53,7 +53,9 @@ MyApp.getInitialProps = async (appContext) => {
       appContext.ctx.pathname === "/signup" ||
       appContext.ctx.pathname === "/signin" ||
       appContext.ctx.pathname === "/profile/[username]" ||
-      appContext.ctx.pathname === "/explore"
+      appContext.ctx.pathname === "/explore" ||
+      appContext.ctx.pathname === "/forgot" ||
+      appContext.ctx.pathname === "/reset/[token]"
 
     if (!isNotProtectedRoute) {
       redirectUser(appContext.ctx, "/signin");

@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Navbar from './Navbar'
 import HeadContent from './HeadContent'
+import styles from './Layout.module.scss'
 
 function Layout({ children, user }) {
   return (
@@ -10,7 +11,7 @@ function Layout({ children, user }) {
         <title>Dividend Tracker</title>
       </Head>
       <Navbar user={user} />
-      <div>
+      <div className={styles.layoutDiv}>
         {children}
       </div>
     </>

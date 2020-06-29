@@ -1,30 +1,26 @@
-import Link from "next/link";
+import styles from "./index.module.scss";
 import { useState } from "react";
-import catchErrors from "../utils/catchErrors";
+import catchErrors from "../../../utils/catchErrors";
 import axios from "axios";
-import { handleLogin } from "../utils/auth";
-import baseUrl from "../utils/baseUrl";
-import styles from "./signup.module.scss";
+import baseUrl from "../../../utils/baseUrl";
+import Link from "next/link";
 
-const INITIAL_USER = {
-  username: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
-
-function signup() {
-  const [user, setUser] = useState(INITIAL_USER);
+function index({ token }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [validateConfirmPass, setValidateConfirmPass] = useState(true);
+  const [passwordState, setPasswordState] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
     // validate confirm password
-    if (user.password !== user.confirmPassword) {
+    if (passwordState.password !== passwordState.confirmPassword) {
       setValidateConfirmPass(false);
-      setUser((prevState) => ({
+      setPasswordState((prevState) => ({
         ...prevState,
         password: "",
         confirmPassword: "",
@@ -33,85 +29,81 @@ function signup() {
     }
     try {
       setLoading(true);
+      const { password } = passwordState;
       setError("");
-      const url = `${baseUrl}/signup`;
-      const payload = { ...user };
+      const url = `${baseUrl}/reset`;
+      const payload = { password, token };
       const response = await axios.post(url, payload);
-      handleLogin(response.data);
+      if (response.status === 200) {
+        setSuccess(true);
+      }
     } catch (error) {
       catchErrors(error, setError);
+    } finally {
       setLoading(false);
+      setPasswordState({
+        password: "",
+        confirmPassword: "",
+      });
     }
   }
 
   function handleChange(event) {
     const { name, value } = event.target;
-    console.log(name);
     if (name === "password" || name === "confirmPassword") {
       setValidateConfirmPass(true);
     }
-    setUser((prevState) => ({
+    setPasswordState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   }
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>
-        Create an account.
-        <br />
-        Access everything for free.
-      </h1>
+      <h1 className={styles.h1}>Reset Password</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label className={styles.label} htmlFor="username">
-          Username
-        </label>
-        <input
-          onChange={handleChange}
-          className={styles.input}
-          name="username"
-          type="text"
-          value={user.username}
-          disabled={loading}
-        />
-        <label className={styles.label} htmlFor="email">
-          Email
-        </label>
-        <input
-          onChange={handleChange}
-          className={styles.input}
-          type="email"
-          name="email"
-          value={user.email}
-          disabled={loading}
-        />
         <label className={styles.label} htmlFor="password">
-          Password
+          New password
         </label>
         <input
           onChange={handleChange}
           className={validateConfirmPass ? styles.input : styles.invalidInput}
           type="password"
           name="password"
-          value={user.password}
+          value={passwordState.password}
           disabled={loading}
         />
         <label className={styles.label} htmlFor="confirmPassword">
-          Confirm Password
+          Confirm new password
         </label>
         <input
           onChange={handleChange}
           className={validateConfirmPass ? styles.input : styles.invalidInput}
           type="password"
           name="confirmPassword"
-          value={user.confirmPassword}
+          value={passwordState.confirmPassword}
           disabled={loading}
         />
         {!validateConfirmPass && (
           <span className={styles.invalidText}>Passwords must match.</span>
         )}
         {Boolean(error) && <span className={styles.invalidText}>{error}</span>}
-        <button className={loading ? `${styles.button} ${styles.disabledBtn}` : styles.button} type="submit" disabled={loading}>
+        {success && (
+          <span className={styles.successText}>
+            Success! Login{" "}
+            <Link href="/signin">
+              <a className={styles.guideLink}>here.</a>
+            </Link>
+          </span>
+        )}
+        <button
+          className={
+            loading ? `${styles.button} ${styles.disabledBtn}` : styles.button
+          }
+          type="submit"
+          disabled={loading}
+        >
           {loading ? (
             <div className={styles.ldsEllipsis}>
               <div></div>
@@ -120,18 +112,21 @@ function signup() {
               <div></div>
             </div>
           ) : (
-            "Sign up"
+            "Change password"
           )}
         </button>
-        <div className={styles.guideContainer}>
-          <span>Already registered?&nbsp;</span>
-          <Link href="/signin">
-            <a className={styles.guideLink}>Login!</a>
-          </Link>
-        </div>
       </form>
     </div>
   );
 }
 
-export default signup;
+export async function getServerSideProps(context) {
+  const { token } = context.query;
+  return {
+    props: {
+      token: token,
+    },
+  };
+}
+
+export default index;

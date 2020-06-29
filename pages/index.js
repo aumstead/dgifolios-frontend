@@ -138,8 +138,7 @@ function Home(props) {
           <a className={styles.signupSection__cta}>Create an account</a>
         </Link>
         <h3 className={styles.signupSection__text}>
-          If you have any questions, ideas for improvement, or wish to
-          collaborate and make this an open-source project, contact me at
+          If you have any questions or ideas contact me at
           dgifolios@gmail.com.
         </h3>
       </section>

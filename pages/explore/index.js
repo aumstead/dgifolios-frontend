@@ -4,6 +4,7 @@ import SidebarMenu from "../../components/styled/SidebarMenu";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Footer from "../../components/styled/Footer";
+import ProfileCard from "../../components/explore/ProfileCard";
 
 function index({ user }) {
   const [activeFollowing, setActiveFollowing] = useState(true);
@@ -44,7 +45,9 @@ function index({ user }) {
             <button
               onClick={handleFollowing}
               className={
-                activeFollowing ? styles.menuItemActive : styles.menuItem
+                activeFollowing
+                  ? `${styles.portfoliosBtn} ${styles.activeBtn}`
+                  : `${styles.portfoliosBtn}`
               }
             >
               Portfolios following
@@ -52,14 +55,20 @@ function index({ user }) {
             <button
               onClick={handleFollowers}
               className={
-                activeFollowers ? styles.menuItemActive : styles.menuItem
+                activeFollowers
+                  ? `${styles.followersBtn} ${styles.activeBtn}`
+                  : `${styles.followersBtn}`
               }
             >
               My followers
             </button>
             <button
               onClick={handleRandom}
-              className={activeRandom ? styles.menuItemActive : styles.menuItem}
+              className={
+                activeRandom
+                  ? `${styles.randomBtn} ${styles.activeBtn}`
+                  : `${styles.randomBtn}`
+              }
             >
               Random portfolios
             </button>
@@ -79,11 +88,7 @@ function index({ user }) {
                   </div>
                 )}
                 {followingState.map((user) => (
-                  <li className={styles.li}>
-                    <Link href={`/profile/${user.username}`}>
-                      <a className={styles.a}>{user.username}</a>
-                    </Link>
-                  </li>
+                  <ProfileCard user={user} />
                 ))}
               </ul>
             </div>
@@ -98,11 +103,7 @@ function index({ user }) {
                   </p>
                 )}
                 {followersState.map((user) => (
-                  <li className={styles.li}>
-                    <Link href={`/profile/${user.username}`}>
-                      <a className={styles.a}>{user.username}</a>
-                    </Link>
-                  </li>
+                  <ProfileCard user={user} />
                 ))}
               </ul>
             </div>

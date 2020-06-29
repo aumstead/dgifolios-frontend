@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { useState } from "react";
-import LoadingSpinner from '../components/styled/LoadingSpinner'
-import catchErrors from '../utils/catchErrors'
+import catchErrors from "../utils/catchErrors";
 import axios from "axios";
-import { handleLogin } from '../utils/auth'
+import { handleLogin } from "../utils/auth";
 import styles from "./signin.module.scss";
-import baseUrl from '../utils/baseUrl'
+import baseUrl from "../utils/baseUrl";
 
 const INITIAL_USER = {
   email: "",
@@ -13,24 +12,24 @@ const INITIAL_USER = {
 };
 
 function signin() {
+  // State
   const [user, setUser] = useState(INITIAL_USER);
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      setLoading(true)
-      setError('')
-      const url = `${baseUrl}/signin`
+      setLoading(true);
+      setError("");
+      const url = `${baseUrl}/signin`;
 
-      const payload = { ...user }
-      const response = await axios.post(url, payload)
-      handleLogin(response.data)
+      const payload = { ...user };
+      const response = await axios.post(url, payload);
+      handleLogin(response.data);
     } catch (error) {
-      catchErrors(error, setError)
-    } finally {
-      setLoading(false)
+      catchErrors(error, setError);
+      setLoading(false);
     }
   }
 
@@ -43,11 +42,8 @@ function signin() {
   }
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>
-        Login for existing users.
-      </h1>
+      <h1 className={styles.h1}>Login for existing users.</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
-        
         <label className={styles.label} htmlFor="email">
           Email
         </label>
@@ -59,6 +55,7 @@ function signin() {
           value={user.email}
           disabled={loading}
         />
+
         <label className={styles.label} htmlFor="password">
           Password
         </label>
@@ -70,8 +67,15 @@ function signin() {
           value={user.password}
           disabled={loading}
         />
-        <button className={styles.button} type="submit" disabled={loading}>
-        {loading ? (
+        {Boolean(error) && <span className={styles.errorText}>{error}</span>}
+        <button
+          className={
+            loading ? `${styles.button} ${styles.disabledBtn}` : styles.button
+          }
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
             <div className={styles.ldsEllipsis}>
               <div></div>
               <div></div>
@@ -84,12 +88,19 @@ function signin() {
         </button>
         <div className={styles.guideContainer}>
           <span>Need an account?&nbsp;</span>
-          <Link href='/signup'><a className={styles.guideLink}>Sign up!</a></Link>
+          <Link href="/signup">
+            <a className={styles.guideLink}>Sign up!</a>
+          </Link>
+        </div>
+        <div className={styles.forgotPassContainer}>
+          {/* <span>Forgot password?&nbsp;</span> */}
+          <Link href="/forgot">
+            <a className={styles.guideLink}>Forgot password?</a>
+          </Link>
         </div>
       </form>
-      {loading && <LoadingSpinner />}
     </div>
-  )
+  );
 }
 
 export default signin;

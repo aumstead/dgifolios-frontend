@@ -93,7 +93,7 @@ function Home(props) {
 
       <section className={styles.stockSection}>
         <h2 className={styles.stockSection__heading}>
-          Every stock that ever gave paid you a dividend has its own page with
+          Every stock that ever paid you a dividend has its own page with
           historical data.
         </h2>
         <div className={styles.stockSection__imageContainer}>

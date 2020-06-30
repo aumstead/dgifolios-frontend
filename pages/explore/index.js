@@ -7,9 +7,9 @@ import Footer from "../../components/styled/Footer";
 import ProfileCard from "../../components/explore/ProfileCard";
 
 function index({ user }) {
-  const [activeFollowing, setActiveFollowing] = useState(true);
+  const [activeFollowing, setActiveFollowing] = useState(false);
   const [activeFollowers, setActiveFollowers] = useState(false);
-  const [activeRandom, setActiveRandom] = useState(false);
+  const [activeRandom, setActiveRandom] = useState(true);
   const [followingState, setFollowingState] = useState([]);
   const [followersState, setFollowersState] = useState([]);
 
@@ -43,6 +43,16 @@ function index({ user }) {
         <div className={styles.displayContainer}>
           <menu className={styles.menu}>
             <button
+              onClick={handleRandom}
+              className={
+                activeRandom
+                  ? `${styles.randomBtn} ${styles.activeBtn}`
+                  : `${styles.randomBtn}`
+              }
+            >
+              dgi folios profiles
+            </button>
+            <button
               onClick={handleFollowing}
               className={
                 activeFollowing
@@ -50,7 +60,7 @@ function index({ user }) {
                   : `${styles.portfoliosBtn}`
               }
             >
-              Portfolios following
+              Profiles following
             </button>
             <button
               onClick={handleFollowers}
@@ -62,16 +72,7 @@ function index({ user }) {
             >
               My followers
             </button>
-            <button
-              onClick={handleRandom}
-              className={
-                activeRandom
-                  ? `${styles.randomBtn} ${styles.activeBtn}`
-                  : `${styles.randomBtn}`
-              }
-            >
-              Random portfolios
-            </button>
+
             <hr className={styles.hr} />
           </menu>
           {activeFollowing && (
@@ -82,9 +83,9 @@ function index({ user }) {
                     <p className={styles.zeroFollowers}>
                       You aren't following any portfolios yet!
                     </p>
-                    <button onClick={handleRandom} className={styles.zeroBtn}>
+                    {/* <button onClick={handleRandom} className={styles.zeroBtn}>
                       View random portfolios&nbsp;&#8594;
-                    </button>
+                    </button> */}
                   </div>
                 )}
                 {followingState.map((user) => (

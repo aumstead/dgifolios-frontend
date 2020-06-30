@@ -37,7 +37,7 @@ export function monthToString(monthNumber) {
       return("December")
       break;
     default:
-      console.log('through month to string switch')
+      console.error('Error in switch statement')
       break;
   }
 }
@@ -81,7 +81,7 @@ export function monthToStringAbbv(monthNumber) {
       return("Dec")
       break;
     default:
-      console.log('through month to string abbv switch')
+      console.error('Error in switch statement')
       break;
   }
 }

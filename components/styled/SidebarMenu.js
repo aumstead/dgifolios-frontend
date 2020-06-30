@@ -27,21 +27,12 @@ function SidebarMenu({ children, user, ctx }) {
     // get data
     async function getData() {
       if (dividends.length === 0) {
-        console.log("getting dividends from sidebar");
         const res = await getDividends(ctx);
-        console.log(res);
-      } else {
-        console.log("dividends array is not zero from sidebar");
       }
 
       if (portfolio.length === 0) {
-        console.log("getting portfolio from sidebar");
         const res = await getPortfolio(ctx);
-        console.log(res);
-      } else {
-        console.log("portfolio array is not zero from sidebar");
       }
-      console.log("setting component to true");
       setTickers(createTickersArr());
       setShowComponent(true);
     }
@@ -105,14 +96,14 @@ function SidebarMenu({ children, user, ctx }) {
       <>
         <nav className={styles.menu}>
           <ul>
-            <li>
-              <Link href="/portfolio">
-                <a>Create an account!</a>
+            <li className={styles.actionLink__li}>
+              <Link href="/signin">
+                <a className={styles.actionLink}>Sign in &#8594;</a>
               </Link>
             </li>
             <li>
-              <Link href="/dividends">
-                <a>Sign in &#8594;</a>
+              <Link href="/signup">
+                <a className={styles.actionLink}>Create an account &#8594;</a>
               </Link>
             </li>
           </ul>

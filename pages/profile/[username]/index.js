@@ -50,11 +50,9 @@ function index({ username, ctx, user }) {
     // get data
     async function getData() {
       // get user _id
-      console.log("getting user info");
       // the profile user, not current site user.
       const profileUser = await getUserInfo(ctx);
       setProfileUser(profileUser);
-      console.log(profileUser);
       const { _id } = profileUser;
       const divUrl = `${baseUrl}/profileDividends`;
       const divPromise = axios.get(divUrl, {
@@ -76,18 +74,16 @@ function index({ username, ctx, user }) {
 
       await Promise.all([divPromise, portfolioPromise])
         .then((values) => {
-          console.log("all promises resolved");
           const dividendsData = dividendCalculations(values[0].data);
           setProfileDividends(dividendsData);
           const portfolioData = portfolioCalculations(values[1].data);
           setProfilePortfolio(portfolioData);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     }
 
     if (username === user.username) {
       setProfileUser(user);
-      console.log("users own profile");
       return;
     } else {
       getData();
@@ -104,7 +100,6 @@ function index({ username, ctx, user }) {
 
   useEffect(() => {
     if (username === user.username) {
-      console.log("dividends", dividends);
       const dividendsData = dividendCalculations(dividends);
       setProfileDividends(dividendsData);
       const portfolioData = portfolioCalculations(portfolio);
@@ -217,14 +212,13 @@ function index({ username, ctx, user }) {
 
       await Promise.all([followPromise, followersPromise])
         .then((values) => {
-          console.log("all follow promises resolved");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
 
       // all following actions completed
       setFollowing(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -255,9 +249,8 @@ function index({ username, ctx, user }) {
 
       await Promise.all([promiseUsers, promiseFollowers])
         .then((values) => {
-          console.log("all follow promises resolved");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
 
       // unfollow was successful, set state to false
       setFollowing(false);

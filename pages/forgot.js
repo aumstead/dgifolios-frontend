@@ -18,7 +18,6 @@ function forgot() {
       const url = `${baseUrl}/forgot`;
 
       const payload = { email };
-      console.log("payload", payload);
       const response = await axios.post(url, payload);
       if (response.status === 200) {
         setSuccess(true);

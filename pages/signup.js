@@ -46,7 +46,6 @@ function signup() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    console.log(name);
     if (name === "password" || name === "confirmPassword") {
       setValidateConfirmPass(true);
     }

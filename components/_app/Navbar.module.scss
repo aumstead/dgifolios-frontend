@@ -10,7 +10,7 @@
   z-index: 500;
 
   &__logo {
-    margin-left: 3rem;
+    margin-left: 5rem;
     // display: flex;
     // align-items: center;
   }
@@ -20,7 +20,10 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    margin-left: 3rem;
+  }
+
+  &__linksAccount {
+    margin-right: 5rem;
   }
 
   &__a {
@@ -38,6 +41,10 @@
     font-size: 1.8rem;
     color: white;
   }
+}
+
+.userBtnContainer {
+  position: relative;
 }
 
 .userBtn {

@@ -207,23 +207,26 @@
   width: 100%;
   margin: 0 auto;
   margin-top: 2rem;
+  justify-content: center;
 
   &__left {
-    width: 75rem;
+    width: 65rem;
     height: 33rem;
-    padding-left: 7rem;
     align-self: center;
   }
 
   &__right {
-    width: 45rem;
-    padding-left: 5rem;
+    width: 65rem;
     align-self: center;
+    display: flex;
+    justify-content: center;
+    margin-left: -3rem;
   }
 
   &__heading {
     font-size: 4rem;
     font-family: var(--font-logo);
+    width: 45rem;
   }
 }
 

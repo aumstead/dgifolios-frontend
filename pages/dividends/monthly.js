@@ -78,7 +78,6 @@ function monthly({ ctx, user }) {
           </button>
           {showYearMenu && (
             <ul className={styles.ul}>
-              {console.log(years)}
               {years.map((year) => (
                 <li className={styles.li} onClick={handleClickYear}>
                   {year}

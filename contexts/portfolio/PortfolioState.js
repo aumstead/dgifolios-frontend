@@ -15,7 +15,6 @@ function PortfolioState({ children }) {
       const url = `${baseUrl}/portfolio`;
       const { token } = parseCookies(ctx);
       if (!token) {
-        console.log("login to view your portfolio");
         router.push("/signin");
       }
       const payload = { headers: { Authorization: token } };
@@ -25,14 +24,12 @@ function PortfolioState({ children }) {
         setShowZeroPositions(true);
       }
 
-      console.log('portfolio context, data: ' + data)
-
       const data = makeCalculations(response.data);
 
       setPortfolio(data);
       return "getPortfolio resolved"
     } catch (error) {
-      console.error("error getting portfolio");
+      console.error(error, "Error getting portfolio");
     }
   }
 

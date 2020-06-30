@@ -22,15 +22,15 @@ function MyApp({ Component, pageProps }) {
     }
   }
   return (
-    <Layout {...pageProps}>
-      <DateState>
-        <PortfolioState>
-          <DividendState>
+    <PortfolioState>
+      <DividendState>
+        <Layout {...pageProps}>
+          <DateState>
             <Component {...pageProps} />
-          </DividendState>
-        </PortfolioState>
-      </DateState>
-    </Layout>
+          </DateState>
+        </Layout>
+      </DividendState>
+    </PortfolioState>
   );
 }
 
@@ -55,7 +55,7 @@ MyApp.getInitialProps = async (appContext) => {
       appContext.ctx.pathname === "/profile/[username]" ||
       appContext.ctx.pathname === "/explore" ||
       appContext.ctx.pathname === "/forgot" ||
-      appContext.ctx.pathname === "/reset/[token]"
+      appContext.ctx.pathname === "/reset/[token]";
 
     if (!isNotProtectedRoute) {
       redirectUser(appContext.ctx, "/signin");

@@ -19,7 +19,6 @@ function DividendState({ children }) {
       const url = `${baseUrl}/dividends`;
       const { token } = parseCookies(ctx);
       if (!token) {
-        console.log("login to gain access");
         router.push("/signin");
       }
       const payload = { headers: { Authorization: token } };

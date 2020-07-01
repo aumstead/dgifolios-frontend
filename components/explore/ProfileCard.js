@@ -4,9 +4,7 @@ import { useState, useEffect } from "react";
 
 function ProfileCard({ user }) {
   const {
-    username,
     age,
-    goals,
     preference1,
     preference2,
     preference3,
@@ -64,15 +62,10 @@ function ProfileCard({ user }) {
             <span className={styles.value}>{user.username}</span>
           </div>
 
-          {age ? (
+          {age && (
             <div className={styles.formGroup}>
               <span className={styles.label}>Age:</span>
               <span className={styles.value}>{age}</span>
-            </div>
-          ) : (
-            <div className={styles.formGroup}>
-              <span className={styles.label}>Age:</span>
-              <span className={styles.value}>n/a</span>
             </div>
           )}
 

@@ -48,16 +48,16 @@ MyApp.getInitialProps = async (appContext) => {
   appProps = await App.getInitialProps(appContext);
 
   if (!token) {
-    const isNotProtectedRoute =
-      appContext.ctx.pathname === "/" ||
-      appContext.ctx.pathname === "/signup" ||
-      appContext.ctx.pathname === "/signin" ||
-      appContext.ctx.pathname === "/profile/[username]" ||
-      appContext.ctx.pathname === "/explore" ||
-      appContext.ctx.pathname === "/forgot" ||
-      appContext.ctx.pathname === "/reset/[token]";
+    const isProtectedRoute =
+      appContext.ctx.pathname === "/portfolio" ||
+      appContext.ctx.pathname === "/portfolio/[ticker]" ||
+      appContext.ctx.pathname === "/edit/dividends" ||
+      appContext.ctx.pathname === "/edit/portfolio" ||
+      appContext.ctx.pathname === "/edit/profile" ||
+      appContext.ctx.pathname === "/dividends" ||
+      appContext.ctx.pathname === "/dividends/monthly";
 
-    if (!isNotProtectedRoute) {
+    if (isProtectedRoute) {
       redirectUser(appContext.ctx, "/signin");
     }
   } else {

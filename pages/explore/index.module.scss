@@ -15,13 +15,12 @@
   // border-bottom: 2px gainsboro solid;
 }
 
-
 .portfoliosBtn {
   font-size: 1.4rem;
   background-color: white;
   color: var(--deep-green);
   border: none;
-  padding: 1rem .5rem;
+  padding: 1rem 0.5rem;
   width: 18rem;
   margin-right: 2rem;
 
@@ -40,7 +39,7 @@
   background-color: white;
   color: var(--deep-green);
   border: none;
-  padding: 1rem .5rem;
+  padding: 1rem 0.5rem;
   width: 18rem;
 
   &:hover {
@@ -58,7 +57,7 @@
   background-color: white;
   color: var(--deep-green);
   border: none;
-  padding: 1rem .5rem;
+  padding: 1rem 0.5rem;
   width: 18rem;
   margin-right: 2rem;
 
@@ -95,7 +94,7 @@
 .ul {
   list-style: none;
   margin-top: 3rem;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .a {
@@ -103,7 +102,32 @@
 }
 
 .zeroFollowers {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.cta__editProfile {
+  font-size: 1.4rem;
+  color: var(--deep-green);
+
+  &:hover {
+    text-decoration: underline;
+    color: darken($color: #0f9a7a, $amount: 5);
+  }
+}
+
+.followers__div {
+  margin-bottom: .5rem;
+}
+
+.followers__link {
+  font-size: 1.4rem;
+  color: var(--deep-green);
+
+  &:hover {
+    text-decoration: underline;
+    color: darken($color: #0f9a7a, $amount: 5);
+  }
 }
 
 .zeroBtn {
@@ -117,4 +141,12 @@
     cursor: pointer;
     text-decoration: underline;
   }
+}
+
+.loadingSpinnerContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

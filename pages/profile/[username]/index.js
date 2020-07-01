@@ -18,6 +18,7 @@ import sort from "fast-sort";
 import Footer from "../../../components/styled/Footer";
 import DividendContext from "../../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../../contexts/portfolio/PortfolioContext";
+import LoadingSpinner from '../../../components/styled/LoadingSpinner'
 
 function index({ username, ctx, user }) {
   // Contexts
@@ -27,6 +28,7 @@ function index({ username, ctx, user }) {
   const { portfolio } = portfolioContext;
 
   // States
+  const [showComponent, setShowComponent] = useState(false)
   const [profilePortfolio, setProfilePortfolio] = useState([]);
   const [profileDividends, setProfileDividends] = useState([]);
   const [profileUser, setProfileUser] = useState({});
@@ -78,28 +80,34 @@ function index({ username, ctx, user }) {
           setProfileDividends(dividendsData);
           const portfolioData = portfolioCalculations(values[1].data);
           setProfilePortfolio(portfolioData);
+          setShowComponent(true)
         })
         .catch((error) => console.error(error));
     }
 
-    if (username === user.username) {
+    if (!user) getData();
+    else if (username === user.username) {
       setProfileUser(user);
+      setShowComponent(true)
       return;
     } else {
       getData();
     }
 
-    // is current user following the profile user?
-    const isFollowing = user.following.find(
-      (user) => user.username === username
-    );
-    if (isFollowing) {
-      setFollowing(true);
+    // if there is a user, is current user following the profile user?
+    if (user) {
+      const isFollowing = user.following.find(
+        (user) => user.username === username
+      );
+      if (isFollowing) {
+        setFollowing(true);
+      }
     }
+
   }, []);
 
   useEffect(() => {
-    if (username === user.username) {
+    if (user && username === user.username) {
       const dividendsData = dividendCalculations(dividends);
       setProfileDividends(dividendsData);
       const portfolioData = portfolioCalculations(portfolio);
@@ -211,8 +219,7 @@ function index({ username, ctx, user }) {
       );
 
       await Promise.all([followPromise, followersPromise])
-        .then((values) => {
-        })
+        .then((values) => {})
         .catch((error) => console.error(error));
 
       // all following actions completed
@@ -248,8 +255,7 @@ function index({ username, ctx, user }) {
       );
 
       await Promise.all([promiseUsers, promiseFollowers])
-        .then((values) => {
-        })
+        .then((values) => {})
         .catch((error) => console.error(error));
 
       // unfollow was successful, set state to false
@@ -261,12 +267,22 @@ function index({ username, ctx, user }) {
     }
   }
 
+  if (!showComponent) {
+    return (
+      <div className={styles.loadingSpinnerContainer}>
+        <LoadingSpinner size="big" />
+      </div>
+    );
+  }
+
   return (
     <SidebarMenu user={user}>
       <div className={styles.contentContainer}>
         <PageHeading text={`${username}'s portfolio`} />
 
-        {username === user.username ? (
+        {!user ? (
+          <div></div>
+        ) : username === user.username ? (
           <div></div>
         ) : following ? (
           <button
@@ -306,7 +322,7 @@ function index({ username, ctx, user }) {
             )}
           </button>
         )}
-        {profileUser.username === user.username ? (
+        {!user || profileUser.username === user.username ? (
           <SectionHeading text="Profile" />
         ) : (
           <SectionHeading stylesObj={{ marginTop: "0rem" }} text="Profile" />
@@ -315,21 +331,22 @@ function index({ username, ctx, user }) {
         <Profile profileUser={profileUser} />
 
         <SectionHeading text="Statistics" />
-        {profileDividends.length === 0 || profilePortfolio.length === 0 ? (
-          user.username === profileUser.username ? (
-            <p className={styles.zeroStats}>
-              Add portfolio positions and dividends to generate statistics.
-            </p>
-          ) : (
-            <p className={styles.zeroStats}>
-              User must add positions and dividends to create statistics.
-            </p>
-          )
-        ) : (
+
+        {profileDividends.length !== 0 && profilePortfolio.length !== 0 ? (
           <Statistics
             portfolio={profilePortfolio}
             dividends={profileDividends}
           />
+        ) : !user ? (
+          <p className={styles.zeroStats}>
+            User must add positions and dividends to create statistics.
+          </p>
+        ) : user.username === profileUser.username ? (
+          <p className={styles.zeroStats}>
+            Add portfolio positions and dividends to generate statistics.
+          </p>
+        ) : (
+          <div></div>
         )}
 
         <SectionHeading text="Portfolio" />
@@ -341,6 +358,8 @@ function index({ username, ctx, user }) {
             setShowModalPie={setShowModalPie}
             setShowModalPortfolio={setShowModalPortfolio}
           />
+        ) : !user ? (
+          <p className={styles.zeroStats}>User has not added any positions.</p>
         ) : user.username === profileUser.username ? (
           <Link href="/edit/portfolio">
             <a className={styles.zeroBtn}>Add positions</a>
@@ -357,6 +376,8 @@ function index({ username, ctx, user }) {
             years={years}
             setShowModalDividends={setShowModalDividends}
           />
+        ) : !user ? (
+          <p className={styles.zeroStats}>User has not added any dividends.</p>
         ) : user.username === profileUser.username ? (
           <Link href="/edit/dividends">
             <a className={styles.zeroBtn}>Add dividends</a>

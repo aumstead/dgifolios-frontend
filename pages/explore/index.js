@@ -5,13 +5,31 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Footer from "../../components/styled/Footer";
 import ProfileCard from "../../components/explore/ProfileCard";
+import baseUrl from "../../utils/baseUrl";
+import axios from "axios";
+import LoadingSpinner from "../../components/styled/LoadingSpinner";
 
 function index({ user }) {
+  const [showComponent, setShowComponent] = useState(false);
   const [activeFollowing, setActiveFollowing] = useState(false);
   const [activeFollowers, setActiveFollowers] = useState(false);
   const [activeRandom, setActiveRandom] = useState(true);
   const [followingState, setFollowingState] = useState([]);
   const [followersState, setFollowersState] = useState([]);
+  const [randomProfilesState, setRandomProfilesState] = useState([]);
+
+  useEffect(() => {
+    // get data
+    async function getData() {
+      const url = `${baseUrl}/randomProfiles`;
+      const response = await axios.get(url);
+      setRandomProfilesState(response.data);
+
+      setShowComponent(true);
+    }
+
+    getData();
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -36,6 +54,15 @@ function index({ user }) {
     setActiveFollowing(false);
     setActiveFollowers(false);
   }
+
+  if (!showComponent) {
+    return (
+      <div className={styles.loadingSpinnerContainer}>
+        <LoadingSpinner size="big" />
+      </div>
+    );
+  }
+
   return (
     <SidebarMenu user={user}>
       <PageHeading text="Explore" />
@@ -50,7 +77,7 @@ function index({ user }) {
                   : `${styles.randomBtn}`
               }
             >
-              Popular portfolios
+              Community portfolios
             </button>
             <button
               onClick={handleFollowing}
@@ -89,7 +116,7 @@ function index({ user }) {
                   </div>
                 )}
                 {followingState.map((user) => (
-                  <ProfileCard user={user} />
+                  <ProfileCard user={user} key={user._id} />
                 ))}
               </ul>
             </div>
@@ -99,18 +126,37 @@ function index({ user }) {
             <div>
               <ul className={styles.ul}>
                 {followersState.length === 0 && (
-                  <p className={styles.zeroFollowers}>
-                    Your portfolio doesn't have any followers yet!
-                  </p>
+                  <div>
+                    <p className={styles.zeroFollowers}>
+                      Your portfolio doesn't have any followers yet.
+                    </p>
+                    <Link href="/edit/profile">
+                      <a className={styles.cta__editProfile}>
+                        Add details to your profile!
+                      </a>
+                    </Link>
+                  </div>
                 )}
                 {followersState.map((user) => (
-                  <ProfileCard user={user} />
+                  <div className={styles.followers__div}>
+                    <Link href={`/profile/${user.username}`}>
+                      <a className={styles.followers__link}>{user.username}</a>
+                    </Link>
+                  </div>
                 ))}
               </ul>
             </div>
           )}
 
-          {activeRandom && <div>random</div>}
+          {activeRandom && (
+            <div>
+              <ul className={styles.ul}>
+                {randomProfilesState.map((user) => (
+                  <ProfileCard user={user} key={user._id} />
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <Footer />
       </div>

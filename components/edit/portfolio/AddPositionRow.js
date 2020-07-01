@@ -37,7 +37,7 @@ function AddPositionRow({
       if (name === "ticker") {
         return { ...prevState, [name]: value.toUpperCase() };
       } else {
-        return { ...prevState, [name]: Number(value) };
+        return { ...prevState, [name]: value };
       }
     });
   }

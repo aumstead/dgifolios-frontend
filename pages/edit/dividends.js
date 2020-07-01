@@ -10,7 +10,7 @@ import ModalAlert from "../../components/styled/ModalAlert";
 import cookie from "js-cookie";
 import Footer from "../../components/styled/Footer";
 
-function dividends({ ctx, user }) {
+function dividends({ user }) {
   // Context
   const dividendContext = useContext(DividendContext);
   const {

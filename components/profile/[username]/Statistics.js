@@ -12,6 +12,7 @@ function Statistics({ portfolio, dividends }) {
   const [daysWithDividend, setDaysWithDividend] = useState("")
   const [topThreePayers, setTopThreePayers] = useState([]);
   const [topThreeYielders, setTopThreeYielders] = useState([]);
+  const [hideTopThreeYieldOnCost, setHideTopThreeYieldOnCost] = useState(false)
 
   useEffect(() => {
     calculateAllTimeTotal();
@@ -224,6 +225,11 @@ function Statistics({ portfolio, dividends }) {
         }
       });
     });
+    // there are less than 3 portfolio positions yielding dividends
+    if (divsInPortfolio[2] === undefined) {
+      setHideTopThreeYieldOnCost(true)
+      return;
+    }
     // sort by yield
     const sortedDivs = sort(divsInPortfolio).desc(div => div.yield);
     // take top three
@@ -274,7 +280,7 @@ function Statistics({ portfolio, dividends }) {
               className={styles.value}
               title="Last month's dividends / (total invested capital / 12)"
             >
-              {lastMonthObject.yield}%
+              {isNaN(lastMonthObject.yield) ? '0.00' : lastMonthObject.yield}%
             </td>
           </tr>
 
@@ -288,7 +294,7 @@ function Statistics({ portfolio, dividends }) {
               className={styles.value}
               title="A true yield of the previous 12 months that accounts for amount invested in each stock and dividend payment frequency. Dividends without cost basis data are omitted from the calculation."
             >
-              {lastTwelveMonthYield}%
+              {isNaN(lastTwelveMonthYield) ? 'n/a' : `${lastTwelveMonthYield}%`}
             </td>
           </tr>
 
@@ -339,7 +345,7 @@ function Statistics({ portfolio, dividends }) {
               <span>Top 3 yield on cost in portfolio</span>
             </td>
             <td className={styles.value}>
-              {topThreeYielders.map((position) => (
+              {hideTopThreeYieldOnCost ? <span>n/a</span> : topThreeYielders.map((position) => (
                 <div className={styles.tickerDiv}>
                   <span>
                     <span className={styles.ticker}>{position.ticker}</span>

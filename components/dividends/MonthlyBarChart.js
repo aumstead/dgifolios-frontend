@@ -84,7 +84,6 @@ function MonthlyBarChart({ dividends, years }) {
       }
     });
     setBarChartData(data);
-    console.log('data', data)
   }
 
   return (

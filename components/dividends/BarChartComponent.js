@@ -4,7 +4,7 @@ function BarChartComponent({ data, xAxisObject, yScaleObject }) {
   return (
     <ResponsiveBar
       data={data}
-      keys={["divs"]}
+      keys={["dividends"]}
       indexBy="year"
       margin={{ top: 20, right: 130, bottom: 50, left: 60 }}
       padding={0.3}

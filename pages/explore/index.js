@@ -50,7 +50,7 @@ function index({ user }) {
                   : `${styles.randomBtn}`
               }
             >
-              dgi folios profiles
+              Popular portfolios
             </button>
             <button
               onClick={handleFollowing}
@@ -60,7 +60,7 @@ function index({ user }) {
                   : `${styles.portfoliosBtn}`
               }
             >
-              Profiles following
+              Profiles Following
             </button>
             <button
               onClick={handleFollowers}

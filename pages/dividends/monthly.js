@@ -3,31 +3,25 @@ import SidebarMenu from "../../components/styled/SidebarMenu";
 import PageHeading from "../../components/styled/PageHeading";
 import SectionHeading from "../../components/styled/SectionHeading";
 import MonthlyBarChart from "../../components/dividends/MonthlyBarChart";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import DividendContext from "../../contexts/dividends/DividendContext";
-import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import DateContext from "../../contexts/date/DateContext";
 import DivsByMonth from "../../components/dividends/DivsByMonth";
-import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import Link from "next/link";
 import Footer from '../../components/styled/Footer'
 
-function monthly({ ctx, user }) {
+function monthly({ user }) {
   // Contexts
   const dividendContext = useContext(DividendContext);
-  const portfolioContext = useContext(PortfolioContext);
   const dateContext = useContext(DateContext);
   const {
     dividends,
-    getDividends,
     years,
     showZeroDividends
   } = dividendContext;
-  const { portfolio, getPortfolio } = portfolioContext;
   const { currentYear } = dateContext;
 
   // State
-  const [showComponent, setShowComponent] = useState(false);
   const [showYearMenu, setShowYearMenu] = useState(false);
   const [yearState, setYearState] = useState(currentYear);
 

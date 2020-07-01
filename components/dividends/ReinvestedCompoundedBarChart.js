@@ -45,7 +45,7 @@ function ReinvestedCompoundedBarChart({ setShowChart, setData, setXAxisObject, s
       let yearlyDivsCagr = yearlyDivs * (divGrowthRate / 100 + 1);
       dataArray.push({
         year: startingYear,
-        divs: Number(yearlyDivsCagr.toFixed(2)),
+        dividends: Number(yearlyDivsCagr.toFixed(2)),
       });
       startingYear++;
       portfolioTotal += yearlyDivsCagr;
@@ -74,10 +74,10 @@ function ReinvestedCompoundedBarChart({ setShowChart, setData, setXAxisObject, s
     if (data.length === 0) {
       return { yMax: 0 };
     }
-    sort(data).asc((div) => div.divs);
+    sort(data).asc((div) => div.dividends);
     const lastIndex = data.length - 1;
-    const yScale = data[lastIndex].divs / 5;
-    const yMax = data[lastIndex].divs + yScale;
+    const yScale = data[lastIndex].dividends / 5;
+    const yMax = data[lastIndex].dividends + yScale;
 
     return { yMax };
   }
@@ -198,8 +198,7 @@ function ReinvestedCompoundedBarChart({ setShowChart, setData, setXAxisObject, s
         {addContribution && (
           <div className={styles.contributionFlexContainer}>
             <p className={styles.contributionText}>
-              * Money is added to portfolio annually, thus increasing dividends
-              yielded.
+              * Contribution is added to portfolio annually, thus compounding is annual (versus monthly, quarterly, etc.)
             </p>
             <button
               onClick={handleContributionCancel}

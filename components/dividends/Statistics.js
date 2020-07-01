@@ -25,7 +25,7 @@ function Statistics({ daysWithDividend }) {
   const [monthlyPaymentAverage, setMonthlyPaymentAverage] = useState("");
   const [topThreePayers, setTopThreePayers] = useState([]);
   const [topThreeYielders, setTopThreeYielders] = useState([]);
-  const [hideTopThreeYielders, setHideTopThreeYielders] = useState(false)
+  const [hideTopThreeYieldOnCost, setHideTopThreeYieldOnCost] = useState(false)
 
   useEffect(() => {
     calculateAllTimeTotal();
@@ -38,9 +38,10 @@ function Statistics({ daysWithDividend }) {
 
   function createTopThreePayers() {
     const topThreeArray = [];
-    topThreeArray.push(allTimeRankings[0]);
-    topThreeArray.push(allTimeRankings[1]);
-    topThreeArray.push(allTimeRankings[2]);
+    
+    if(allTimeRankings[0]) topThreeArray.push(allTimeRankings[0]);
+    if(allTimeRankings[1]) topThreeArray.push(allTimeRankings[1]);
+    if(allTimeRankings[2]) topThreeArray.push(allTimeRankings[2]);
     setTopThreePayers(topThreeArray);
   }
 
@@ -198,7 +199,7 @@ function Statistics({ daysWithDividend }) {
     });
     // there are less than 3 portfolio positions yielding dividends
     if (divsInPortfolio[2] === undefined) {
-      setHideTopThreeYielders(true)
+      setHideTopThreeYieldOnCost(true)
       return;
     }
     // sort by yield
@@ -252,7 +253,7 @@ function Statistics({ daysWithDividend }) {
               className={styles.value}
               title="Last month's dividends / (total invested capital / 12)"
             >
-              {lastMonthObject.yield}%
+              {isNaN(lastMonthObject.yield) ? '0.00' : lastMonthObject.yield}%
             </td>
           </tr>
 
@@ -266,7 +267,7 @@ function Statistics({ daysWithDividend }) {
               className={styles.value}
               title="A true yield of the previous 12 months that accounts for amount invested in each stock and dividend payment frequency. Dividends without cost basis data are omitted from the calculation."
             >
-              {lastTwelveMonthYield}%
+              {isNaN(lastTwelveMonthYield) ? 'n/a' : `${lastTwelveMonthYield}%`}
             </td>
           </tr>
           <tr>
@@ -297,7 +298,7 @@ function Statistics({ daysWithDividend }) {
             </td>
             <td className={styles.value}>
               
-              {hideTopThreeYielders ? <span>n.a.</span> : topThreePayers.map((position) => (
+              {topThreePayers.map((position) => (
                 <div className={styles.tickerDiv}>
                   <span>
                     <Link
@@ -321,7 +322,8 @@ function Statistics({ daysWithDividend }) {
               <span>Top 3 yield on cost in portfolio</span>
             </td>
             <td className={styles.value}>
-              {topThreeYielders.map((position) => (
+
+              {hideTopThreeYieldOnCost ? <span>n/a</span> : topThreeYielders.map((position) => (
                 <div className={styles.tickerDiv}>
                   <span>
                     <Link

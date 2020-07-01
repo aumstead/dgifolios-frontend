@@ -20,6 +20,14 @@
 .tableHeading {
   font-weight: normal;
   font-size: 1.2rem;
+  text-align: center;
+  padding: 1rem 0rem;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--off-white);
+  }
 }
 .secondaryMenu {
   display: flex;
@@ -28,7 +36,7 @@
 }
 
 .btnSecondaryMenu {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin-right: 3rem;
   border: 1px solid var(--deep-green);
   border-radius: 4px;

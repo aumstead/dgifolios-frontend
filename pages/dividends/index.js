@@ -59,12 +59,12 @@ function index({ user }) {
         {/* <SectionHeading text="Upcoming Dividends" />
         <RecentDividends /> */}
 
-        <SectionHeading text="Approaching Ex-Dividend Dates" explanation={"(estimated programatically)"}/>
+        <SectionHeading text="Approaching Ex-Dividend Dates" explanation={"(Programatically estimated)"}/>
         <UpcomingExDivDates dividends={dividends} />
 
         <SectionHeading
           text="Days With Dividend Payments"
-          explanation={"(from the last 12 months)"}
+          explanation={"(From the last 12 months)"}
         />
         <CalendarComponent
           dividends={dividends}

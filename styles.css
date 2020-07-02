@@ -27,8 +27,9 @@
   --color-light-grey2: #f5f5f5;
   --color-dark-grey: rgb(177, 177, 177);
 
-  --font-sans: "Raleway", 'Lato', sans-serif;
-  --font-logo: 'Londrina Solid', 'Raleway', 'Lato', serif;
+  /* --font-sans: 'Lato', sans-serif; */
+  --font-sans: 'Verdana', 'Arial', sans-serif;
+  --font-logo: 'Londrina Solid', 'Lato', serif;
 }
 
 *,

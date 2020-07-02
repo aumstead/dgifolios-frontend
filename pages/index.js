@@ -142,7 +142,7 @@ function Home(props) {
         </h3>
       </section>
 
-      <Footer styleObj={{ width: "100vw" }}/>
+      <Footer styleObj={{ width: "100%" }}/>
     </>
   );
 }

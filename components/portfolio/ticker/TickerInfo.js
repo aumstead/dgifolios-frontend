@@ -108,6 +108,36 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
             100
           ).toFixed(2)
         );
+      } else if (
+        dividendsArray[0].frequency === "biannually" &&
+        tickerFromPortfolio.costBasis
+      ) {
+        yieldOnCost = Number(
+          (
+            ((dividendsArray[0].amount * 2) / tickerFromPortfolio.costBasis) *
+            100
+          ).toFixed(2)
+        );
+      } else if (
+        dividendsArray[0].frequency === "monthly" &&
+        tickerFromPortfolio.costBasis
+      ) {
+        yieldOnCost = Number(
+          (
+            ((dividendsArray[0].amount * 12) / tickerFromPortfolio.costBasis) *
+            100
+          ).toFixed(2)
+        );
+      } else if (
+        dividendsArray[0].frequency === "annually" &&
+        tickerFromPortfolio.costBasis
+      ) {
+        yieldOnCost = Number(
+          (
+            ((dividendsArray[0].amount * 1) / tickerFromPortfolio.costBasis) *
+            100
+          ).toFixed(2)
+        );
       }
     }
 
@@ -158,7 +188,9 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
                       : `${styles.value} ${styles.absent}`
                   }
                 >
-                  {portfolioData.portfolioStatus ? "In portfolio" : "No current position"}
+                  {portfolioData.portfolioStatus
+                    ? "In portfolio"
+                    : "No current position"}
                 </span>
               </td>
             </tr>
@@ -231,7 +263,7 @@ function TickerInfo({ portfolio, dividends, ticker, allTimeRankings }) {
             </tr>
             <tr>
               <td className={styles.td}>
-                <span>Yield on cost</span>
+                <span>Yield on cost&nbsp;</span><span className={styles.subtext}>(based on most recent dividend received)</span>
               </td>
               <td>
                 <span className={styles.value}>

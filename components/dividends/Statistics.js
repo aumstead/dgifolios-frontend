@@ -210,8 +210,6 @@ function Statistics({ daysWithDividend }) {
     topThreeArray.push(sortedDivs[0])
     let count = 0
     let i = 0
-    console.log('topthreearr:', topThreeArray)
-    console.log('sortedDivs:', sortedDivs)
     while (count < 2) {
       const someResult = topThreeArray.some(div => div.ticker === sortedDivs[i].ticker)
       if (!someResult) {

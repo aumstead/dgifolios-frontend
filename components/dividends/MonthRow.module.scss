@@ -80,6 +80,10 @@
   background-color: #275cbe;
   color: #fff;
   height: 1.7rem;
+
+  &:first-child {
+    margin-bottom: 0px;
+  }
 }
 
 .cellBlue {

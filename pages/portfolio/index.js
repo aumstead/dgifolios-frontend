@@ -11,7 +11,7 @@ import Footer from "../../components/styled/Footer";
 
 function index({ user }) {
   const portfolioContext = useContext(PortfolioContext);
-  const { portfolio, getPortfolio, showZeroPositions } = portfolioContext;
+  const { portfolio, showZeroPositions } = portfolioContext;
 
   if (showZeroPositions) {
     return (

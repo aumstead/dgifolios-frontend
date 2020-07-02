@@ -29,7 +29,7 @@ function SidebarMenu({ children, user, ctx }) {
       if (dividends.length === 0) {
         const res = await getDividends(ctx);
       }
-
+      
       if (portfolio.length === 0) {
         const res = await getPortfolio(ctx);
       }

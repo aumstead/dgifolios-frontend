@@ -70,7 +70,6 @@ function MonthlyLineChart({ dividends }) {
     }
     setData(data);
     setYScaleObject(yScaleObj);
-    console.log(dataArray);
     if (dataArray.length !== 0) {
       setShowChart(true);
     }

@@ -22,6 +22,8 @@ function PortfolioState({ children }) {
 
       if (response.data.length === 0) {
         setShowZeroPositions(true);
+      } else {
+        setShowZeroPositions(false)
       }
 
       const data = makeCalculations(response.data);

@@ -26,6 +26,8 @@ function DividendState({ children }) {
 
       if (response.data.length === 0) {
         setShowZeroDividends(true);
+      } else {
+        setShowZeroDividends(false)
       }
 
       const data = makeCalculations(response.data)

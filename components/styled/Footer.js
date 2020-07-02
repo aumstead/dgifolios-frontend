@@ -1,9 +1,9 @@
 import styles from "./Footer.module.scss";
 import Logo from "./LogoFooterSvg";
 
-function Footer() {
+function Footer({ styleObj }) {
   return (
-    <footer className={styles.footerContainer}>
+    <footer className={styles.footerContainer} style={styleObj}>
       <div className={styles.flexContainer}>
         
           <span className={styles.text__copy}>&copy; 2020</span>

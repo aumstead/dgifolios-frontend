@@ -63,6 +63,96 @@ function index({ user }) {
     );
   }
 
+  if (!user) {
+    return (
+      <SidebarMenu user={user}>
+        <PageHeading text="Explore" />
+        <div className={styles.contentContainer}>
+          <div className={styles.displayContainer}>
+            <menu className={styles.menu}>
+              <button
+                onClick={handleRandom}
+                className={
+                  activeRandom
+                    ? `${styles.randomBtn} ${styles.activeBtn}`
+                    : `${styles.randomBtn}`
+                }
+              >
+                Community portfolios
+              </button>
+              <button
+                onClick={handleFollowing}
+                className={
+                  activeFollowing
+                    ? `${styles.portfoliosBtn} ${styles.activeBtn}`
+                    : `${styles.portfoliosBtn}`
+                }
+              >
+                Profiles Following
+              </button>
+              <button
+                onClick={handleFollowers}
+                className={
+                  activeFollowers
+                    ? `${styles.followersBtn} ${styles.activeBtn}`
+                    : `${styles.followersBtn}`
+                }
+              >
+                My followers
+              </button>
+
+              <hr className={styles.hr} />
+            </menu>
+            {activeFollowing && (
+              <div>
+                <div className={styles.notLoggedIn}>
+                  <p>
+                    Please{" "}
+                    <Link href="/signin">
+                      <a className={styles.notLoggedIn__link}>sign in</a>
+                    </Link>{" "}
+                    or{" "}
+                    <Link href="/signup">
+                      <a className={styles.notLoggedIn__link}>create an account</a>
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {activeFollowers && (
+              <div className={styles.notLoggedIn}>
+                <p>
+                  Please{" "}
+                  <Link href="/signin">
+                    <a className={styles.notLoggedIn__link}>sign in</a>
+                  </Link>{" "}
+                  or{" "}
+                  <Link href="/signup">
+                    <a className={styles.notLoggedIn__link}>create an account</a>
+                  </Link>
+                  .
+                </p>
+              </div>
+            )}
+
+            {activeRandom && (
+              <div>
+                <ul className={styles.ul}>
+                  {randomProfilesState.map((user) => (
+                    <ProfileCard user={user} key={user._id} />
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+          <Footer />
+        </div>
+      </SidebarMenu>
+    );
+  }
+
   return (
     <SidebarMenu user={user}>
       <PageHeading text="Explore" />

@@ -8,7 +8,7 @@ function Layout({ children, user }) {
     <>
       <Head>
         <HeadContent />
-        <title>Dividend Tracker</title>
+        <title>dgi folios - Dividend investing, tracking, and sharing.</title>
       </Head>
       <Navbar user={user} />
       <div className={styles.layoutDiv}>

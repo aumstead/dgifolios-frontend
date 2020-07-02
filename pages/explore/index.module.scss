@@ -143,6 +143,21 @@
   }
 }
 
+.notLoggedIn {
+  margin-top: 3rem;
+  margin-left: .5rem;
+  font-size: 1.4rem;
+
+  &__link {
+    color: var(--deep-green);
+  
+    &:hover {
+      text-decoration: underline;
+      color: darken($color: #0f9a7a, $amount: 5);
+    }
+  }
+}
+
 .loadingSpinnerContainer {
   width: 100%;
   height: 100%;

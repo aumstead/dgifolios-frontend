@@ -76,8 +76,7 @@ function Home(props) {
       <section className={styles.profileSection}>
         <div className={styles.profileSection__left}>
           <h2 className={styles.profileSection__Heading}>
-            Share info and stats about your portfolio with other dividend growth
-            investors.
+            Share info and stats about your portfolio with other dividend growth investors.
           </h2>
         </div>
         <div className={styles.profileSection__right}>
@@ -143,7 +142,7 @@ function Home(props) {
         </h3>
       </section>
 
-      <Footer />
+      <Footer styleObj={{ width: "100vw" }}/>
     </>
   );
 }

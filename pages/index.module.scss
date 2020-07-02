@@ -69,8 +69,6 @@
 
   &:hover {
     cursor: pointer;
-    // background-color: darken($color: #0f9a7a, $amount: 5);
-    // border: 1px solid darken($color: #0f9a7a, $amount: 5);
     background-color: var(--deep-green);
     color: #fff;
   }
@@ -90,7 +88,7 @@
 }
 
 .pieSectionContainer {
-  width: 100vw;
+  width: 100%;
   height: 50rem;
 }
 
@@ -126,13 +124,13 @@
 }
 
 .profileSection {
-  width: 100vw;
+  width: 100%;
   height: 43rem;
   display: flex;
   margin: 0 auto;
   margin-top: 5rem;
-  padding-left: 7rem;
-  padding-right: 10rem;
+  // padding-left: 7rem;
+  // padding-right: 10rem;
   justify-content: center;
 
   &__Heading {
@@ -160,7 +158,7 @@
 }
 
 .stockSection {
-  width: 100vw;
+  width: 100%;
   height: 50rem;
 
   &__heading {
@@ -190,14 +188,12 @@
   &__stockPageImage {
     height: 28rem;
     box-shadow: 5px 15px 115px -24px rgba(0, 0, 0, 0.62);
-    // transform: perspective(600px) rotateY(15deg);
   }
 
   &__stockChartsImage {
     height: 28rem;
     margin-left: 5rem;
     box-shadow: 5px 15px 115px -24px rgba(0, 0, 0, 0.62);
-    // transform: perspective(600px) rotateY(-15deg);
   }
 }
 
@@ -271,8 +267,6 @@
       cursor: pointer;
       background-color: darken($color: #0f9a7a, $amount: 5);
       border: 1px solid darken($color: #0f9a7a, $amount: 5);
-      // background-color: var(--deep-green);
-      // color: #fff;
     }
   }
 }

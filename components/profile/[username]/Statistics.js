@@ -2,6 +2,7 @@ import styles from "./Statistics.module.scss";
 import { useEffect, useState } from "react";
 import sort from "fast-sort";
 import { monthToString } from "../../../utils/conversions";
+import { v4 as uuidv4 } from "uuid";
 
 function Statistics({ portfolio, dividends }) {
   // States
@@ -208,10 +209,10 @@ function Statistics({ portfolio, dividends }) {
     const finalRankingsArray = sort(tickerObjects).desc(obj => obj.allTimeDividends)
 
     const topThreeArray = [];
-    topThreeArray.push(finalRankingsArray[0]);
-    topThreeArray.push(finalRankingsArray[1]);
-    topThreeArray.push(finalRankingsArray[2]);
-    console.log(topThreeArray)
+    if (finalRankingsArray[0]) topThreeArray.push(finalRankingsArray[0]);
+    if (finalRankingsArray[1]) topThreeArray.push(finalRankingsArray[1]);
+    if (finalRankingsArray[2]) topThreeArray.push(finalRankingsArray[2]);
+
     setTopThreePayers(topThreeArray);
   }
 
@@ -326,7 +327,7 @@ function Statistics({ portfolio, dividends }) {
             </td>
             <td className={styles.value}>
               {topThreePayers.map((position) => (
-                <div className={styles.tickerDiv}>
+                <div className={styles.tickerDiv} key={uuidv4()}>
                   <span>
                     <span className={styles.ticker}>{position.ticker}</span>
                     <span className={styles.topThreeAmount}>
@@ -346,7 +347,7 @@ function Statistics({ portfolio, dividends }) {
             </td>
             <td className={styles.value}>
               {hideTopThreeYieldOnCost ? <span>n/a</span> : topThreeYielders.map((position) => (
-                <div className={styles.tickerDiv}>
+                <div className={styles.tickerDiv} key={uuidv4()}>
                   <span>
                     <span className={styles.ticker}>{position.ticker}</span>
                     <span className={styles.topThreeAmount}>

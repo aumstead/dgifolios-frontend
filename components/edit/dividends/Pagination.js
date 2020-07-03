@@ -1,5 +1,6 @@
 import styles from "./Pagination.module.scss";
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 function Pagination({
   totalPages,
@@ -16,7 +17,6 @@ function Pagination({
     for (let i = 1; i <= totalPages; i++) {
       visiblePages.push(i);
     }
-    console.log(visiblePages);
   } else {
     // total pages 5 or more
     if (page === 1 || page === 2) {
@@ -57,6 +57,7 @@ function Pagination({
                   ? `${styles.pageBtn} ${styles.currentPage}`
                   : styles.pageBtn
               }
+              key={uuidv4()}
             >
               {p}
             </button>

@@ -9,6 +9,7 @@ import DateContext from "../../contexts/date/DateContext";
 import DivsByMonth from "../../components/dividends/DivsByMonth";
 import Link from "next/link";
 import Footer from '../../components/styled/Footer'
+import { v4 as uuidv4 } from "uuid";
 
 function monthly({ user }) {
   // Contexts
@@ -73,7 +74,7 @@ function monthly({ user }) {
           {showYearMenu && (
             <ul className={styles.ul}>
               {years.map((year) => (
-                <li className={styles.li} onClick={handleClickYear}>
+                <li className={styles.li} onClick={handleClickYear} key={uuidv4()}>
                   {year}
                 </li>
               ))}

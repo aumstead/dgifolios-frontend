@@ -1,6 +1,7 @@
 import styles from "./DivsByMonth.module.scss";
 import { useState, useEffect } from "react";
 import MonthRow from "./MonthRow";
+import { v4 as uuidv4 } from "uuid";
 
 function DivsByMonth({ dividends, yearState }) {
   // States
@@ -52,6 +53,7 @@ function DivsByMonth({ dividends, yearState }) {
               monthNumber={index}
               year={yearState}
               monthArray={month[index]}
+              key={uuidv4()}
             />
           );
         })}

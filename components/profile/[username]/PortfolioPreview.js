@@ -2,7 +2,7 @@ import styles from "./PortfolioPreview.module.scss";
 import SmallPortfolioPie from "./SmallPortfolioPie";
 import sort from "fast-sort";
 import PositionRow from "./PositionRow";
-import Footer from '../../../components/styled/Footer'
+import { v4 as uuidv4 } from "uuid";
 
 function PortfolioPreview({ portfolio, user, setShowModalPie, setShowModalPortfolio }) {
   const sortedPositions = sort(portfolio).desc(
@@ -30,6 +30,7 @@ function PortfolioPreview({ portfolio, user, setShowModalPie, setShowModalPortfo
               ticker={position.ticker}
               shares={position.shares}
               percent={position.percentOfPortfolio}
+              key={uuidv4()}
             />
           ))}
           <button onClick={() => setShowModalPortfolio(true)} className={`${styles.btn} ${styles.btnPortfolio}`}>View Portfolio<span></span></button>

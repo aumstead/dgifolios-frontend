@@ -147,8 +147,8 @@ function index({ user }) {
               </div>
             )}
           </div>
-          <Footer />
         </div>
+        <Footer />
       </SidebarMenu>
     );
   }

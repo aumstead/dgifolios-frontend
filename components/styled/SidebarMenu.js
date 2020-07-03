@@ -6,6 +6,7 @@ import { useState, useEffect, useContext } from "react";
 import DividendContext from "../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import LoadingSpinner from "./LoadingSpinner";
+import { v4 as uuidv4 } from "uuid";
 
 function SidebarMenu({ children, user, ctx }) {
   const router = useRouter();
@@ -182,15 +183,10 @@ function SidebarMenu({ children, user, ctx }) {
             {tickerResults.length > 0 && (
               <ul className={styles.search__ul}>
                 {tickerResults.map((ticker) => (
-                  // <Link
-                  //   href={`/portfolio/[ticker]?ticker=${ticker.ticker}`}
-                  //   as={`/portfolio/${ticker.ticker}`}
-                  // >
-                  //   <li className={styles.search__li}>{ticker.ticker}</li>
-                  // </Link>
                   <li
                     onMouseDown={handleMouseDown}
                     className={styles.search__li}
+                    key={uuidv4()}
                   >
                     {ticker.ticker}
                   </li>

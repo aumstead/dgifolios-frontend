@@ -18,7 +18,7 @@ import sort from "fast-sort";
 import Footer from "../../../components/styled/Footer";
 import DividendContext from "../../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../../contexts/portfolio/PortfolioContext";
-import LoadingSpinner from '../../../components/styled/LoadingSpinner'
+import LoadingSpinner from "../../../components/styled/LoadingSpinner";
 
 function index({ username, ctx, user }) {
   // Contexts
@@ -28,7 +28,7 @@ function index({ username, ctx, user }) {
   const { portfolio } = portfolioContext;
 
   // States
-  const [showComponent, setShowComponent] = useState(false)
+  const [showComponent, setShowComponent] = useState(false);
   const [profilePortfolio, setProfilePortfolio] = useState([]);
   const [profileDividends, setProfileDividends] = useState([]);
   const [profileUser, setProfileUser] = useState({});
@@ -80,7 +80,7 @@ function index({ username, ctx, user }) {
           setProfileDividends(dividendsData);
           const portfolioData = portfolioCalculations(values[1].data);
           setProfilePortfolio(portfolioData);
-          setShowComponent(true)
+          setShowComponent(true);
         })
         .catch((error) => console.error(error));
     }
@@ -88,7 +88,7 @@ function index({ username, ctx, user }) {
     if (!user) getData();
     else if (username === user.username) {
       setProfileUser(user);
-      setShowComponent(true)
+      setShowComponent(true);
       return;
     } else {
       getData();
@@ -103,7 +103,6 @@ function index({ username, ctx, user }) {
         setFollowing(true);
       }
     }
-
   }, []);
 
   useEffect(() => {

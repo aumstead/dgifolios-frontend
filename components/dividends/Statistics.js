@@ -5,6 +5,7 @@ import DividendContext from "../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import Link from "next/link";
 import sort from "fast-sort";
+import { v4 as uuidv4 } from "uuid";
 
 function Statistics({ daysWithDividend }) {
   // Contexts
@@ -297,7 +298,7 @@ function Statistics({ daysWithDividend }) {
             <td className={styles.value}>
               
               {topThreePayers.map((position) => (
-                <div className={styles.tickerDiv}>
+                <div className={styles.tickerDiv} key={uuidv4()}>
                   <span>
                     <Link
                       href={`/portfolio/[ticker]?ticker=${position.ticker}`}
@@ -322,7 +323,7 @@ function Statistics({ daysWithDividend }) {
             <td className={styles.value}>
 
               {hideTopThreeYieldOnCost ? <span>n/a</span> : topThreeYielders.map((position) => (
-                <div className={styles.tickerDiv}>
+                <div className={styles.tickerDiv} key={uuidv4}>
                   <span>
                     <Link
                       href={`/portfolio/[ticker]?ticker=${position.ticker}`}

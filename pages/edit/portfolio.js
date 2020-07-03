@@ -12,6 +12,7 @@ import cookie from "js-cookie";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import Footer from "../../components/styled/Footer";
 import sort from 'fast-sort'
+import { v4 as uuidv4 } from "uuid";
 
 function portfolio({ user }) {
   const portfolioContext = useContext(PortfolioContext);
@@ -126,6 +127,7 @@ function portfolio({ user }) {
               <ZeroPositions
                 setShowZeroPositions={setShowZeroPositions}
                 setAddingNewTicker={setAddingNewTicker}
+                key={uuidv4()}
               />
             ) : (
               portfolio.map((position) => (
@@ -141,6 +143,7 @@ function portfolio({ user }) {
                   setActivePosition={setActivePosition}
                   setPortfolio={setPortfolio}
                   makeCalculations={makeCalculations}
+                  key={uuidv4()}
                 />
               ))
             )}

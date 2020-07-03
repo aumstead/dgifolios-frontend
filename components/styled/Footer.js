@@ -9,7 +9,7 @@ function Footer({ styleObj }) {
           <span className={styles.text__copy}>&copy; 2020</span>
           <span className={styles.logo}><Logo/></span>
        
-          <span className={styles.text__contact}>Contact: dgifolios@gmail.com</span>
+          <span className={styles.text__contact}>Contact: admin@dgifolios.com</span>
       
       </div>
     </footer>

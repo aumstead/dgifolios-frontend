@@ -31,6 +31,7 @@ function signup() {
       }));
       return;
     }
+
     try {
       setLoading(true);
       setError("");
@@ -41,6 +42,11 @@ function signup() {
     } catch (error) {
       catchErrors(error, setError);
       setLoading(false);
+      setUser((prevState) => ({
+        ...prevState,
+        password: "",
+        confirmPassword: "",
+      }));
     }
   }
 
@@ -54,6 +60,7 @@ function signup() {
       [name]: value,
     }));
   }
+
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>
@@ -85,11 +92,11 @@ function signup() {
           disabled={loading}
         />
         <label className={styles.label} htmlFor="password">
-          Password
+          Password <br/><span className={styles.passwordReqs}>(Minimum length of 7 characters. Must include a number and uppercase letter.)</span>
         </label>
         <input
           onChange={handleChange}
-          className={validateConfirmPass ? styles.input : styles.invalidInput}
+          className={styles.input}
           type="password"
           name="password"
           value={user.password}
@@ -100,7 +107,7 @@ function signup() {
         </label>
         <input
           onChange={handleChange}
-          className={validateConfirmPass ? styles.input : styles.invalidInput}
+          className={styles.input}
           type="password"
           name="confirmPassword"
           value={user.confirmPassword}
@@ -110,7 +117,13 @@ function signup() {
           <span className={styles.invalidText}>Passwords must match.</span>
         )}
         {Boolean(error) && <span className={styles.invalidText}>{error}</span>}
-        <button className={loading ? `${styles.button} ${styles.disabledBtn}` : styles.button} type="submit" disabled={loading}>
+        <button
+          className={
+            loading ? `${styles.button} ${styles.disabledBtn}` : styles.button
+          }
+          type="submit"
+          disabled={loading}
+        >
           {loading ? (
             <div className={styles.ldsEllipsis}>
               <div></div>

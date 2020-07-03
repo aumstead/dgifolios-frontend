@@ -57,7 +57,7 @@ function signin() {
         />
 
         <label className={styles.label} htmlFor="password">
-          Password
+          Password <br/><span className={styles.passwordReqs}>(Minimum length of 7 characters. Must include a number and uppercase letter.)</span>
         </label>
         <input
           onChange={handleChange}

@@ -64,7 +64,7 @@ function index({ token }) {
       <h1 className={styles.h1}>Reset Password</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.label} htmlFor="password">
-          New password
+          New password <br/><span className={styles.passwordReqs}>(Minimum length of 7 characters. Must include a number and uppercase letter.)</span>
         </label>
         <input
           onChange={handleChange}

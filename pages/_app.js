@@ -47,6 +47,16 @@ MyApp.getInitialProps = async (appContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   appProps = await App.getInitialProps(appContext);
 
+  if (token) {
+    const isUnusableRoute =
+      appContext.ctx.pathname === "/signin" ||
+      appContext.ctx.pathname === "/signup";
+
+    if (isUnusableRoute) {
+      redirectUser(appContext.ctx, "/explore");
+    }
+  }
+
   if (!token) {
     const isProtectedRoute =
       appContext.ctx.pathname === "/portfolio" ||

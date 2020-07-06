@@ -1,6 +1,6 @@
 import { ResponsivePie } from "@nivo/pie";
 
-function Pie1() {
+function MobilePie1() {
   let data = [
     {
       id: "MMM",
@@ -129,28 +129,28 @@ function Pie1() {
   }
 
   const theme = {
-    fontSize: 8,
-  };
+    fontSize: 8
+  }
 
   return (
     <ResponsivePie
       theme={theme}
       data={data}
-      margin={{ top: 25, right: 110, bottom: 50, left: 110 }}
+      margin={{ top: 20, right: 90, bottom: 15, left: 90 }}
       enableSlicesLabels={false}
       radialLabel={function (e) {
         return e.id + " (" + e.value + "%)";
       }}
       colors={{ scheme: "paired" }}
       sortByValue={true}
-      radialLabelsSkipAngle={7}
+      radialLabelsSkipAngle={9}
       tooltip={nivoPieTooltip}
       // radialLabelsLinkOffset={7}
-      // radialLabelsLinkDiagonalLength={20}
-      // radialLabelsLinkHorizontalLength={40}
+      radialLabelsLinkDiagonalLength={10}
+      radialLabelsLinkHorizontalLength={10}
       // radialLabelsTextXOffset={3}
     />
   );
 }
 
-export default Pie1;
+export default MobilePie1;

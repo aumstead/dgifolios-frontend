@@ -1,8 +1,20 @@
 import { ResponsiveBar } from "@nivo/bar";
 
 function BarChartComponent({ data, xAxisObject, yScaleObject }) {
+  const mobileTheme = {
+    fontSize: 8,
+    axis: {
+      legend: {
+        text: {
+          fontSize: 8,
+        },
+      },
+    },
+  };
+
   return (
     <ResponsiveBar
+      theme={mobileTheme}
       data={data}
       keys={["dividends"]}
       indexBy="year"

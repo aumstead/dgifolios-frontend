@@ -86,6 +86,17 @@ function MonthlyBarChart({ dividends, years }) {
     setBarChartData(data);
   }
 
+  const mobileTheme = {
+    fontSize: 8,
+    axis: {
+      legend: {
+        text: {
+          fontSize: 8
+        }
+      }
+    }
+  }
+
   return (
     <React.Fragment>
       <div className={styles.componentContainer}>
@@ -165,6 +176,7 @@ function MonthlyBarChart({ dividends, years }) {
 
       <div className={styles.mobileContainer}>
         <ResponsiveBar
+          theme={mobileTheme}
           data={barChartData}
           keys={years}
           indexBy="month"

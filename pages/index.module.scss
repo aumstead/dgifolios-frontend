@@ -16,7 +16,6 @@
   font-size: 5rem;
   font-family: "Londrina Solid", "Raleway", "Lato", serif;
   text-align: center;
-  font-weight: 400;
   margin: 0 auto;
 }
 
@@ -195,6 +194,9 @@
     margin-left: 5rem;
     box-shadow: 5px 15px 115px -24px rgba(0, 0, 0, 0.62);
   }
+  &__mobileImage {
+    display: none;
+  }
 }
 
 .dataSection {
@@ -223,6 +225,9 @@
     font-size: 4rem;
     font-family: var(--font-logo);
     width: 45rem;
+  }
+  &__mobileBarContainer {
+    display: none;
   }
 }
 
@@ -277,4 +282,145 @@
 
 .fadeOut {
   opacity: 0;
+}
+
+.mobilePie1Container {
+  display: none;
+}
+.mobilePie2Container {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .contentContainer {
+    width: unset;
+  }
+  .heroSectionContainer {
+    width: unset;
+    height: unset;
+    margin: 0rem 2rem;
+    padding-top: 18vh;
+  }
+  .heroText {
+    width: unset;
+  }
+  .guideContainer {
+    display: none;
+  }
+
+  .pieSectionContainer {
+    width: unset;
+    height: unset;
+    margin: 0rem 2rem;
+  }
+  .pieSection__heading {
+    width: unset;
+    font-size: 3.5rem;
+    margin-top: 15vh;
+  }
+  .piesContainer {
+    display: flex;
+    flex-direction: column;
+    height: unset;
+    width: unset;
+  }
+  .pie1Container {
+    display: none;
+  }
+  .pie2Container {
+    display: none;
+  }
+  .mobilePie1Container {
+    display: block;
+    height: 25rem;
+  }
+  .mobilePie2Container {
+    display: block;
+    height: 25rem;
+  }
+
+  .profileSection {
+    height: unset;
+    width: unset;
+    flex-direction: column;
+    margin-top: 10vh;
+    &__left {
+      width: unset;
+      margin: 0 2rem;
+      text-align: center;
+    }
+    &__right {
+      width: unset;
+      padding-left: 0rem;
+    }
+    &__screen {
+      width: 75%;
+      margin: 0 auto;
+    }
+    &__image {
+      margin-left: 0rem;
+      margin-top: 4rem;
+    }
+  }
+
+  .stockSection {
+    height: unset;
+    &__heading {
+      width: unset;
+      margin: 0rem 2rem;
+      margin-top: 12vh;
+    }
+    &__imageContainer {
+      display: none;
+    }
+    &__mobileImage {
+      display: block;
+      width: 75%;
+      margin: 0 auto;
+      box-shadow: 5px 15px 115px -24px rgba(0, 0, 0, 0.62);
+      margin-top: 3rem;
+    }
+    
+  }
+
+  .dataSection {
+    flex-direction: column-reverse;
+    height: unset;
+    margin-top: 15vh;
+    &__right {
+      width: unset;
+      margin: 0rem 2rem;
+      text-align: center;
+    }
+    &__left {
+      display: none;
+    }
+    &__mobileBarContainer {
+      display: block;
+      height: 30rem;
+      width: 100%;
+    }
+    &__heading {
+      width: unset;
+    }
+  }
+
+  .signupSection {
+    margin: 0rem 2rem;
+    margin-top: 12vh;
+    width: unset;
+    &__text {
+      width: unset;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 345px) {
+  .mobilePie1Container {
+    height: 18rem;
+  }
+  .mobilePie2Container {
+    height: 18rem;
+  }
 }

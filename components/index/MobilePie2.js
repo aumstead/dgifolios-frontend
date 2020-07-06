@@ -1,6 +1,6 @@
 import { ResponsivePie } from "@nivo/pie";
 
-function Pie2() {
+function MobilePie2() {
   let data = [
     {
       id: "VOO",
@@ -76,19 +76,19 @@ function Pie2() {
     },
     {
       id: "CVS",
-      value: 1
+      value: 1,
     },
     {
       id: "O",
-      value: 1
+      value: 1,
     },
     {
       id: "VFC",
-      value: 1
+      value: 1,
     },
     {
       id: "UPS",
-      value: 1
+      value: 1,
     },
   ];
 
@@ -110,21 +110,21 @@ function Pie2() {
     <ResponsivePie
       theme={theme}
       data={data}
-      margin={{ top: 25, right: 110, bottom: 50, left: 110 }}
+      margin={{ top: 30, right: 90, bottom: 15, left: 90 }}
       enableSlicesLabels={false}
       radialLabel={function (e) {
         return e.id + " (" + e.value + "%)";
       }}
       colors={{ scheme: "paired" }}
       sortByValue={true}
-      radialLabelsSkipAngle={5}
+      radialLabelsSkipAngle={8}
       tooltip={nivoPieTooltip}
       // radialLabelsLinkOffset={3}
-      // radialLabelsLinkDiagonalLength={20}
-      // radialLabelsLinkHorizontalLength={40}
+      radialLabelsLinkDiagonalLength={10}
+      radialLabelsLinkHorizontalLength={10}
       // radialLabelsTextXOffset={3}
     />
   );
 }
 
-export default Pie2;
+export default MobilePie2;

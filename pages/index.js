@@ -5,36 +5,36 @@ import Pie1 from "../components/index/Pie1";
 import Pie2 from "../components/index/Pie2";
 import Bar from "../components/index/Bar";
 import Footer from "../components/styled/Footer";
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect } from "react";
+import MobilePie1 from "../components/index/MobilePie1";
+import MobilePie2 from "../components/index/MobilePie2";
+import MobileBar from "../components/index/MobileBar";
 
 function Home(props) {
-  const seeFeaturesRef = useRef(null)
+  const seeFeaturesRef = useRef(null);
 
   useEffect(() => {
     const homePageOptions = {
-      rootMargin: "-70% 0px 0px 0px"
+      rootMargin: "-70% 0px 0px 0px",
     };
-    const homePageObserver = new IntersectionObserver(function(
-      entries
-    ) {
-      entries.forEach(entry => {
+    const homePageObserver = new IntersectionObserver(function (entries) {
+      entries.forEach((entry) => {
         if (!entry.isIntersecting) {
-          seeFeaturesRef.current.classList.add(styles.fadeOut)
+          seeFeaturesRef.current.classList.add(styles.fadeOut);
         } else {
-          seeFeaturesRef.current.classList.remove(styles.fadeOut)
+          seeFeaturesRef.current.classList.remove(styles.fadeOut);
         }
       });
-    },
-    homePageOptions);
-  
+    }, homePageOptions);
+
     homePageObserver.observe(seeFeaturesRef.current);
     return () => {
       homePageObserver.unobserve(seeFeaturesRef.current);
-  };
-  }, [])
+    };
+  }, []);
 
   return (
-    <>
+    <div className={styles.contentContainer}>
       <div className={styles.heroSectionContainer}>
         <div className={styles.heroSection__titleContainer}>
           <h1 className={styles.title}>
@@ -70,13 +70,20 @@ function Home(props) {
           <div className={styles.pie2Container}>
             <Pie2 />
           </div>
+          <div className={styles.mobilePie1Container}>
+            <MobilePie1 />
+          </div>
+          <div className={styles.mobilePie2Container}>
+            <MobilePie2 />
+          </div>
         </div>
       </section>
 
       <section className={styles.profileSection}>
         <div className={styles.profileSection__left}>
           <h2 className={styles.profileSection__Heading}>
-            Share info and stats about your portfolio with other dividend growth investors.
+            Share info and stats about your portfolio with other dividend growth
+            investors.
           </h2>
         </div>
         <div className={styles.profileSection__right}>
@@ -111,11 +118,19 @@ function Home(props) {
             />
           </div>
         </div>
+        <img
+          className={styles.stockSection__mobileImage}
+          src="/images/tickerScreen.png"
+          alt="Screenshot of a stock's individual page."
+        />
       </section>
 
       <section className={styles.dataSection}>
         <div className={styles.dataSection__left}>
           <Bar />
+        </div>
+        <div className={styles.dataSection__mobileBarContainer}>
+          <MobileBar />
         </div>
         <div className={styles.dataSection__right}>
           <h2 className={styles.dataSection__heading}>
@@ -137,13 +152,12 @@ function Home(props) {
           <a className={styles.signupSection__cta}>Create an account</a>
         </Link>
         <h3 className={styles.signupSection__text}>
-          If you have any questions or ideas contact me at
-          dgifolios@gmail.com.
+          If you have any questions or ideas contact me at dgifolios@gmail.com.
         </h3>
       </section>
 
-      <Footer styleObj={{ width: "100%" }}/>
-    </>
+      <Footer styleObj={{ width: "100%" }} />
+    </div>
   );
 }
 

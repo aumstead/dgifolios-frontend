@@ -68,7 +68,7 @@ function DividendHistoryTable({
   }
 
   return (
-    <div>
+    <div className={styles.contentContainer}>
       <div className={styles.tableHeadings}>
         <h6 className={styles.tableHeading}>Ticker</h6>
         <h6 className={styles.tableHeading}>Shares</h6>

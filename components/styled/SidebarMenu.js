@@ -7,8 +7,15 @@ import DividendContext from "../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import LoadingSpinner from "./LoadingSpinner";
 import { v4 as uuidv4 } from "uuid";
+import ExploreSvg from "../styled/svg/ExploreSvg";
+import ProfileSvg from "../styled/svg/ProfileSvg";
+import DividendsSvg from "../styled/svg/DividendsSvg";
+import MonthlyHistorySvg from "../styled/svg/MonthlyHistorySvg";
+import PortfolioSvg from "../styled/svg/PortfolioSvg";
+import EditPortfolioSvg from "./svg/EditPortfolioSvg";
+import EditDividendsSvg from "./svg/EditDividendsSvg";
 
-function SidebarMenu({ children, user, ctx }) {
+function SidebarMenu({ children, user, ctx, username }) {
   const router = useRouter();
 
   const path = router.pathname;
@@ -30,7 +37,7 @@ function SidebarMenu({ children, user, ctx }) {
       if (dividends.length === 0) {
         const res = await getDividends(ctx);
       }
-      
+
       if (portfolio.length === 0) {
         const res = await getPortfolio(ctx);
       }
@@ -220,6 +227,140 @@ function SidebarMenu({ children, user, ctx }) {
               }
             >
               Edit Dividend Data
+            </a>
+          </Link>
+        </div>
+      </nav>
+
+      {/* mobile menu */}
+      <nav className={styles.mobileMenu}>
+        <div className={`${styles.mobileSearch}`}>
+          <h6 className={`${styles.sectionHeading}`}>Search My Tickers</h6>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            name="searchInput"
+            autoComplete="off"
+            placeholder="i.e. AAPL, VZ"
+            className={styles.searchInput}
+            onKeyUp={handleKeyUp}
+            id="inputSearchId"
+            onBlur={() => setSearchQuery("")}
+          />
+          <div className={styles.search__ulContainer}>
+            {tickerResults.length > 0 && (
+              <ul className={styles.search__ul}>
+                {tickerResults.map((ticker) => (
+                  <li
+                    onMouseDown={handleMouseDown}
+                    className={styles.search__li}
+                    key={uuidv4()}
+                  >
+                    {ticker.ticker}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.mobileEditSection}>
+          <h6 className={`${styles.sectionHeading}`}>Edit Data</h6>
+          <div className={styles.mobileEditSection__links}>
+            <Link href="/edit/portfolio">
+              <a
+                className={
+                  path === "/edit/portfolio"
+                    ? `${styles.mobileEditMenuItem} ${styles.mobileNavActive}`
+                    : styles.mobileEditMenuItem
+                }
+              >
+                <EditPortfolioSvg />
+                <p>Portfolio Data</p>
+              </a>
+            </Link>
+
+            <Link href="/edit/dividends">
+              <a
+                className={
+                  path === "/edit/dividends"
+                    ? `${styles.mobileEditMenuItem} ${styles.mobileNavActive}`
+                    : styles.mobileEditMenuItem
+                }
+              >
+                <EditDividendsSvg />
+                <p>Dividend Data</p>
+              </a>
+            </Link>
+          </div>
+        </div>
+
+        <div className={styles.mobileMenuNavigation}>
+          {/* <h6 className={`${styles.sectionHeading}`}>Views</h6> */}
+
+          <Link href="/portfolio">
+            <a
+              className={
+                path === "/portfolio"
+                  ? `${styles.mobileNavItem} ${styles.mobileNavActive}`
+                  : styles.mobileNavItem
+              }
+            >
+              <PortfolioSvg />
+              My Portfolio
+            </a>
+          </Link>
+
+          <Link href="/dividends">
+            <a
+              className={
+                path === "/dividends"
+                  ? `${styles.mobileNavItem} ${styles.mobileNavActive}`
+                  : styles.mobileNavItem
+              }
+            >
+              <DividendsSvg />
+              My Dividends
+            </a>
+          </Link>
+
+          <Link href="/dividends/monthly">
+            <a
+              className={
+                path === "/dividends/monthly"
+                  ? `${styles.mobileNavItem} ${styles.mobileNavActive}`
+                  : styles.mobileNavItem
+              }
+            >
+              <MonthlyHistorySvg />
+              Monthly History
+            </a>
+          </Link>
+
+          <Link href="/explore">
+            <a
+              className={
+                path === "/explore"
+                  ? `${styles.mobileNavItem} ${styles.mobileNavActive}`
+                  : styles.mobileNavItem
+              }
+            >
+              <ExploreSvg />
+              Explore
+            </a>
+          </Link>
+          
+          <Link href={`/profile/${user.username}`}>
+            <a
+              className={
+                username === user.username
+                  ? `${styles.mobileNavItem} ${styles.mobileNavActive}`
+                  : styles.mobileNavItem
+              }
+            >
+              <ProfileSvg username={username} user={user} />
+              My profile
             </a>
           </Link>
         </div>

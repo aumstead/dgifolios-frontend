@@ -1,6 +1,6 @@
 import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
-import styles from './MonthlyBarChart.module.scss'
+import styles from "./MonthlyBarChart.module.scss";
 
 function MonthlyBarChart({ dividends, years }) {
   // States
@@ -87,80 +87,154 @@ function MonthlyBarChart({ dividends, years }) {
   }
 
   return (
-    <div className={styles.componentContainer}>
-      {/* <div className={styles.dropdownContainer}>
+    <React.Fragment>
+      <div className={styles.componentContainer}>
+        {/* <div className={styles.dropdownContainer}>
         <button className={styles.dropdownBtn}>Color Scheme <span className={styles.arrow}>&#9662;</span></button>
       </div> */}
-      <ResponsiveBar
-        data={barChartData}
-        keys={years}
-        indexBy="month"
-        margin={{ top: 25, right: 100, bottom: 50, left: 80 }}
-        padding={0.3}
-        groupMode="grouped"
-        colors={[
-          "#a6cee3",
-          "#1f78b4",
-          "#b2df8a",
-          "#33a02c",
-          "#fb9a99",
-          "#e31a1c",
-          "#fdbf6f",
-          "#ff7f00",
-          "#cab2d6",
-          "#6a3d9a",
-          "#b15928",
-        ]}
-        borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Month",
-          legendPosition: "middle",
-          legendOffset: 32,
-        }}
-        axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Monthly Total",
-          legendPosition: "middle",
-          legendOffset: -55,
-        }}
-        labelSkipWidth={12}
-        labelSkipHeight={12}
-        enableLabel={false}
-        labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-        legends={[
-          {
-            dataFrom: "keys",
-            anchor: "right",
-            direction: "column",
-            justify: false,
-            translateX: 120,
-            translateY: 0,
-            itemsSpacing: 2,
-            itemWidth: 100,
-            itemHeight: 20,
-            itemDirection: "left-to-right",
-            itemOpacity: 0.85,
-            symbolSize: 10,
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemOpacity: 1,
+        <ResponsiveBar
+          data={barChartData}
+          keys={years}
+          indexBy="month"
+          margin={{ top: 25, right: 100, bottom: 50, left: 80 }}
+          padding={0.3}
+          groupMode="grouped"
+          colors={[
+            "#a6cee3",
+            "#1f78b4",
+            "#b2df8a",
+            "#33a02c",
+            "#fb9a99",
+            "#e31a1c",
+            "#fdbf6f",
+            "#ff7f00",
+            "#cab2d6",
+            "#6a3d9a",
+            "#b15928",
+          ]}
+          borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Month",
+            legendPosition: "middle",
+            legendOffset: 32,
+          }}
+          axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Monthly Total",
+            legendPosition: "middle",
+            legendOffset: -55,
+          }}
+          labelSkipWidth={12}
+          labelSkipHeight={12}
+          enableLabel={false}
+          labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          legends={[
+            {
+              dataFrom: "keys",
+              anchor: "right",
+              direction: "column",
+              justify: false,
+              translateX: 120,
+              translateY: 0,
+              itemsSpacing: 2,
+              itemWidth: 100,
+              itemHeight: 20,
+              itemDirection: "left-to-right",
+              itemOpacity: 0.85,
+              symbolSize: 10,
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemOpacity: 1,
+                  },
                 },
-              },
-            ],
-          },
-        ]}
-        animate={false}
-      />
-    </div>
+              ],
+            },
+          ]}
+          animate={false}
+        />
+      </div>
+
+      <div className={styles.mobileContainer}>
+        <ResponsiveBar
+          data={barChartData}
+          keys={years}
+          indexBy="month"
+          margin={{ top: 25, right: 40, bottom: 90, left: 50 }}
+          padding={0.3}
+          groupMode="grouped"
+          colors={[
+            "#a6cee3",
+            "#1f78b4",
+            "#b2df8a",
+            "#33a02c",
+            "#fb9a99",
+            "#e31a1c",
+            "#fdbf6f",
+            "#ff7f00",
+            "#cab2d6",
+            "#6a3d9a",
+            "#b15928",
+          ]}
+          borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 45,
+            legend: "Month",
+            legendPosition: "middle",
+            legendOffset: 37,
+          }}
+          axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Monthly Total",
+            legendPosition: "middle",
+            legendOffset: -40,
+          }}
+          labelSkipWidth={12}
+          labelSkipHeight={12}
+          enableLabel={false}
+          labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+          legends={[
+            {
+              dataFrom: "keys",
+              anchor: "bottom",
+              direction: "row",
+              justify: false,
+              translateX: 0,
+              translateY: 70,
+              itemsSpacing: 0,
+              itemWidth: 50,
+              itemHeight: 20,
+              itemDirection: "left-to-right",
+              itemOpacity: 0.85,
+              symbolSize: 8,
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemOpacity: 1,
+                  },
+                },
+              ],
+            },
+          ]}
+          animate={false}
+        />
+      </div>
+    </React.Fragment>
   );
 }
 

@@ -21,6 +21,12 @@
   flex-wrap: wrap;
 }
 
+.modalTableContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .divFlexContainer {
   text-align: center;
   margin-bottom: 1rem;
@@ -131,4 +137,19 @@
   visibility: hidden;
   opacity: 0;
   transition: opacity 1s;
+}
+
+@media only screen and (max-width: 500px) {
+  .keyContainer {
+    width: 18rem;
+  }
+  .modalTableContainer {
+    flex-wrap: unset;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .keyContainer {
+    width: 22rem;
+  }
 }

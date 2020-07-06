@@ -20,3 +20,13 @@
   font-style: italic;
 }
 
+@media only screen and (max-width: 500px) {
+  .sectionHeading {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .explanation {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}

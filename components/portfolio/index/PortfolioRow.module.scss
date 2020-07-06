@@ -23,3 +23,19 @@
     cursor: pointer;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .row {
+    margin-left: 2rem;
+    grid-template-columns: 8rem 8rem 8rem 8rem 8rem;
+    font-size: 1.3rem;
+    margin-right: 2rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .row {
+    grid-template-columns: 7rem 7rem 7rem 7rem 7rem;
+    font-size: 1.2rem;
+  }
+}

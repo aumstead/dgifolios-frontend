@@ -143,7 +143,7 @@ function portfolio({ user }) {
                   setActivePosition={setActivePosition}
                   setPortfolio={setPortfolio}
                   makeCalculations={makeCalculations}
-                  key={uuidv4()}
+                  // key={uuidv4()}
                 />
               ))
             )}

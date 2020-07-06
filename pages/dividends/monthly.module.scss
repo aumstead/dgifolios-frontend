@@ -121,3 +121,18 @@
   margin-top: 5rem;
   width: fit-content;
 }
+
+@media only screen and (max-width: 500px) {
+  .contentContainer {
+    width: 100%;
+  }
+
+  .secondaryMenu {
+    margin-left: 2rem;
+  }
+
+  .barChartContainer {
+    height: 30rem;
+    margin-left: 2rem;
+  }
+}

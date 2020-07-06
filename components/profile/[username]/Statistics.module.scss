@@ -44,3 +44,34 @@
 .divider {
   border-bottom: 1px solid gainsboro;
 }
+
+@media only screen and (max-width: 500px) {
+  .componentContainer {
+    // display: none;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: block;
+  }
+  .table {
+    margin-right: 0rem;
+  }
+  .mobileTableTwo {
+    margin-top: 0rem;
+  }
+  .td {
+    width: 25rem;
+    padding-right: 2rem;
+  }
+  .topThreeTd {
+    width: 25rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .td {
+    width: 20rem;
+  }
+  .topThreeTd {
+    width: 20rem;
+  }
+}

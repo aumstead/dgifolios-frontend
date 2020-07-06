@@ -2,7 +2,7 @@ import styles from "./ProfileDivsByMonth.module.scss";
 import { useState, useEffect } from "react";
 import ProfileMonthRow from "./ProfileMonthRow";
 
-function ProfileDivsByMonth({ dividends, yearState }) {
+function ProfileDivsByMonth({ dividends, yearState, showModalDividends }) {
   // States
   const [monthsObject, setMonthsObject] = useState({});
 
@@ -52,6 +52,7 @@ function ProfileDivsByMonth({ dividends, yearState }) {
               monthNumber={index}
               year={yearState}
               monthArray={month[index]}
+              showModalDividends={showModalDividends}
             />
           );
         })}

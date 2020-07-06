@@ -42,10 +42,6 @@ function PortfolioPreview({ portfolio, user, setShowModalPie, setShowModalPortfo
           <button onClick={() => setShowModalPie(true)} className={`${styles.btn} ${styles.btnPie}`}>Enlarge<span></span></button>
         </div>
       </div>
-
-     
-     
-      {/* <Footer></Footer> */}
     </div>
   );
 }

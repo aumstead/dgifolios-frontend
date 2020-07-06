@@ -5,3 +5,9 @@
   margin-bottom: 8rem;
 }
 
+@media only screen and (max-width: 500px) {
+  .componentContainer {
+    margin-left: 2rem;
+  }
+}
+

@@ -1,3 +1,9 @@
 .layoutDiv {
   height: calc(100vh - 5rem);
 }
+
+@media only screen and (max-width: 500px) {
+  .layoutDiv {
+    // display: none;
+  }
+}

@@ -275,7 +275,7 @@ function index({ username, ctx, user }) {
   }
 
   return (
-    <SidebarMenu user={user}>
+    <SidebarMenu user={user} username={username}>
       <div className={styles.contentContainer}>
         <PageHeading text={`${username}'s portfolio`} />
 
@@ -401,6 +401,7 @@ function index({ username, ctx, user }) {
         )}
         {showModalDividends && (
           <ModalDividends
+            showModalDividends={showModalDividends}
             dividends={profileDividends}
             backdropOnClick={() => setShowModalDividends(false)}
             years={years}

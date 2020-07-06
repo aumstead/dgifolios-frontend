@@ -1,0 +1,13 @@
+.mobileComponentContainer {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .componentContainer {
+    display: none;
+  }
+  .mobileComponentContainer {
+    display: block;
+  }
+
+}

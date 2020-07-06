@@ -2,7 +2,7 @@ import styles from "./TickerHistory.module.scss";
 import { useEffect, useState } from "react";
 import TickerHistoryRow from "./TickerHistoryRow";
 import sort from "fast-sort";
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
 
 function TickerHistory({ dividends, ticker }) {
   const [data, setData] = useState([]);
@@ -77,7 +77,7 @@ function TickerHistory({ dividends, ticker }) {
   }
 
   return (
-    <div>
+    <div className={styles.componentContainer}>
       {noDivHistory && <p style={{ fontSize: "1.4rem", marginLeft: "6rem", marginTop: "1rem"}}>No dividend history.</p>}
       {data.map((year) => (
         <TickerHistoryRow year={year.year} dividends={year.dividends} key={uuidv4()} />

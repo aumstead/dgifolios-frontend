@@ -21,6 +21,7 @@ function PortfolioPie({ portfolio }) {
   }
 
   return (
+    <React.Fragment>
     <div className={styles.pieContainer}>
       <ResponsivePie
         data={data}
@@ -40,6 +41,27 @@ function PortfolioPie({ portfolio }) {
         // radialLabelsTextXOffset={3}
       />
     </div>
+
+    <div className={styles.mobilePieContainer}>
+      <ResponsivePie
+        data={data}
+        margin={{ top: 30, right: 30, bottom: 30, left: 30 }}
+        enableSlicesLabels={false}
+        radialLabel={function (e) {
+          return e.id + " (" + e.value + "%)";
+        }}
+        colors={{ scheme: "paired" }}
+        sortByValue={true}
+        radialLabelsSkipAngle={12}
+        tooltip={nivoPieTooltip}
+        enableRadialLabels={true}
+        // radialLabelsLinkOffset={2}
+        radialLabelsLinkDiagonalLength={5}
+        radialLabelsLinkHorizontalLength={5}
+        // radialLabelsTextXOffset={3}
+      />
+    </div>
+    </React.Fragment>
   );
 }
 

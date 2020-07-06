@@ -226,3 +226,16 @@
     transform: translate(24px, 0);
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .row {
+    grid-template-columns: 8rem 8rem 9rem 8rem 8rem;
+    margin-left: 2rem;
+  }
+}
+
+@media only screen and (max-width: 345px) {
+  .row {
+    grid-template-columns: 6rem 7rem 8rem 8rem 8rem;
+  }
+}

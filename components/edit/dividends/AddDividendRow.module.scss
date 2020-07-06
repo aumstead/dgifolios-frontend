@@ -1,7 +1,7 @@
 .newDividendRow {
   position: relative;
   display: grid;
-  grid-template-columns: 8rem 8rem 8rem 12rem 12rem 8rem 10rem 8rem 8rem;
+  grid-template-columns: 8rem 8rem 8rem 14rem 14rem 8rem 10rem 8rem 8rem;
   margin-left: 3rem;
   margin-right: 3rem;
   font-size: 1.4rem;
@@ -167,5 +167,11 @@
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .newDividendRow {
+    margin-left: 2rem;
   }
 }

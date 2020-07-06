@@ -141,3 +141,17 @@
     transform: translate(24px, 0);
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .componentContainer {
+    width: unset;
+  }
+  .form {
+    margin-left: 2rem;
+    width: unset;
+    margin-right: 2rem;
+  }
+  .select {
+    margin-bottom: 1.5rem;
+  }
+}

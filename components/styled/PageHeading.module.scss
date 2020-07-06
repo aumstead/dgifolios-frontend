@@ -4,6 +4,12 @@
   margin-top: 1.5rem;
 }
 
+.hiddenMobilePageHeading {
+  font-size: 4rem;
+  margin-left: 3rem;
+  margin-top: 1.5rem;
+}
+
 .hr {
   border: none;
   border-top: 1px solid var(--color-light-grey);
@@ -11,4 +17,16 @@
   margin-left: 3rem;
   // margin-right: 3rem;
   width: 83rem;
-} 
+}
+
+@media only screen and (max-width: 500px) {
+  .hiddenMobilePageHeading {
+    display: none;
+  }
+
+  .pageHeading {
+    font-size: 3rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+  }
+}

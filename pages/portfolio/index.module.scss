@@ -1,6 +1,6 @@
 .contentContainer {
   width: 80rem;
-  min-height: calc(100vw - 11.5rem);
+  // min-height: calc(100vw - 11.5rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -47,10 +47,14 @@
 
   &:hover {
     cursor: pointer;
-    // background-color: darken($color: #0f9a7a, $amount: 5);
-    // border: 1px solid darken($color: #0f9a7a, $amount: 5);
     border: 1px solid var(--deep-green);
     background-color: var(--deep-green);
     color: #fff;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .contentContainer {
+    width: 100%;
   }
 }

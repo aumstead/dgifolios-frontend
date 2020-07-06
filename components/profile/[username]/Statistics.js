@@ -319,7 +319,7 @@ function Statistics({ portfolio, dividends }) {
         </tbody>
       </table>
 
-      <table className={styles.table}>
+      <table className={`${styles.table} ${styles.mobileTableTwo}`}>
         <tbody>
           <tr>
             <td className={styles.topThreeTd}>

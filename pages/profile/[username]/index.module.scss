@@ -1,7 +1,6 @@
 
 
 .contentContainer {
-  // width: 80rem;
   min-height: calc(100vh - 5rem);
   display: flex;
   flex-direction: column;
@@ -35,8 +34,6 @@
 
   &:hover {
     cursor: pointer;
-    // background-color: darken($color: #0f9a7a, $amount: 5);
-    // border: 1px solid darken($color: #0f9a7a, $amount: 5);
     border: 1px solid var(--deep-red);
     background-color: var(--deep-red);
     color: #fff;
@@ -170,5 +167,19 @@
   }
   100% {
     transform: translate(24px, 0);
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .contentContainer {
+    width: 100%;
+  }
+  .btnFollow {
+    margin-top: 2.5rem;
+    margin-left: 2rem;
+  }
+  .btnFollowing {
+    margin-top: 2.5rem;
+    margin-left: 2rem;
   }
 }

@@ -6,7 +6,7 @@ import DateContext from "../../../contexts/date/DateContext";
 import ProfileDivsByMonth from "./ProfileDivsByMonth";
 import { useEffect } from 'react'
 
-function ModalDividends({ backdropOnClick, dividends, years }) {
+function ModalDividends({ backdropOnClick, dividends, years, showModalDividends }) {
   // Contexts
   const dateContext = useContext(DateContext);
   const { currentYear } = dateContext;
@@ -58,7 +58,7 @@ function ModalDividends({ backdropOnClick, dividends, years }) {
             </ul>
           )}
         </div>
-        <ProfileDivsByMonth dividends={dividends} yearState={yearState} />
+        <ProfileDivsByMonth dividends={dividends} yearState={yearState} showModalDividends={showModalDividends} />
       </div>
       <Backdrop onClick={backdropOnClick} />
     </>

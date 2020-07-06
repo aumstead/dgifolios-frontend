@@ -72,6 +72,34 @@
   margin-left: 6rem;
 }
 
+.mobileBarChartContainer {
+  display: none;
+  height: 35rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .hideBarChartContainer {
   display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .contentContainer {
+    width: 100%;
+    min-height: calc(100vh - 11.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+  }
+  .explanation {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  .barChartContainer {
+    display: none;
+  }
+  .mobileBarChartContainer {
+    display: block;
+  }
 }

@@ -8,3 +8,23 @@
   height: 10px;
   display: inline-block;
 }
+
+.mobilePie {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .pieContainer {
+    display: none;
+  }
+  .mobilePie {
+    display: block;
+    height: 35rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .mobilePie {
+    height: 30rem;
+  }
+}

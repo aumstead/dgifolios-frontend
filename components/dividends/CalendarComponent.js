@@ -1,4 +1,5 @@
 import { ResponsiveCalendar } from "@nivo/calendar";
+import styles from "./CalendarComponent.module.scss";
 
 function CalendarComponent({ dividends, setDaysWithDividend }) {
   const currentDate = new Date();
@@ -26,10 +27,10 @@ function CalendarComponent({ dividends, setDaysWithDividend }) {
   );
 
   // get strings for 'to' and 'from' nivo props
-  const lastYearArray = lastYearFinalObj.toISOString().split('T')
-  const lastYear = lastYearArray[0]
-  const recentMonthArray = mostRecentMonthFinalObj.toISOString().split('T')
-  const thisYear = recentMonthArray[0]
+  const lastYearArray = lastYearFinalObj.toISOString().split("T");
+  const lastYear = lastYearArray[0];
+  const recentMonthArray = mostRecentMonthFinalObj.toISOString().split("T");
+  const thisYear = recentMonthArray[0];
 
   let dataArray = [];
   lastTwelveMonthsDivsArray.forEach((divX) => {
@@ -44,37 +45,82 @@ function CalendarComponent({ dividends, setDaysWithDividend }) {
   });
 
   // calculate days with a dividend and pass up to index page
-  const days = dataArray.length
-  setDaysWithDividend(days)
+  const days = dataArray.length;
+  setDaysWithDividend(days);
 
   return (
-    <div style={{ height: "34rem", marginLeft: "6rem" }}>
-      <ResponsiveCalendar
-        data={dataArray}
-        from={lastYear}
-        to={thisYear}
-        emptyColor="#eeeeee"
-        colors={["#eeeeee", "#a6cee4", "#2177b4", "#b2df8a", "#32a02d", "#fa9b99"]}
-        margin={{ top: 10, right: 40, bottom: 40, left: 20 }}
-        yearSpacing={40}
-        monthBorderColor="#ffffff"
-        dayBorderWidth={2}
-        dayBorderColor="#ffffff"
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "row",
-            translateY: 10,
-            itemCount: 4,
-            itemWidth: 42,
-            itemHeight: 36,
-            itemsSpacing: 14,
-            itemDirection: "right-to-left",
-          },
-        ]}
-      />
-    </div>
+    <React.Fragment>
+      <div className={styles.webCalendar}>
+        <ResponsiveCalendar
+          data={dataArray}
+          from={lastYear}
+          to={thisYear}
+          emptyColor="#eeeeee"
+          colors={[
+            "#eeeeee",
+            "#a6cee4",
+            "#2177b4",
+            "#b2df8a",
+            "#32a02d",
+            "#fa9b99",
+          ]}
+          margin={{ top: 10, right: 40, bottom: 40, left: 20 }}
+          yearSpacing={40}
+          monthBorderColor="#ffffff"
+          dayBorderWidth={2}
+          dayBorderColor="#ffffff"
+          legends={[
+            {
+              anchor: "bottom-right",
+              direction: "row",
+              translateY: 10,
+              itemCount: 4,
+              itemWidth: 42,
+              itemHeight: 36,
+              itemsSpacing: 14,
+              itemDirection: "right-to-left",
+            },
+          ]}
+        />
+      </div>
+
+      <div className={styles.mobileCalendar}>
+        <ResponsiveCalendar
+          data={dataArray}
+          from={lastYear}
+          to={thisYear}
+          emptyColor="#eeeeee"
+          colors={[
+            "#eeeeee",
+            "#a6cee4",
+            "#2177b4",
+            "#b2df8a",
+            "#32a02d",
+            "#fa9b99",
+          ]}
+          margin={{ top: 10, right: 20, bottom: 10, left: 20 }}
+          yearSpacing={40}
+          monthBorderColor="#ffffff"
+          dayBorderWidth={2}
+          dayBorderColor="#ffffff"
+          legends={[
+            {
+              anchor: "bottom",
+              direction: "row",
+              translateY: 10,
+              itemCount: 4,
+              itemWidth: 32,
+              itemHeight: 30,
+              itemsSpacing: 14,
+              itemDirection: "right-to-left",
+              
+            },
+          ]}
+        />
+      </div>
+    </React.Fragment>
   );
 }
 
 export default CalendarComponent;
+

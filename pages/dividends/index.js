@@ -8,13 +8,13 @@ import { useState, useEffect, useContext } from "react";
 import DividendContext from "../../contexts/dividends/DividendContext";
 import PortfolioContext from "../../contexts/portfolio/PortfolioContext";
 import Statistics from "../../components/dividends/Statistics";
-import LoadingSpinner from "../../components/styled/LoadingSpinner";
 import CalendarComponent from "../../components/dividends/CalendarComponent";
 import CompoundingLineChart from "../../components/dividends/CompoundingLineChart";
 import ReinvestedCompoundedBarChart from "../../components/dividends/ReinvestedCompoundedBarChart";
 import Link from "next/link";
 import Footer from "../../components/styled/Footer";
 import BarChartComponent from "../../components/dividends/BarChartComponent";
+import MobileBarChartComponent from '../../components/dividends/MobileBarChartComponent'
 
 function index({ user }) {
   const dividendContext = useContext(DividendContext);
@@ -79,7 +79,6 @@ function index({ user }) {
 
         <SectionHeading
           text="My Portfolio's Annual Dividends Visualizer"
-          // explanation="Calculates compounded annual dividends based solely on organic dividend growth."
         />
         <p className={`${styles.explanation} ${styles.mt_1}`}>
           Shows the future amount of dividends your portfolio will yield
@@ -102,6 +101,16 @@ function index({ user }) {
         <div className={showChart ? styles.barChartContainer : styles.hideBarChartContainer}>
           {showChart && (
             <BarChartComponent
+              data={data}
+              xAxisObject={xAxisObject}
+              yScaleObject={yScaleObject}
+            />
+          )}
+        </div>
+
+        <div className={showChart ? styles.mobileBarChartContainer : styles.hideBarChartContainer}>
+          {showChart && (
+            <MobileBarChartComponent
               data={data}
               xAxisObject={xAxisObject}
               yScaleObject={yScaleObject}

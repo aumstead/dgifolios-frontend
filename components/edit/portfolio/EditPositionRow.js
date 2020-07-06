@@ -20,6 +20,7 @@ function EditPositionRow({
   setPortfolio,
   makeCalculations
 }) {
+
   const [showEditInterface, setShowEditInterface] = useState(false);
   const [editInputs, setEditInputs] = useState({
     shares: "",

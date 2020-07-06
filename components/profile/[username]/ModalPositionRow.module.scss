@@ -16,3 +16,22 @@
   }
 }
 
+@media only screen and (max-width: 500px) {
+  .row {
+    display: grid;
+    grid-template-columns: 6rem 6rem 8rem 10rem 6rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    align-items: center;
+    justify-items: center;
+    border-bottom: 1px solid gainsboro;
+    position: relative;
+  
+    &:hover {
+      background-color: var(--off-white);
+    }
+  }
+}

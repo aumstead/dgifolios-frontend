@@ -77,8 +77,8 @@ function ticker({ ticker, user }) {
         <AmountLineChart dividends={dividends} ticker={ticker} />
         <SectionHeading text={`Cash Received`} />
         <TotalLineChart dividends={dividends} ticker={ticker} />
-        <Footer />
       </div>
+        <Footer />
     </SidebarMenu>
   );
 }

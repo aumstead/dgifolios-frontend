@@ -160,3 +160,22 @@
     transform: translate(24px, 0);
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .newTickerRow {
+    grid-template-columns: 8rem 8rem 9rem 8rem 8rem;
+    margin-left: 2rem;
+  }
+  .input {
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 345px) {
+  .newTickerRow {
+    grid-template-columns: 6rem 7rem 8rem 8rem 8rem;
+  }
+  .input {
+    width: 95%;
+  }
+}

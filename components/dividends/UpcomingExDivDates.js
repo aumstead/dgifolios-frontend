@@ -3,6 +3,7 @@ import UpcomingExDivStock from "./UpcomingExDivStock";
 import styles from "./UpcomingExDivDates.module.scss";
 import { monthToStringAbbv } from "../../utils/conversions";
 import sort from "fast-sort";
+import UpcomingExDivMobileRow from "./UpcomingExDivMobileRow";
 
 function UpcomingExDivDates({ dividends }) {
   const [possibleStocks, setPossibleStocks] = useState([]);
@@ -49,27 +50,54 @@ function UpcomingExDivDates({ dividends }) {
     setPossibleStocks(possibleStocks);
   }
   return (
-    <div className={styles.componentContainer}>
-      {possibleStocks.length === 0 ? (
-        <span>None</span>
-      ) : (
-        <div className={styles.keyContainer}>
-          <div className={`${styles.cellKey} ${styles.ticker}`}>Ticker</div>
-          <div
-            className={`${styles.cellKey} ${styles.cellNormal} ${styles.cellPrevious}`}
-          >
-            Previous ex-div
+    <React.Fragment>
+      <div className={styles.componentContainer}>
+        {possibleStocks.length === 0 ? (
+          <span>None</span>
+        ) : (
+          <div className={styles.keyContainer}>
+            <div className={`${styles.cellKey} ${styles.ticker}`}>Ticker</div>
+            <div
+              className={`${styles.cellKey} ${styles.cellNormal} ${styles.cellPrevious}`}
+            >
+              Previous ex-div
+            </div>
+            <div
+              className={`${styles.cellKey} ${styles.cellNormal} ${styles.cellEstimated}`}
+            >
+              Estimated ex-div
+            </div>
           </div>
-          <div
-            className={`${styles.cellKey} ${styles.cellNormal} ${styles.cellEstimated}`}
-          >
-            Estimated ex-div
-          </div>
+        )}
+        <div className={styles.dataContainer}>
+          {possibleStocks.map((stock) => (
+            <UpcomingExDivStock
+              ticker={stock.ticker}
+              prevExDivDate={stock.exDivDate}
+              estimatedExDivDate={stock.estimatedExDivDate}
+              key={stock._id}
+            />
+          ))}
         </div>
-      )}
-      <div className={styles.dataContainer}>
+      </div>
+
+      <div className={styles.mobileComponentContainer}>
+        {possibleStocks.length === 0 ? (
+          <span>None</span>
+        ) : (
+          <div className={styles.mobileTableHeadings}>
+            <h6 className={styles.mobileTableHeading}>Ticker</h6>
+            <h6 className={styles.mobileTableHeading}>
+              Previous Ex-Dividend Date
+            </h6>
+            <h6 className={styles.mobileTableHeading}>
+              Esimated Ex-Dividend Date
+            </h6>
+          </div>
+        )}
+
         {possibleStocks.map((stock) => (
-          <UpcomingExDivStock
+          <UpcomingExDivMobileRow
             ticker={stock.ticker}
             prevExDivDate={stock.exDivDate}
             estimatedExDivDate={stock.estimatedExDivDate}
@@ -77,7 +105,7 @@ function UpcomingExDivDates({ dividends }) {
           />
         ))}
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 

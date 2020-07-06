@@ -23,3 +23,16 @@
     background-color: var(--off-white);
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .tableHeadings {
+    margin-left: 2rem;
+    grid-template-columns: 8rem 8rem 8rem 8rem 8rem;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .tableHeadings {
+    grid-template-columns: 7rem 7rem 7rem 7rem 7rem;
+  }
+}

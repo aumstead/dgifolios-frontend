@@ -5,7 +5,7 @@ import sort from "fast-sort";
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 
-function ProfileMonthRow({ monthNumber, year, monthArray }) {
+function ProfileMonthRow({ monthNumber, year, monthArray, showModalDividends }) {
   // Variables for calculations
   let netCostBasisTotal = 0;
   let monthlyTotalDividends = 0;
@@ -81,7 +81,7 @@ function ProfileMonthRow({ monthNumber, year, monthArray }) {
           </div>
           <div className={`${styles.cellKey} ${styles.cellGreen}`}>Total</div>
           <div className={`${styles.cellKey} ${styles.cellRed}`}>
-            Cost Basis/Share
+            Cost Basis
           </div>
           <div className={`${styles.cellKey} ${styles.cellRed}`}>
             Net Cost Basis
@@ -90,7 +90,7 @@ function ProfileMonthRow({ monthNumber, year, monthArray }) {
             Yield on Cost
           </div>
         </div>
-        <div className={styles.tableContainer}>
+        <div className={showModalDividends ? styles.modalTableContainer : styles.tableContainer}>
           {/* array is sorted by divDate before mapping */}
           {sort(monthArray)
             .asc((div) => div.divDate)

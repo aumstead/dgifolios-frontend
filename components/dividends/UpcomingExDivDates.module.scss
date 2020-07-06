@@ -1,11 +1,9 @@
 .componentContainer {
-  // height: 30rem;
   display: flex;
   margin-left: 6rem;
   margin-top: 1rem;
   font-size: 1.3rem;
   width: 100%;
-  
 }
 
 .dataContainer {
@@ -13,9 +11,7 @@
   flex-wrap: wrap;
 }
 
-.cellKey {
-  padding-left: .2rem;
-}
+
 
 .ticker {
   border: 1px solid gainsboro;
@@ -30,6 +26,11 @@
   margin-bottom: -1px;
 }
 
+.cellKey {
+  padding-left: .2rem;
+  width: 13rem;
+}
+
 .cellPrevious {
   background-color: #eee;
 }
@@ -37,4 +38,34 @@
 .cellEstimated {
   // background-color: #a6cee4;
   background-color: #eee;
+}
+
+.mobileComponentContainer {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .componentContainer {
+    margin-left: 2rem;
+    display: none;
+  }
+
+  .mobileComponentContainer {
+    display: block;
+    margin-top: 2rem;
+  }
+
+  .mobileTableHeadings {
+    display: grid;
+    grid-template-columns: 13rem 13rem 13rem;
+    color: var(--color-dark-grey);
+    width: 3rem;
+    justify-items: center;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .mobileTableHeading {
+    padding: 0rem 2rem;
+  }
 }

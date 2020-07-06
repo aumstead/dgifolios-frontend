@@ -139,3 +139,13 @@
   opacity: 0;
   transition: opacity 1s;
 }
+
+@media only screen and (max-width: 500px) {
+  .keyContainer {
+    margin-bottom: 1rem;
+    margin-left: -1px;
+    font-size: 1.3rem;
+    width: 17rem;
+    height: 100%;
+  }
+}

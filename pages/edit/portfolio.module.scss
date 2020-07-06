@@ -62,7 +62,7 @@
   width: 8rem;
   height: 4rem;
   font-size: 1.4rem;
-  background-color: var(--red);
+  background-color: var(--deep-red);
   color: #fff;
   margin-right: 2.5rem;
 
@@ -94,4 +94,23 @@
   display: flex;
   justify-content: center;
   margin-top: 10%;
+}
+
+@media only screen and (max-width: 500px) {
+  .contentContainer {
+    width: unset;
+  }
+  .secondaryMenu {
+    margin-left: 2rem;
+  }
+  .tableHeadings {
+    grid-template-columns: 8rem 8rem 9rem;
+    margin-left: 2rem;
+  }
+}
+
+@media only screen and (max-width: 345px) {
+  .tableHeadings {
+    grid-template-columns: 6rem 7rem 8rem;
+  }
 }

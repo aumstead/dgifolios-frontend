@@ -37,11 +37,6 @@
       color: var(--logo-teal);
     }
   }
-
-  &__logo {
-    font-size: 1.8rem;
-    color: white;
-  }
 }
 
 .userBtnContainer {
@@ -110,4 +105,51 @@
   width: 100vw;
   position: fixed;
   z-index: 1;
+}
+
+@media only screen and (max-width: 500px) {
+  .navbar {
+    height: 7rem;
+    width: 100%;
+  
+    &__logo {
+      margin-left: 5rem;
+      margin-right: 2rem;
+    }
+
+    &__linksSocial {
+      display: none;
+    }
+
+    &__links {
+      justify-content: end;
+    }
+
+    &__linksAccount {
+      margin-right: 0rem;
+      display: flex;
+    }
+
+    &__a {
+      color: white;
+      margin-left: 0rem;
+      margin-right: 3rem;
+      font-size: 1.4rem;
+    }
+  }
+
+  .userBtn {
+    font-size: 1.6rem;
+  }
+
+  .iconTriangle {
+    font-size: 1.6rem;
+  }
+
+  .ul {
+    width: 18rem;
+  }
+  .li {
+    font-size: 1.6rem;
+  }
 }

@@ -227,8 +227,8 @@ function Statistics({ daysWithDividend }) {
   return (
     <div className={styles.componentContainer}>
       <table className={styles.table}>
-        <tbody>
-          <tr>
+        <tbody className={styles.tbody}>
+          <tr className={styles.tr}>
             <td
               className={styles.td}
               title="Sum of all dividends ever received"
@@ -241,7 +241,7 @@ function Statistics({ daysWithDividend }) {
               </span>
             </td>
           </tr>
-          <tr>
+          <tr className={styles.tr}>
             <td
               className={styles.td}
               title="Last month's dividends / (total invested capital / 12)"
@@ -256,7 +256,7 @@ function Statistics({ daysWithDividend }) {
             </td>
           </tr>
 
-          <tr>
+          <tr className={styles.tr}>
             <td className={styles.td}>
               <span title="A true yield of the previous 12 months that accounts for amount invested in each stock and dividend payment frequency. Dividends without cost basis data are omitted from the calculation.">
                 12 month yield
@@ -269,14 +269,14 @@ function Statistics({ daysWithDividend }) {
               {isNaN(lastTwelveMonthYield) ? 'n/a' : `${lastTwelveMonthYield}%`}
             </td>
           </tr>
-          <tr>
+          <tr className={styles.tr}>
             <td className={styles.td}>
               <span>Last 12 months average monthly payment</span>
             </td>
             <td className={styles.value}>${monthlyPaymentAverage}</td>
           </tr>
 
-          <tr>
+          <tr className={styles.tr}>
             <td className={styles.td}>
               <span># of days with a dividend payment from last 12 months</span>
             </td>
@@ -289,7 +289,7 @@ function Statistics({ daysWithDividend }) {
         </tbody>
       </table>
 
-      <table className={styles.table}>
+      <table className={`${styles.table} ${styles.mobileSecondTable}`}>
         <tbody>
           <tr>
             <td className={styles.topThreeTd}>

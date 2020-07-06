@@ -44,3 +44,39 @@
 .divider {
   border-bottom: 1px solid gainsboro;
 }
+
+@media only screen and (max-width: 500px) {
+  .componentContainer {
+    margin-left: 2rem;
+    flex-direction: column;
+    // deleting width removed horizontal scroll
+    // width: 100%;
+    margin-right: 2rem;
+  }
+
+  .table {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+    width: 100%;
+  }
+
+  .tbody {
+    width: 100%;
+  }
+
+  .td {
+    width: 22rem;
+    padding-right: 2rem;
+  }
+
+  .mobileSecondTable {
+    margin-top: 0rem;
+  }
+
+  .topThreeTd {
+    vertical-align: baseline;
+    width: 22rem;
+    padding-right: 2rem;
+  }
+}

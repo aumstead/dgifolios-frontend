@@ -26,3 +26,9 @@
     border: 1px solid darken($color: #0f9a7a, $amount: 5);
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .componentContainer {
+    margin-left: 2rem;
+  }
+}

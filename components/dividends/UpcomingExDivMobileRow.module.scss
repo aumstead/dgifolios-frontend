@@ -1,0 +1,13 @@
+.row {
+  display: grid;
+  grid-template-columns: 13rem 13rem 13rem;
+  justify-items: center;
+  text-align: center;
+  font-size: 1.6rem;
+  margin-top: .5rem;
+}
+
+.ticker {
+  color: var(--dark-purple);
+  font-weight: 800;
+}

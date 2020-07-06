@@ -40,9 +40,6 @@ function Navbar({ user }) {
         </Link>
       </div>
 
-      {/* <nav className={styles.navbar__social}>
-        
-      </nav> */}
       <nav className={styles.navbar__links}>
         <div className={styles.navbar__linksSocial}>
           <Link href="/explore">
@@ -77,11 +74,7 @@ function Navbar({ user }) {
                       <a className={styles.a}>Edit profile</a>
                     </Link>
                   </li>
-                  {/* <li onClick={handleClickList} className={styles.li}>
-            <Link href={`#`}>
-              <a className={styles.a}>Edit preferences</a>
-            </Link>
-          </li> */}
+
                   <li
                     className={`${styles.li} ${styles.liSignOut}`}
                     onClick={handleClickLogout}

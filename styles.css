@@ -28,6 +28,7 @@
   /* --font-sans: 'Lato', sans-serif; */
   --font-sans: 'Verdana', 'Arial', sans-serif;
   --font-logo: 'Londrina Solid', 'Lato', serif;
+  --font-input: 16px;
 }
 
 *,

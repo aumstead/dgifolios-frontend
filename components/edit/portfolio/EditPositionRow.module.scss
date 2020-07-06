@@ -125,7 +125,7 @@
 }
 
 .input {
-  font-size: 1.4rem;
+  font-size: var(--font-input);
   width: 7rem;
   padding-top: .5rem;
   padding-bottom: .5rem;

@@ -1,6 +1,6 @@
 .tableHeadings {
   display: grid;
-  grid-template-columns: 8rem 8rem 8rem 14rem 14rem 8rem 10rem;
+  grid-template-columns: 8rem 8rem 10rem 17rem 17rem 10rem 10rem;
   color: var(--color-dark-grey);
   justify-items: center;
   margin-top: 2.5rem;
@@ -31,7 +31,7 @@
 
 @media only screen and (max-width: 500px) {
   .contentContainer {
-    width: 90rem;
+    width: 100rem;
   }
   .tableHeadings {
     margin-left: 2rem;

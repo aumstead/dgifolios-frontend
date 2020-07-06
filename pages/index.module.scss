@@ -360,6 +360,8 @@
     &__image {
       margin-left: 0rem;
       margin-top: 4rem;
+      transform: unset;
+      box-shadow: 5px 15px 115px -24px rgba(0, 0, 0, 0.62);
     }
   }
 

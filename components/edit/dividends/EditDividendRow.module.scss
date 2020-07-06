@@ -1,11 +1,11 @@
 .row {
   display: grid;
-  grid-template-columns: 8rem 8rem 8rem 14rem 14rem 8rem 10rem 8rem 8rem;
+  grid-template-columns: 8rem 8rem 10rem 17rem 17rem 10rem 10rem 8rem 8rem;
   margin-left: 3rem;
   margin-right: 3rem;
   font-size: 1.4rem;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
   align-items: center;
   justify-items: center;
   border-bottom: 1px solid gainsboro;
@@ -126,12 +126,12 @@
 }
 
 .inputContainer {
-  margin-top: .5rem;
+  margin-top: .8rem;
   position: relative;
 }
 
 .input {
-  font-size: 1.4rem;
+  font-size: var(--font-input);
   text-align: center;
   border-radius: 4px;
   border: 1px solid gainsboro;

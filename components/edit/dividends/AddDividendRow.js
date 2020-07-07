@@ -113,6 +113,8 @@ function AddDividendRow({ setAddingNewDividend, setDividends }) {
     } finally {
       setNewDividend(INITIAL_FORM_VALUES);
       setLoading(false);
+      // scroll to top for mobile
+      window.scrollTo(0, 0)
     }
   }
 

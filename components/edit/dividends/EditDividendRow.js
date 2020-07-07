@@ -191,6 +191,8 @@ function EditDividendRow({
         amount: "",
         frequency: ""
       }));
+      // scroll to top for mobile
+      window.scrollTo(0, 0)
     }
   }
 

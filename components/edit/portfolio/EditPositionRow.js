@@ -98,6 +98,8 @@ function EditPositionRow({
         shares: "",
         costBasis: "",
       }));
+      // scroll to top for mobile
+      window.scrollTo(0, 0)
     }
   }
 

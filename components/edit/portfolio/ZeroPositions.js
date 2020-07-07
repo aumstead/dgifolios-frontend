@@ -8,6 +8,7 @@ function ZeroPositions({ setShowZeroPositions, setAddingNewTicker }) {
   }
   
   return (
+    <React.Fragment>
     <div className={styles.container}>
       <DummyRow ticker="AAPL" shares={10} costBasis={211.79} />
       <DummyRow ticker="JNJ" shares={27} costBasis={97.33} />
@@ -25,6 +26,11 @@ function ZeroPositions({ setShowZeroPositions, setAddingNewTicker }) {
         </button>
       </div>
     </div>
+
+    <div className={styles.mobileContainer}>
+      Tap button to add new position!
+    </div>
+    </React.Fragment>
   );
 }
 

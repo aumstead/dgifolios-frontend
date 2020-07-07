@@ -173,6 +173,7 @@
 @media only screen and (max-width: 500px) {
   .contentContainer {
     width: 100%;
+    min-height: calc(100vh - 202px);
   }
   .btnFollow {
     margin-top: 2.5rem;

@@ -50,7 +50,8 @@ MyApp.getInitialProps = async (appContext) => {
   if (token) {
     const isUnusableRoute =
       appContext.ctx.pathname === "/signin" ||
-      appContext.ctx.pathname === "/signup";
+      appContext.ctx.pathname === "/signup" ||
+      appContext.ctx.pathname === "/"
 
     if (isUnusableRoute) {
       redirectUser(appContext.ctx, "/explore");

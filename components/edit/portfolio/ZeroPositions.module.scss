@@ -39,3 +39,19 @@
   font-size: 2rem;
   margin-right: .5rem;
 }
+
+.mobileContainer {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .container {
+    display: none;
+  }
+  .mobileContainer {
+    display: block;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    font-size: 1.4rem;
+  }
+}

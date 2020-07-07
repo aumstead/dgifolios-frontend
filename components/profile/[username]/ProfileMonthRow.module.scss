@@ -141,11 +141,11 @@
 
 @media only screen and (max-width: 500px) {
   .keyContainer {
-    width: 18rem;
+    width: 17rem;
   }
-  .modalTableContainer {
-    flex-wrap: unset;
-  }
+  // .modalTableContainer {
+  //   flex-wrap: unset;
+  // }
 }
 
 @media only screen and (max-width: 350px) {

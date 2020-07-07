@@ -126,7 +126,10 @@
   .contentContainer {
     width: 100%;
   }
-
+  .contentContainerZero {
+    width: unset;
+    min-height: calc(100vh - 232px);
+  }
   .secondaryMenu {
     margin-left: 2rem;
   }

@@ -45,7 +45,8 @@ function DividendHistoryTable({
 
   if (showZeroDividends) {
     return (
-      <div>
+      <React.Fragment>
+      <div className={styles.zeroDividendsContainer}>
         <div className={styles.tableHeadings}>
           <h6 className={styles.tableHeading}>Ticker</h6>
           <h6 className={styles.tableHeading}>Shares</h6>
@@ -64,6 +65,11 @@ function DividendHistoryTable({
           setAddingNewDividend={setAddingNewDividend}
         />
       </div>
+
+      <div className={styles.mobileZeroDividendsContainer}>
+        Tap button to add a dividend!
+      </div>
+      </React.Fragment>
     );
   }
 

@@ -123,11 +123,16 @@
 
     &__links {
       justify-content: end;
+      width: unset;
     }
 
     &__linksAccount {
       margin-right: 0rem;
-      display: flex;
+      // display: flex;
+    }
+
+    .userBtnContainer {
+      align-self: flex-end;
     }
 
     &__a {

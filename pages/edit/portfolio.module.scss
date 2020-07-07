@@ -100,12 +100,16 @@
   .contentContainer {
     width: unset;
   }
+  .contentContainerZero {
+    width: unset;
+    min-height: calc(100vh - 232px);
+  }
   .secondaryMenu {
     margin-left: 2rem;
   }
   .tableHeadings {
-    grid-template-columns: 8rem 8rem 9rem;
-    margin-left: 2rem;
+    grid-template-columns: 8rem 7rem 9rem;
+    margin-left: 1rem;
   }
 }
 

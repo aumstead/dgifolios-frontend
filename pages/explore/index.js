@@ -167,7 +167,7 @@ function index({ user }) {
                   : `${styles.randomBtn}`
               }
             >
-              Community portfolios
+              Community<br/>portfolios
             </button>
             <button
               onClick={handleFollowing}
@@ -177,7 +177,7 @@ function index({ user }) {
                   : `${styles.portfoliosBtn}`
               }
             >
-              Profiles Following
+              Profiles<br/>Following
             </button>
             <button
               onClick={handleFollowers}
@@ -187,7 +187,7 @@ function index({ user }) {
                   : `${styles.followersBtn}`
               }
             >
-              My followers
+              My<br/>followers
             </button>
 
             <hr className={styles.hr} />

@@ -91,6 +91,10 @@
     flex-direction: column;
     justify-content: unset;
   }
+  .contentContainerZero {
+    width: unset;
+    min-height: calc(100vh - 232px);
+  }
   .explanation {
     margin-left: 2rem;
     margin-right: 2rem;

@@ -116,7 +116,7 @@ function SidebarMenu({ children, user, ctx, username }) {
             </li>
           </ul>
         </nav>
-        <div className={styles.content}>{children}</div>
+        <div className={path === "/explore" ? styles.contentExplore : styles.content}>{children}</div>
       </>
     );
   }

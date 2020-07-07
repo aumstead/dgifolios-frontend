@@ -122,12 +122,20 @@
   width: fit-content;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 950px) {
   .contentContainer {
     width: 100%;
   }
   .contentContainerZero {
     width: unset;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .contentContainer {
+    width: 100%;
+  }
+  .contentContainerZero {
     min-height: calc(100vh - 232px);
   }
   .secondaryMenu {

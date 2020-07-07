@@ -33,18 +33,24 @@
   display: none;
 }
 
-@media only screen and (max-width: 500px) {
-  .contentContainer {
-    width: 100rem;
-  }
+@media only screen and (max-width: 950px) {
   .zeroDividendsContainer {
     display: none;
   }
   .mobileZeroDividendsContainer {
     display: block;
-    margin-left: 2rem;
+    margin-left: 3rem;
     margin-top: 2rem;
     font-size: 1.4rem;
+  }
+  .contentContainer {
+    width: 100rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .mobileZeroDividendsContainer {
+    margin-left: 2rem;
   }
   .tableHeadings {
     margin-left: 1rem;

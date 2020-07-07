@@ -169,15 +169,25 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 850px) {
   .contentContainer {
     width: 100%;
   }
-  
   .displayContainer {
     margin-left: 2rem;
     margin-right: 2rem;
   }
+}
+
+@media only screen and (max-width: 500px) {
+  // .contentContainer {
+  //   width: 100%;
+  // }
+  
+  // .displayContainer {
+  //   margin-left: 2rem;
+  //   margin-right: 2rem;
+  // }
   .menu {
     margin: 0 auto;
     width: max-content;

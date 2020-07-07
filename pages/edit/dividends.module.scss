@@ -47,7 +47,7 @@
   width: 8rem;
   height: 4rem;
   font-size: 1.4rem;
-  background-color: var(--red);
+  background-color: var(--deep-red);
   color: #fff;
   margin-right: 2.5rem;
 
@@ -73,10 +73,16 @@
   }
 }
 
+@media only screen and (max-width: 950px) {
+  .contentContainer {
+    width: unset;
+    overflow: auto;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .contentContainer {
     overflow: auto;
-    width: 100%;
     padding-right: 2rem;
   }
 

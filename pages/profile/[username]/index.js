@@ -276,137 +276,147 @@ function index({ username, ctx, user }) {
 
   return (
     <SidebarMenu user={user} username={username}>
-      <div className={styles.contentContainer}>
-        <PageHeading text={`${username}'s portfolio`} />
+      <div className={styles.flexContainer}>
+        <div className={styles.contentContainer}>
+          <PageHeading text={`${username}'s portfolio`} />
 
-        {!user ? (
-          <div></div>
-        ) : username === user.username ? (
-          <div></div>
-        ) : following ? (
-          <button
-            onClick={() => handleUnfollow(profileUser.username)}
-            className={styles.btnFollowing}
-            disabled={loading}
-          >
-            {loading ? (
-              <div className={styles.ldsEllipsis}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            ) : (
-              <>
-                <span className={styles.span}>Following</span>
-                <span className={styles.spanHover}>Unfollow</span>
-              </>
-            )}
-          </button>
-        ) : (
-          <button
-            onClick={handleFollow}
-            className={styles.btnFollow}
-            disabled={loading}
-          >
-            {loading ? (
-              <div className={styles.ldsEllipsis}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            ) : (
-              <span>Follow&nbsp;&#43;</span>
-            )}
-          </button>
-        )}
-        {!user || profileUser.username === user.username ? (
-          <SectionHeading text="Profile" />
-        ) : (
-          <SectionHeading stylesObj={{ marginTop: "0rem" }} text="Profile" />
-        )}
+          {!user ? (
+            <div></div>
+          ) : username === user.username ? (
+            <div></div>
+          ) : following ? (
+            <button
+              onClick={() => handleUnfollow(profileUser.username)}
+              className={styles.btnFollowing}
+              disabled={loading}
+            >
+              {loading ? (
+                <div className={styles.ldsEllipsis}>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              ) : (
+                <>
+                  <span className={styles.span}>Following</span>
+                  <span className={styles.spanHover}>Unfollow</span>
+                </>
+              )}
+            </button>
+          ) : (
+            <button
+              onClick={handleFollow}
+              className={styles.btnFollow}
+              disabled={loading}
+            >
+              {loading ? (
+                <div className={styles.ldsEllipsis}>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              ) : (
+                <span>Follow&nbsp;&#43;</span>
+              )}
+            </button>
+          )}
+          {!user || profileUser.username === user.username ? (
+            <SectionHeading text="Profile" />
+          ) : (
+            <SectionHeading stylesObj={{ marginTop: "0rem" }} text="Profile" />
+          )}
 
-        <Profile profileUser={profileUser} />
+          <Profile profileUser={profileUser} />
 
-        <SectionHeading text="Statistics" />
+          <SectionHeading text="Statistics" />
 
-        {profileDividends.length !== 0 && profilePortfolio.length !== 0 ? (
-          <Statistics
-            portfolio={profilePortfolio}
-            dividends={profileDividends}
-          />
-        ) : !user ? (
-          <p className={styles.zeroStats}>
-            User must add positions and dividends to create statistics.
-          </p>
-        ) : user.username === profileUser.username ? (
-          <p className={styles.zeroStats}>
-            Add portfolio positions and dividends to generate statistics.
-          </p>
-        ) : (
-          <div></div>
-        )}
+          {profileDividends.length !== 0 && profilePortfolio.length !== 0 ? (
+            <Statistics
+              portfolio={profilePortfolio}
+              dividends={profileDividends}
+            />
+          ) : !user ? (
+            <p className={styles.zeroStats}>
+              User must add positions and dividends to create statistics.
+            </p>
+          ) : user.username === profileUser.username ? (
+            <p className={styles.zeroStats}>
+              Add portfolio positions and dividends to generate statistics.
+            </p>
+          ) : (
+            <div></div>
+          )}
 
-        <SectionHeading text="Portfolio" />
+          <SectionHeading text="Portfolio" />
 
-        {profilePortfolio.length !== 0 ? (
-          <PortfolioPreview
-            portfolio={profilePortfolio}
-            user={profileUser}
-            setShowModalPie={setShowModalPie}
-            setShowModalPortfolio={setShowModalPortfolio}
-          />
-        ) : !user ? (
-          <p className={styles.zeroStats}>User has not added any positions.</p>
-        ) : user.username === profileUser.username ? (
-          <Link href="/edit/portfolio">
-            <a className={styles.zeroBtn}>Add positions</a>
-          </Link>
-        ) : (
-          <p className={styles.zeroStats}>User has not added any positions.</p>
-        )}
+          {profilePortfolio.length !== 0 ? (
+            <PortfolioPreview
+              portfolio={profilePortfolio}
+              user={profileUser}
+              setShowModalPie={setShowModalPie}
+              setShowModalPortfolio={setShowModalPortfolio}
+            />
+          ) : !user ? (
+            <p className={styles.zeroStats}>
+              User has not added any positions.
+            </p>
+          ) : user.username === profileUser.username ? (
+            <Link href="/edit/portfolio">
+              <a className={styles.zeroBtn}>Add positions</a>
+            </Link>
+          ) : (
+            <p className={styles.zeroStats}>
+              User has not added any positions.
+            </p>
+          )}
 
-        <SectionHeading text="Dividends" />
+          <SectionHeading text="Dividends" />
 
-        {profileDividends.length !== 0 ? (
-          <DividendsPreview
-            dividends={profileDividends}
-            years={years}
-            setShowModalDividends={setShowModalDividends}
-          />
-        ) : !user ? (
-          <p className={styles.zeroStats}>User has not added any dividends.</p>
-        ) : user.username === profileUser.username ? (
-          <Link href="/edit/dividends">
-            <a className={styles.zeroBtn}>Add dividends</a>
-          </Link>
-        ) : (
-          <p className={styles.zeroStats}>User has not added any dividends.</p>
-        )}
+          {profileDividends.length !== 0 ? (
+            <DividendsPreview
+              dividends={profileDividends}
+              years={years}
+              setShowModalDividends={setShowModalDividends}
+            />
+          ) : !user ? (
+            <p className={styles.zeroStats}>
+              User has not added any dividends.
+            </p>
+          ) : user.username === profileUser.username ? (
+            <Link href="/edit/dividends">
+              <a className={styles.zeroBtn}>Add dividends</a>
+            </Link>
+          ) : (
+            <p className={styles.zeroStats}>
+              User has not added any dividends.
+            </p>
+          )}
 
-        {showModalPie && (
-          <ModalPie
-            portfolio={profilePortfolio}
-            backdropOnClick={() => setShowModalPie(false)}
-            username={username}
-          />
-        )}
-        {showModalPortfolio && (
-          <ModalPortfolio
-            portfolio={profilePortfolio}
-            backdropOnClick={() => setShowModalPortfolio(false)}
-            username={username}
-          />
-        )}
-        {showModalDividends && (
-          <ModalDividends
-            showModalDividends={showModalDividends}
-            dividends={profileDividends}
-            backdropOnClick={() => setShowModalDividends(false)}
-            years={years}
-          />
-        )}
+          {showModalPie && (
+            <ModalPie
+              portfolio={profilePortfolio}
+              backdropOnClick={() => setShowModalPie(false)}
+              username={username}
+            />
+          )}
+          {showModalPortfolio && (
+            <ModalPortfolio
+              portfolio={profilePortfolio}
+              backdropOnClick={() => setShowModalPortfolio(false)}
+              username={username}
+            />
+          )}
+          {showModalDividends && (
+            <ModalDividends
+              showModalDividends={showModalDividends}
+              dividends={profileDividends}
+              backdropOnClick={() => setShowModalDividends(false)}
+              years={years}
+            />
+          )}
+        </div>
         <Footer />
       </div>
     </SidebarMenu>

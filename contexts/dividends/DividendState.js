@@ -42,7 +42,7 @@ function DividendState({ children }) {
   function makeCalculations(data) {
     data.forEach((div) => {
       const { divDate, amount, shares, exDivDate } = div;
-
+     
       // Handle divDate DOMstring to date object
       const divDateString = divDate.toString();
       const divDateObj = new Date(divDateString);

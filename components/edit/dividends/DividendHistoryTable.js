@@ -26,6 +26,7 @@ function DividendHistoryTable({
 
   useEffect(() => {
     createPageDivsArray();
+    window.scrollTo(0, 0)
   }, [page, dividends]);
 
   function createPageDivsArray() {

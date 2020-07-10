@@ -8,6 +8,7 @@ import ProfileCard from "../../components/explore/ProfileCard";
 import baseUrl from "../../utils/baseUrl";
 import axios from "axios";
 import LoadingSpinner from "../../components/styled/LoadingSpinner";
+import Pagination from "../../components/edit/dividends/Pagination";
 
 function index({ user }) {
   const [showComponent, setShowComponent] = useState(false);
@@ -16,14 +17,23 @@ function index({ user }) {
   const [activeRandom, setActiveRandom] = useState(true);
   const [followingState, setFollowingState] = useState([]);
   const [followersState, setFollowersState] = useState([]);
-  const [randomProfilesState, setRandomProfilesState] = useState([]);
+  // const [randomProfilesState, setRandomProfilesState] = useState([]);
+  const [usersList, setUsersList] = useState([]);
+  const [currentPageUsers, setCurrentPageUsers] = useState([]);
+  const [page, setPage] = useState(1);
+
+  // Variables
+  const usersPerPage = 30;
+  const totalPages = Math.ceil(usersList.length / usersPerPage);
 
   useEffect(() => {
     // get data
     async function getData() {
-      const url = `${baseUrl}/randomProfiles`;
+      // const url = `${baseUrl}/randomProfiles`;
+      const url = `${baseUrl}/allProfiles`;
       const response = await axios.get(url);
-      setRandomProfilesState(response.data);
+      // setRandomProfilesState(response.data);
+      setUsersList(response.data);
 
       setShowComponent(true);
     }
@@ -32,12 +42,32 @@ function index({ user }) {
   }, []);
 
   useEffect(() => {
+    createCurrentPageUsersArr();
+    window.scrollTo(0, 0)
+  }, [usersList, page]);
+
+  useEffect(() => {
     if (user) {
       const { following, followers } = user;
       setFollowingState(following);
       setFollowersState(followers);
     }
   }, []);
+
+  function createCurrentPageUsersArr() {
+    let lastUserIndex = page * 30;
+    let firstUserIndex = lastUserIndex - 30;
+    const thisPageUsersArr = usersList.slice(firstUserIndex, lastUserIndex);
+    setCurrentPageUsers(thisPageUsersArr);
+  }
+
+  function handlePreviousPage() {
+    setPage(page - 1);
+  }
+
+  function handleNextPage() {
+    setPage(page + 1);
+  }
 
   function handleFollowing() {
     setActiveFollowing(true);
@@ -113,7 +143,9 @@ function index({ user }) {
                     </Link>{" "}
                     or{" "}
                     <Link href="/signup">
-                      <a className={styles.notLoggedIn__link}>create an account</a>
+                      <a className={styles.notLoggedIn__link}>
+                        create an account
+                      </a>
                     </Link>
                     .
                   </p>
@@ -130,7 +162,9 @@ function index({ user }) {
                   </Link>{" "}
                   or{" "}
                   <Link href="/signup">
-                    <a className={styles.notLoggedIn__link}>create an account</a>
+                    <a className={styles.notLoggedIn__link}>
+                      create an account
+                    </a>
                   </Link>
                   .
                 </p>
@@ -140,10 +174,17 @@ function index({ user }) {
             {activeRandom && (
               <div>
                 <ul className={styles.ul}>
-                  {randomProfilesState.map((user) => (
+                  {currentPageUsers.map((user) => (
                     <ProfileCard user={user} key={user._id} />
                   ))}
                 </ul>
+                <Pagination
+                  totalPages={totalPages}
+                  page={page}
+                  setPage={setPage}
+                  handleNextPage={handleNextPage}
+                  handlePreviousPage={handlePreviousPage}
+                />
               </div>
             )}
           </div>
@@ -167,7 +208,9 @@ function index({ user }) {
                   : `${styles.randomBtn}`
               }
             >
-              Community<br/>portfolios
+              Community
+              <br />
+              portfolios
             </button>
             <button
               onClick={handleFollowing}
@@ -177,7 +220,9 @@ function index({ user }) {
                   : `${styles.portfoliosBtn}`
               }
             >
-              Profiles<br/>Following
+              Profiles
+              <br />
+              Following
             </button>
             <button
               onClick={handleFollowers}
@@ -187,7 +232,9 @@ function index({ user }) {
                   : `${styles.followersBtn}`
               }
             >
-              My<br/>followers
+              My
+              <br />
+              followers
             </button>
 
             <hr className={styles.hr} />
@@ -241,13 +288,21 @@ function index({ user }) {
           {activeRandom && (
             <div>
               <ul className={styles.ul}>
-                {randomProfilesState.map((user) => (
+                {currentPageUsers.map((user) => (
                   <ProfileCard user={user} key={user._id} />
                 ))}
               </ul>
+              <Pagination
+                totalPages={totalPages}
+                page={page}
+                setPage={setPage}
+                handleNextPage={handleNextPage}
+                handlePreviousPage={handlePreviousPage}
+              />
             </div>
           )}
         </div>
+
         <Footer />
       </div>
     </SidebarMenu>

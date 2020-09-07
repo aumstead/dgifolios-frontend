@@ -28,3 +28,10 @@
 .currentPage {
   background-color: rgb(15, 154, 122, .2);
 }
+
+@media only screen and (max-width: 500px) {
+  .pagination {
+    width: 100%;
+    margin-left: 0;
+  } 
+}

@@ -40,7 +40,6 @@ function Home(props) {
           <h1 className={styles.title}>
             Dividend investing, tracking, and sharing.
           </h1>
-          {/* <h3 className={styles.subheading}>100% free. Forever.</h3> */}
           <h4 className={styles.heroText}>
             <span className={styles.logoText}>
               <span className={styles.grayText}>dgi</span>&nbsp;
